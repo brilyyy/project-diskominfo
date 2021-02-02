@@ -15,6 +15,11 @@ class CreateVillagesTable extends Migration
     {
         Schema::create('villages', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->string('alamat_kantor');
+            $table->string('nama_kades');
+            $table->string('kode');
+            $table->string('kode_desa');
             $table->timestamps();
         });
     }

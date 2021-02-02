@@ -10,26 +10,26 @@ class LettercController extends Controller
     public function index()
     {
 
-        LettercServices::all();
+        return LettercServices::all();
     }
 
     public function store(Request $request)
     {
-        LettercServices::add($request);
+        return LettercServices::add($request);
     }
 
     public function show($id)
     {
-        LettercServices::show($id);
+        return LettercServices::show($id);
     }
 
     public function update(Request $request, $id)
     {
-        LettercServices::update($request, $id);
+        return LettercServices::update($request, $id);
     }
 
     public function destroy($id)
     {
-        LettercServices::delete($id);
+        return LettercServices::delete($id);
     }
 }
