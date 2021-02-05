@@ -3,10 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Letterc;
+use App\Services\LettercServices;
 use Illuminate\Http\Request;
 
 class LettercController extends Controller
 {
+
+    protected $letterc;
+
+    public function __construct(LettercServices $letterc)
+    {
+        $this->letterc = $letterc;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +23,7 @@ class LettercController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $this->letterc->index();
     }
 
     /**
@@ -35,7 +34,7 @@ class LettercController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $this->letterc->store($request);
     }
 
     /**
@@ -44,20 +43,9 @@ class LettercController extends Controller
      * @param  \App\Models\Letterc  $letterc
      * @return \Illuminate\Http\Response
      */
-    public function show(Letterc $letterc)
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Letterc  $letterc
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Letterc $letterc)
-    {
-        //
+        return $this->letterc->show($id);
     }
 
     /**
@@ -67,9 +55,9 @@ class LettercController extends Controller
      * @param  \App\Models\Letterc  $letterc
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Letterc $letterc)
+    public function update(Request $request, $id)
     {
-        //
+        return $this->letterc->update($request, $id);
     }
 
     /**
@@ -78,8 +66,8 @@ class LettercController extends Controller
      * @param  \App\Models\Letterc  $letterc
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Letterc $letterc)
+    public function destroy($id)
     {
-        //
+        return $this->letterc->destroy($id);
     }
 }

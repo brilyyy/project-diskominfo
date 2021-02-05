@@ -4,12 +4,14 @@ namespace App\Exceptions;
 
 use App\Traits\ApiResponser;
 use BadMethodCallException;
+use ErrorException;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -58,6 +60,14 @@ class Handler extends ExceptionHandler
             }
 
             if($e instanceof BadMethodCallException)
+            {
+                return $this->errorResponse($e->getMessage(), 500);
+            }
+            if($e instanceof ErrorException)
+            {
+                return $this->errorResponse($e->getMessage(), 500);
+            }
+            if($e instanceof RouteNotFoundException)
             {
                 return $this->errorResponse($e->getMessage(), 500);
             }
