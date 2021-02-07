@@ -1,8 +1,8 @@
 import React from 'react'
-import { BrowserRouter as Router} from 'react-router-dom'
 import Sidebar from './Sidebar'
 import TitleBar from './TitleBar'
 import DashboardRoute from './DashboardRoute'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 const Dashboard = () => {
     return (

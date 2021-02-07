@@ -23,9 +23,13 @@ const TableData = (props) => {
         </tr>
     )
 }
+
 const Letterc = () => {
     return (
         <div>
+            <div className='my-2'>
+                <input type="text" placeholder='Cari...' className='p-2 border-2'/>
+            </div>
             <table className='border-collapse border border-green-800 w-full'>
                 <thead>
                     <tr>
