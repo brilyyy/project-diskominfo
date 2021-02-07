@@ -1,10 +1,22 @@
-import React from 'react';
+import React from 'react'
+import { BrowserRouter as Router} from 'react-router-dom'
+import Sidebar from './Sidebar'
+import TitleBar from './TitleBar'
+import DashboardRoute from './DashboardRoute'
 
 const Dashboard = () => {
     return (
-    <div className='flex bg-gray-300'>
-
-    </div>
+        <Router>
+            <div className='flex h-screen'>
+                <Sidebar />
+                <main className='w-full'>
+                    <TitleBar title='Adiarta Dashboard' />
+                    <div className='p-4'>
+                        <DashboardRoute />
+                    </div>
+                </main>
+            </div>
+        </Router>
     )
 }
 
