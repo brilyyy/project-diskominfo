@@ -1,17 +1,17 @@
 import React from 'react'
 import Dashboard from './dashboard/Dashboard'
 import Login from './login/Login'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import ProtectedRoute from './ProtectedRoute'
-import N404 from './404/N404'
+import NotFound from './notfound/NotFound'
 
 function App() {
   return (
     <Router>
         <Switch>
           <Route exact path='/login' component={Login}/>
-          <ProtectedRoute exact path='/' component={Dashboard}/>
-          <Route exact path='*' component={N404} />
+          <ProtectedRoute  path='/' component={Dashboard}/>
+          <Route component={NotFound} />
         </Switch>
     </Router>
   )

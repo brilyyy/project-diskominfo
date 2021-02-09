@@ -15,7 +15,7 @@ const Login = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        apiService.userLogin(user)
+        history.push('/')
     }
 
     return (
