@@ -22,8 +22,12 @@ const Pagination = ({total = 0, itemsPerPage = 10, currentPage = 1, onPageChange
             )
         }
 
-        return pages
-        
+        for(let i=0; i<= Math.ceil(totalPages/5)*5; i += 5){
+            if(currentPage <= i){
+                return pages.slice(i-5, i)
+            }
+        }
+
     }, [ totalPages, currentPage ])
 
     if ( totalPages === 0 ) return null
@@ -32,7 +36,9 @@ const Pagination = ({total = 0, itemsPerPage = 10, currentPage = 1, onPageChange
         <div className="flex text-gray-700">
             <div className="flex h-8 font-medium rounded-full bg-gray-200">
             <PaginationPrev onClick={() => onPageChange(currentPage - 1)} disable={ currentPage === 1 } />
-            { paginationItems }
+            {
+                paginationItems
+            }
             <PaginationNext onClick={() => onPageChange(currentPage + 1)} disable={ currentPage === totalPages }/>
             </div>
         </div>

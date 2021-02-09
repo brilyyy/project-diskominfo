@@ -52,9 +52,9 @@ const Table = () => {
           currentPage = {currentPage}
           onPageChange = {(page) => setCurrentPage(page)}
       />
-      <span className="px-1 bg-red-400 rounded-full cursor-pointer" onClick={() => {
-        history.push('/letterc/tambah')
-      }}>➕</span>
+      <button class="inline-flex items-center justify-center w-10 h-10 mr-2 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:outline-none hover:bg-indigo-800" onClick={() => {history.push('/letterc/tambah')}} >
+        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
+      </button>
     </div>
       
       <table className="border-collapse border border-green-800 w-full">
@@ -83,9 +83,9 @@ const Table = () => {
               <td className="border border-green-600">{letterc.luas}</td>
               <td className="border border-green-600">{letterc.foto}</td>
               <td className="border border-green-600">
-                <span className="px-1">✏</span>
-                <span className="px-1">🗑</span>
-                <span className="px-1">🖨</span>
+                <span className="px-1 cursor-pointer" onClick={() => {history.push(`/letterc/ubah/${letterc.nama}`)}} >✏</span>
+                <span className="px-1 cursor-pointer" onClick={() => {history.push(`/letterc/hapus/${letterc.nama}`)}} >🗑</span>
+                <span className="px-1 cursor-pointer" onClick={() => {history.push(`/letterc/cetak/${letterc.nama}`)}} >🖨</span>
               </td>
             </tr>
           )) 

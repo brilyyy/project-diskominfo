@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
 import TitleBar from './TitleBar'
 import DataDesa from './data-desa/DataDesa'
-import TambahDataLc from './letterc/crud/TambahData'
 import Letterc from './letterc/Letterc'
+import CetakSurat from './cetak-surat/CetakSurat'
+import TambahDataLc from './letterc/crud/TambahData'
 import SidebarLink from './sidebar/SidebarLink'
 import SidebarIcon from './sidebar/SidebarIcon'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
@@ -55,7 +56,7 @@ const Dashboard = () => {
                             <Route exact path='/data-desa'  component={DataDesa} />
                             <Route exact path='/letterc' component={Letterc} />
                             <Route exact path='/letterc/tambah' component={TambahDataLc} />
-                            <Route exact path='/cetak-surat' component={null} />
+                            <Route exact path='/cetak-surat' component={CetakSurat} />
                             <Route exact path='/konfigurasi' component={null} />
                         </Switch>
                     </div>
