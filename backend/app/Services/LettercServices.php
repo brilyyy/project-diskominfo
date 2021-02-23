@@ -6,6 +6,8 @@ use App\Http\Resources\LettercResource;
 use App\Models\Letterc;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LettercServices
 {
@@ -13,13 +15,22 @@ class LettercServices
 
     public function index()
     {
-        $lettercs = Letterc::all();
-        return $this->successResponse($lettercs, 'Lettercs Data Retrieved Successfully');
+        if (Auth::id() == 1)
+        {
+            $lettercs = Letterc::all();
+            return $this->successResponse($lettercs, 'Lettercs Data Retrieved Successfully');
+        }
+        else
+        {
+            $lettercs = Letterc::where('user_id', Auth::id())->get();
+            return $this->successResponse($lettercs, 'Lettercs Data Retrieved Successfully');
+        }
     }
 
     public function store(Request $request)
     {
         $letterc = new Letterc;
+        $letterc->user_id = Auth::id();
         $letterc->nama = $request->get('nama');
         $letterc->nomor = $request->get('nomor');
         $letterc->no_persil_sawah = $request->get('no_persil_sawah');
@@ -38,6 +49,7 @@ class LettercServices
         $letterc->luas_bangunan = $request->get('luas_bangunan');
         $letterc->pajak_bangunan = $request->get('pajak_bangunan');
         $letterc->mutasi_bangunan = $request->get('mutasi_bangunan');
+        $letterc->foto = $request->get('foto');
 
         if($letterc->save())
         {
@@ -56,6 +68,7 @@ class LettercServices
     {
         $letterc = Letterc::find($id);
 
+        $letterc->user_id = Auth::id();
         $letterc->nama = $request->get('nama');
         $letterc->nomor = $request->get('nomor');
         $letterc->no_persil_sawah = $request->get('no_persil_sawah');
@@ -74,6 +87,7 @@ class LettercServices
         $letterc->luas_bangunan = $request->get('luas_bangunan');
         $letterc->pajak_bangunan = $request->get('pajak_bangunan');
         $letterc->mutasi_bangunan = $request->get('mutasi_bangunan');
+        $letterc->foto = $request->get('foto');
 
         if($letterc->save())
         {
@@ -87,6 +101,15 @@ class LettercServices
         $letterc->delete();
 
         return $this->successResponse($letterc, 'Letterc Deleted Successfully', 200);
+    }
+
+    public function detailLetter($id){
+        $data = DB::table('lettercs')
+        ->join('users', 'lettercs.user_id', '=', 'users.id')
+        ->join('villages', 'users.id', '=', 'villages.user_id')
+        ->get();
+
+        return $this->successResponse($data, 'Letterc Deleted Successfully', 200);
     }
 
 

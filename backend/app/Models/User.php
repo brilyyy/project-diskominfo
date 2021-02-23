@@ -18,6 +18,8 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+    protected $guard_name = 'api';
     protected $fillable = [
         'name',
         'email',
@@ -42,4 +44,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function letterc(){
+        return $this->hasMany(Letterc::class);
+    }
+
+    public function village(){
+        return $this->hasOne(Village::class);
+    }
 }

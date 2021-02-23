@@ -1,14 +1,12 @@
 import React from 'react'
 import Table from './table/Table'
 
-
-const Letterc = () => {
-    
+const CetakSurat = () => {
     return (
-        <div>
+        <>
             <Table />
-        </div>
+        </>
     )
 }
 
-export default Letterc
+export default CetakSurat

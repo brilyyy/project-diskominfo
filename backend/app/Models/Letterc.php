@@ -28,9 +28,9 @@ class Letterc extends Model
         'luas_bangunan',
         'pajak_bangunan',
         'mutasi_bangunan',
+        'foto',
     ];
-
-    public function photos(){
-        return $this->hasMany(Photo::class, 'foreign_key');
+    public function user(){
+        $this->belongsTo(User::class);
     }
 }

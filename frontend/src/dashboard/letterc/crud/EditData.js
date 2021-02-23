@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { useParams, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 const TambahData = () => {
+    let { id } = useParams()
     let history = useHistory()
-
     const [data, setData] = useState({})
 
     const handleChange = e => {
@@ -14,7 +14,7 @@ const TambahData = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        axios.post('http://localhost:8000/api/lettercs', data, {
+        axios.put('http://localhost:8000/api/lettercs/' + id, data, {
             headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
         })
         .then(response => {
@@ -26,18 +26,30 @@ const TambahData = () => {
         history.push('/letterc')
     }
 
+    useEffect(() => {
+        axios.get('http://localhost:8000/api/lettercs/' + id, {
+            headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
+        })
+        .then(response => {
+            setData(response.data.data)
+        })
+        .catch(err => {
+            console.log(err.response)
+        })
+    }, [])
+
     return(
         <div>
-            <h1 className='mb-6 text-3xl font-bold'>Tambah Data</h1>
+            <h1 className='mb-6 text-3xl font-bold'>Ubah Data</h1>
             <form onChange={handleChange} onSubmit={handleSubmit} >
             <div>
                 <div>
-                    {/* Input htmlForm */}
+                    {/* Input form */}
                     <div className='mb-6'>
                         <div className="text-gray-700 md:flex md:items-center">
                         <div className="mb-1 md:mb-0 md:w-1/3">
                             <label 
-                            htmlFor="nama"
+                            for="nama"
                             >
                             Nama Wajib Pajak</label>
                         </div>
@@ -47,7 +59,8 @@ const TambahData = () => {
                             type="text" 
                             id="nama" 
                             name="nama" 
-                            autoComplete="off"
+                            autocomplete="off"
+                            value={ data.nama }
                             />
                         </div>
                         </div>
@@ -56,7 +69,7 @@ const TambahData = () => {
                         <div className="text-gray-700 md:flex md:items-center">
                         <div className="mb-1 md:mb-0 md:w-1/3">
                             <label 
-                            htmlFor="nomor"
+                            for="nomor"
                             >
                             Nomor</label>
                         </div>
@@ -66,7 +79,8 @@ const TambahData = () => {
                             type="number" 
                             id="nomor" 
                             name="nomor" 
-                            autoComplete="off"
+                            autocomplete="off"
+                            value={ data.nomor }
                             />
                         </div>
                         </div>
@@ -76,7 +90,7 @@ const TambahData = () => {
                         <div className="text-gray-700 md:flex md:items-center">
                         <div className="mb-1 md:mb-0 md:w-1/3">
                             <label 
-                            htmlFor="no_persil_sawah"
+                            for="no_persil_sawah"
                             >
                             Nomor Persil dan Bagian Persil</label>
                         </div>
@@ -86,7 +100,8 @@ const TambahData = () => {
                             type="text" 
                             id="no_persil_sawah" 
                             name="no_persil_sawah" 
-                            autoComplete="off"
+                            autocomplete="off"
+                            value={ data.no_persil_sawah }
                             />
                         </div>
                         </div>
@@ -96,7 +111,7 @@ const TambahData = () => {
                         <div className="text-gray-700 md:flex md:items-center">
                         <div className="mb-1 md:mb-0 md:w-1/3">
                             <label 
-                            htmlFor="desa_sawah"
+                            for="desa_sawah"
                             >
                             Desa</label>
                         </div>
@@ -106,7 +121,8 @@ const TambahData = () => {
                             type="text" 
                             id="desa_sawah" 
                             name="desa_sawah" 
-                            autoComplete="off"
+                            autocomplete="off"
+                            value={ data.desa_sawah }
                             />
                         </div>
                         </div>
@@ -116,7 +132,7 @@ const TambahData = () => {
                         <div className="text-gray-700 md:flex md:items-center">
                         <div className="mb-1 md:mb-0 md:w-1/3">
                             <label 
-                            htmlFor="nasional_sawah"
+                            for="nasional_sawah"
                             >
                             Nasional</label>
                         </div>
@@ -126,7 +142,8 @@ const TambahData = () => {
                             type="text" 
                             id="nasional_sawah" 
                             name="nasional_sawah" 
-                            autoComplete="off"
+                            autocomplete="off"
+                            value={ data.nasional_sawah }
                             />
                         </div>
                         </div>
@@ -136,7 +153,7 @@ const TambahData = () => {
                         <div className="text-gray-700 md:flex md:items-center">
                         <div className="mb-1 md:mb-0 md:w-1/3">
                             <label 
-                            htmlFor="luas_sawah"
+                            for="luas_sawah"
                             >
                             Luas (m2) </label>
                         </div>
@@ -146,7 +163,8 @@ const TambahData = () => {
                             type="text" 
                             id="luas_sawah" 
                             name="luas_sawah" 
-                            autoComplete="off"
+                            autocomplete="off"
+                            value={ data.luas_sawah }
                             />
                         </div>
                         </div>
@@ -156,7 +174,7 @@ const TambahData = () => {
                         <div className="text-gray-700 md:flex md:items-center">
                         <div className="mb-1 md:mb-0 md:w-1/3">
                             <label 
-                            htmlFor="pajak_sawah"
+                            for="pajak_sawah"
                             >
                             Pajak (Rp) </label>
                         </div>
@@ -166,7 +184,8 @@ const TambahData = () => {
                             type="text" 
                             id="pajak_sawah" 
                             name="pajak_sawah" 
-                            autoComplete="off"
+                            autocomplete="off"
+                            value={ data.pajak_sawah }
                             />
                         </div>
                         </div>
@@ -176,7 +195,7 @@ const TambahData = () => {
                         <div className="text-gray-700 md:flex md:items-center">
                         <div className="mb-1 md:mb-0 md:w-1/3">
                             <label 
-                            htmlFor="mutasi_bumi"
+                            for="mutasi_bumi"
                             >
                             Mutasi </label>
                         </div>
@@ -186,7 +205,8 @@ const TambahData = () => {
                             type="text" 
                             id="mutasi_bumi" 
                             name="mutasi_bumi" 
-                            autoComplete="off"
+                            autocomplete="off"
+                            value={ data.mutasi_bumi }
                             />
                         </div>
                         </div>
@@ -196,7 +216,7 @@ const TambahData = () => {
                         <div className="text-gray-700 md:flex md:items-center">
                         <div className="mb-1 md:mb-0 md:w-1/3">
                             <label 
-                            htmlFor="no_persil_darat"
+                            for="no_persil_darat"
                             >
                             Nomor Persil dan Bagian Persil </label>
                         </div>
@@ -206,7 +226,8 @@ const TambahData = () => {
                             type="text" 
                             id="no_persil_darat" 
                             name="no_persil_darat" 
-                            autoComplete="off"
+                            autocomplete="off"
+                            value={ data.no_persil_darat }
                             />
                         </div>
                         </div>
@@ -216,7 +237,7 @@ const TambahData = () => {
                         <div className="text-gray-700 md:flex md:items-center">
                         <div className="mb-1 md:mb-0 md:w-1/3">
                             <label 
-                            htmlFor="desa_darat"
+                            for="desa_darat"
                             >
                             Desa </label>
                         </div>
@@ -226,7 +247,8 @@ const TambahData = () => {
                             type="text" 
                             id="desa_darat" 
                             name="desa_darat" 
-                            autoComplete="off"
+                            autocomplete="off"
+                            value={ data.desa_darat }
                             />
                         </div>
                         </div>
@@ -236,7 +258,7 @@ const TambahData = () => {
                         <div className="text-gray-700 md:flex md:items-center">
                         <div className="mb-1 md:mb-0 md:w-1/3">
                             <label 
-                            htmlFor="nasional_darat"
+                            for="nasional_darat"
                             >
                             Nasional </label>
                         </div>
@@ -246,7 +268,8 @@ const TambahData = () => {
                             type="text" 
                             id="nasional_darat" 
                             name="nasional_darat" 
-                            autoComplete="off"
+                            autocomplete="off"
+                            value={ data.nasional_darat }
                             />
                         </div>
                         </div>
@@ -256,7 +279,7 @@ const TambahData = () => {
                         <div className="text-gray-700 md:flex md:items-center">
                         <div className="mb-1 md:mb-0 md:w-1/3">
                             <label 
-                            htmlFor="luas_darat"
+                            for="luas_darat"
                             >
                             Luas (m2) </label>
                         </div>
@@ -266,7 +289,8 @@ const TambahData = () => {
                             type="text" 
                             id="luas_darat" 
                             name="luas_darat" 
-                            autoComplete="off"
+                            autocomplete="off"
+                            value={ data.luas_darat }
                             />
                         </div>
                         </div>
@@ -276,7 +300,7 @@ const TambahData = () => {
                         <div className="text-gray-700 md:flex md:items-center">
                         <div className="mb-1 md:mb-0 md:w-1/3">
                             <label 
-                            htmlFor="pajak_darat"
+                            for="pajak_darat"
                             >
                             Pajak (Rp) </label>
                         </div>
@@ -286,7 +310,8 @@ const TambahData = () => {
                             type="text" 
                             id="pajak_darat" 
                             name="pajak_darat" 
-                            autoComplete="off"
+                            autocomplete="off"
+                            value={ data.pajak_darat }
                             />
                         </div>
                         </div>
@@ -296,7 +321,7 @@ const TambahData = () => {
                         <div className="text-gray-700 md:flex md:items-center">
                         <div className="mb-1 md:mb-0 md:w-1/3">
                             <label 
-                            htmlFor="no_persil_bangunan"
+                            for="no_persil_bangunan"
                             >
                             Nomor Persil dan Bagian Persil</label>
                         </div>
@@ -306,7 +331,8 @@ const TambahData = () => {
                             type="text" 
                             id="no_persil_bangunan" 
                             name="no_persil_bangunan" 
-                            autoComplete="off"
+                            autocomplete="off"
+                            value={ data.no_persil_bangunan }
                             />
                         </div>
                         </div>
@@ -316,7 +342,7 @@ const TambahData = () => {
                         <div className="text-gray-700 md:flex md:items-center">
                         <div className="mb-1 md:mb-0 md:w-1/3">
                             <label 
-                            htmlFor="gol_bangunan"
+                            for="gol_bangunan"
                             >
                             Golongan</label>
                         </div>
@@ -326,7 +352,8 @@ const TambahData = () => {
                             type="text" 
                             id="gol_bangunan" 
                             name="gol_bangunan" 
-                            autoComplete="off"
+                            autocomplete="off"
+                            value={ data.gol_bangunan }
                             />
                         </div>
                         </div>
@@ -336,7 +363,7 @@ const TambahData = () => {
                         <div className="text-gray-700 md:flex md:items-center">
                         <div className="mb-1 md:mb-0 md:w-1/3">
                             <label 
-                            htmlFor="luas_bangunan"
+                            for="luas_bangunan"
                             >
                             Luas (m2)</label>
                         </div>
@@ -346,7 +373,8 @@ const TambahData = () => {
                             type="text" 
                             id="luas_bangunan" 
                             name="luas_bangunan" 
-                            autoComplete="off"
+                            autocomplete="off"
+                            value={ data.luas_bangunan }
                             />
                         </div>
                         </div>
@@ -356,7 +384,7 @@ const TambahData = () => {
                         <div className="text-gray-700 md:flex md:items-center">
                         <div className="mb-1 md:mb-0 md:w-1/3">
                             <label 
-                            htmlFor="pajak_bangunan"
+                            for="pajak_bangunan"
                             >
                             Pajak (Rp)</label>
                         </div>
@@ -366,7 +394,8 @@ const TambahData = () => {
                             type="text" 
                             id="pajak_bangunan" 
                             name="pajak_bangunan" 
-                            autoComplete="off"
+                            autocomplete="off"
+                            value={ data.pajak_bangunan }
                             />
                         </div>
                         </div>
@@ -376,7 +405,7 @@ const TambahData = () => {
                         <div className="text-gray-700 md:flex md:items-center">
                         <div className="mb-1 md:mb-0 md:w-1/3">
                             <label 
-                            htmlFor="mutasi_bangunan"
+                            for="mutasi_bangunan"
                             >
                             Mutasi</label>
                         </div>
@@ -386,7 +415,8 @@ const TambahData = () => {
                             type="text" 
                             id="mutasi_bangunan" 
                             name="mutasi_bangunan" 
-                            autoComplete="off"
+                            autocomplete="off"
+                            value={ data.mutasi_bangunan }
                             />
                         </div>
                         </div>
@@ -396,7 +426,7 @@ const TambahData = () => {
                         <div className="text-gray-700 md:flex md:items-center">
                         <div className="mb-1 md:mb-0 md:w-1/3">
                             <label 
-                            htmlFor="foto"
+                            for="foto"
                             >
                             Foto</label>
                         </div>
@@ -406,7 +436,8 @@ const TambahData = () => {
                             type="text" 
                             id="foto" 
                             name="foto" 
-                            autoComplete="off"
+                            autocomplete="off"
+                            value={ data.foto }
                             />
                         </div>
                         </div>
@@ -415,7 +446,7 @@ const TambahData = () => {
                 </div>
             </div>
             <div className='mt-10 flex flex-row-reverse'>
-                <button className="h-12 px-6 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800 focus:outline-none">Large</button>
+                <button class="h-12 px-6 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800 focus:outline-none">Large</button>
             </div>
             </form>
         </div>

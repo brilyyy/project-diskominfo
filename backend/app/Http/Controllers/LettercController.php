@@ -11,9 +11,10 @@ class LettercController extends Controller
 
     protected $letterc;
 
-    public function __construct(LettercServices $letterc)
+    public function __construct()
     {
-        $this->letterc = $letterc;
+        $this->middleware(['permission:access lettercs']);
+        $this->letterc = new LettercServices();
     }
 
     /**
@@ -69,5 +70,10 @@ class LettercController extends Controller
     public function destroy($id)
     {
         return $this->letterc->destroy($id);
+    }
+
+    public function detailLetter($id)
+    {
+        return $this->letterc->detailLetter($id);
     }
 }

@@ -7,6 +7,7 @@ use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class AuthServices
 {
@@ -17,7 +18,7 @@ class AuthServices
     {
         $validatedData = $request->validate([
             'name' => 'required|max:55',
-            'email' => 'required|email|unique:users',
+            'username' => 'required|unique:users',
             'password' => 'required|confirmed'
         ]);
 
@@ -30,7 +31,7 @@ class AuthServices
     public function login(Request $request)
     {
         $loginData = $request->validate([
-            'email' => 'email|required',
+            'username' => 'required',
             'password' => 'required'
         ]);
 
@@ -54,8 +55,9 @@ class AuthServices
 
     public function details()
     {
-        $user = Auth::user();
+
+        $user = User::find(Auth::id());
+        $user->getAllPermissions();
         return $this->successResponse($user, 'User Details Retreived Successfully', 200);
     }
 }
- 

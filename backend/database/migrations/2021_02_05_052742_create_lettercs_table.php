@@ -15,6 +15,7 @@ class CreateLettercsTable extends Migration
     {
         Schema::create('lettercs', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('nama');
             $table->bigInteger('nomor');
             $table->string('no_persil_sawah');
@@ -33,7 +34,11 @@ class CreateLettercsTable extends Migration
             $table->string('luas_bangunan');
             $table->string('pajak_bangunan');
             $table->string('mutasi_bangunan');
+            $table->string('foto');
             $table->timestamps();
+        });
+        Schema::table('lettercs', function(Blueprint $table){
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

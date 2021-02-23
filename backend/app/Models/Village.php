@@ -14,4 +14,8 @@ class Village extends Model
         'kepala_desa',
         'nip'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

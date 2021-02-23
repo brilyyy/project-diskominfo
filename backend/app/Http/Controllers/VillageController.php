@@ -10,9 +10,10 @@ class VillageController extends Controller
 
     protected $village;
 
-    public function __construct(VillageServices $village)
+    public function __construct()
     {
-        $this->village = $village;
+        $this->middleware(['permission:access villages']);
+        $this->village = new VillageServices();
     }
     public function index()
     {

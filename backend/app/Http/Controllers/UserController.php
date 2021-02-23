@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Photo;
 use Illuminate\Http\Request;
 
-class PhotoController extends Controller
+class UserController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware(['permission:access users']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -41,10 +45,10 @@ class PhotoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Photo  $photo
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Photo $photo)
+    public function show($id)
     {
         //
     }
@@ -52,10 +56,10 @@ class PhotoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Photo  $photo
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Photo $photo)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +68,10 @@ class PhotoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Photo  $photo
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Photo $photo)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +79,10 @@ class PhotoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Photo  $photo
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Photo $photo)
+    public function destroy($id)
     {
         //
     }
