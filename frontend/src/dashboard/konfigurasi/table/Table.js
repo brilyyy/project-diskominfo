@@ -10,12 +10,12 @@ const Table = () => {
   const [totalItems, setTotalItems] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
 
-  const ITEMS_PER_PAGE = 30
+  const ITEMS_PER_PAGE = 10
 
 
   useEffect(() => {
     axios
-        .get('http://localhost:8000/api/villages', {
+        .get('http://localhost:8000/api/users', {
           headers: {
               'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
           }
@@ -25,7 +25,7 @@ const Table = () => {
         })
   }, [])
 
-  const villagesData = useMemo(() => {
+  const usersData = useMemo(() => {
     let computedData = Array.from(data)
 
     setTotalItems(computedData.length)
@@ -38,7 +38,7 @@ const Table = () => {
 
   return (
     <div >
-    <div className='flex items-center w-full justify-between p-3 select-none sticky top-0' >
+    <div className='flex items-center w-full justify-between p-3 select-none' >
       <Pagination 
           total = {totalItems}
           itemsPerPage = {ITEMS_PER_PAGE}
@@ -52,18 +52,16 @@ const Table = () => {
         <tbody>
           {
             
-            villagesData.length !== 0
+            usersData.length !== 0
             ? 
-            villagesData.map((village, key) => (
+            usersData.map((user, key) => (
             <tr className="text-center hover:bg-gray-300 cursor-pointer select-none h-11" 
             key={key}
-            onClick={()=>{history.push(`/data-desa/detail/${village.id}`)}}
+            onClick={()=>{history.push(`/konfigurasi/${user.id}`)}}
             >
-              <td className="border border-green-600">{village.nama}</td>
-              <td className="border border-green-600">{village.status}</td>
-              <td className="border border-green-600">{village.alamat}</td>
-              <td className="border border-green-600">{village.kecamatan}</td>
-              <td className="border border-green-600">{village.kepala_desa}</td>
+              <td className="border border-green-600">{user.name}</td>
+              <td className="border border-green-600">{user.username}</td>
+              <td className="border border-green-600">{user.email}</td>
             </tr>
           )) 
           : 

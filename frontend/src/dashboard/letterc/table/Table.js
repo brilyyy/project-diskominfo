@@ -4,6 +4,7 @@ import Pagination from "./pagination/Pagination"
 import Header from "./Header"
 import Search from './Search'
 import axios from 'axios'
+import FadeLoader from 'react-spinners/FadeLoader'
 
 const Table = () => {
   const history = useHistory()
@@ -14,6 +15,10 @@ const Table = () => {
   const [deleteModal, setDeleteModal] = useState()
   const [activeItem, setActiveItem] = useState()
   const [namaItem, setNamaItem] = useState()
+  const [navbar, setNavbar] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [village, setVillage] = useState({})
+  const [searchVillage, setSearchVillage] = useState('')
 
   const ITEMS_PER_PAGE = 20
 
@@ -24,7 +29,16 @@ const Table = () => {
         })
         .then(response => {
             setData(response.data.data)
-            console.log(response.data.data)
+            setLoading(false)
+        })
+        .catch(err => {
+            console.log(err.response)
+        })
+    axios.get('http://localhost:8000/api/villages',{
+            headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
+        })
+        .then(response => {
+            setVillage(response.data.data)
         })
         .catch(err => {
             console.log(err.response)
@@ -33,12 +47,21 @@ const Table = () => {
 
   const lettercData = useMemo(() => {
     let computedData = Array.from(data)
-
     if(search){
       computedData = computedData.filter( 
         data => 
         data.nama.toLowerCase().indexOf(search.toLowerCase()) > -1
        )
+    }
+
+    if(searchVillage){
+      computedData = computedData.filter( 
+        i => {
+          console.log(i)
+          return String(i.user_id) === searchVillage
+          }
+       )
+       console.log(computedData)
     }
 
     setTotalItems(computedData.length)
@@ -47,14 +70,13 @@ const Table = () => {
         (currentPage - 1) * ITEMS_PER_PAGE,
         (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
     )
-  }, [data, currentPage, search])
+  }, [data, currentPage, search, searchVillage])
 
   const handleDelete = () => {
         axios.delete('http://localhost:8000/api/lettercs/' + activeItem, {
             headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
         })
         .then(response => {
-            console.log(response)
             setDeleteModal(false)
             history.go(0)
         })
@@ -63,13 +85,30 @@ const Table = () => {
         })
   }
 
+  const changeNavbar = () => {
+    window.scrollY >= 80 ? setNavbar(true) : setNavbar(false)
+  }
+
+  window.addEventListener('scroll', changeNavbar)
+
+  const handleChange = e => {
+    setSearchVillage(e.target.value)
+  }
+
   return (
     <div >
-    <div className='flex items-center w-full justify-between p-3 select-none' >
+    <div className={ 'transition-all duration-500 flex items-center w-full justify-between py-3 select-none sticky top-0 ' + (!navbar ? '' : 'bg-gradient-to-b from-mac-light-gray to-mac-gray drop-shadow-md p-3 rounded-sm') } >
       <Search onSearch={(value) => {
         setSearch(value)
         setCurrentPage(1)
       }} />
+      <select name="" id="" onChange={handleChange}>
+        <option value="">All</option>
+        { Array.from(village).map((village, key) => (
+          <option value={village.id} key={key}>{village.nama}</option>
+        )) }
+      </select>
+
       <Pagination 
           total = {totalItems}
           itemsPerPage = {ITEMS_PER_PAGE}
@@ -81,11 +120,10 @@ const Table = () => {
       </button>
     </div>
       
-      <table className="border-collapse border border-green-800 w-full">
+      <table className="border-collapse border w-full">
         <Header />
         <tbody>
           {
-            
             lettercData.length !== 0
             ? 
             lettercData.map((letterc, key) => (
@@ -111,25 +149,25 @@ const Table = () => {
                 onClick={() => {history.push(`/letterc/ubah/${letterc.id}`)}} >✏</span>
                 <span 
                 className="px-1 cursor-pointer" 
+                onClick={() => {history.push(`/letterc/cetak/${letterc.id}`)}} >🖨</span>
+                <span 
+                className="px-1 cursor-pointer" 
                 onClick={() => {
                   setDeleteModal(true)
                   setActiveItem(letterc.id)
                   setNamaItem(letterc.nama)
                 }} >🗑</span>
-                <span 
-                className="px-1 cursor-pointer" 
-                onClick={() => {history.push(`/letterc/cetak/${letterc.id}`)}} >🖨</span>
               </td>
             </tr>
           )) 
           : 
           <tr className="text-center">
               <td colSpan="11" className="border border-green-600 p-5">
-                <span className="text-xl">
+                {loading ? <FadeLoader/> : <span className="text-xl">
                   Data Not Found
-                </span>
+                </span>}
               </td>
-            </tr>
+          </tr>
             
           }
         </tbody>
@@ -153,7 +191,7 @@ const Table = () => {
                     <div className="sm:flex sm:items-start">
                     <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
                         <svg className="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                         </svg>
                     </div>
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">

@@ -5,7 +5,7 @@ import Table from './table/Table'
 const Letterc = () => {
     
     return (
-        <div>
+        <div className='bg-mac-panel-light p-4 min-h-screen'>
             <Table />
         </div>
     )

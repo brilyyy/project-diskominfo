@@ -68,7 +68,7 @@ class LettercServices
     {
         $letterc = Letterc::find($id);
 
-        $letterc->user_id = Auth::id();
+        $letterc->user_id = $request->get('user_id');
         $letterc->nama = $request->get('nama');
         $letterc->nomor = $request->get('nomor');
         $letterc->no_persil_sawah = $request->get('no_persil_sawah');
@@ -108,7 +108,6 @@ class LettercServices
         ->join('users', 'lettercs.user_id', '=', 'users.id')
         ->join('villages', 'users.id', '=', 'villages.user_id')
         ->get();
-
         return $this->successResponse($data, 'Letterc Deleted Successfully', 200);
     }
 

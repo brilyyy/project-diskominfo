@@ -14,7 +14,7 @@ class VillageServices
 
     public function index()
     {
-        $data = Village::all();
+        $data = Village::where('id', '!=', 1)->get();
         return $this->successResponse($data, 'Villages Data Retreived Successfully');
     }
 

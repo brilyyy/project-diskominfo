@@ -16,13 +16,13 @@ const Header = () => {
                         <th colSpan="3" className="border border-green-600">Darat</th>
                     </tr>
                     <tr>
-                        <th className="border border-green-600">No</th>
+                        <th className="border border-green-600">Nomor Persil</th>
                         <th className="border border-green-600">Desa</th>
                         <th className="border border-green-600">Nasional</th>
-                        <th className="border border-green-600">No</th>
+                        <th className="border border-green-600">Nomor Persil</th>
                         <th className="border border-green-600">Desa</th>
                         <th className="border border-green-600">Nasional</th>
-                        <th className="border border-green-600">Di Persil dan Bag. Persil No.</th>
+                        <th className="border border-green-600">Di Persil dan Bagian Persil Nomor</th>
                         <th className="border border-green-600">Gol/Kelas</th>
                     </tr>
             </thead>

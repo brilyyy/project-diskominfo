@@ -5,7 +5,27 @@ import axios from 'axios'
 const TambahData = () => {
     let history = useHistory()
 
-    const [data, setData] = useState({})
+    const [data, setData] = useState({
+        desa_darat: '',
+        desa_sawah: '',
+        foto: '',
+        gol_bangunan: '',
+        luas_bangunan: '',
+        luas_darat: '',
+        luas_sawah: '',
+        mutasi_bangunan: '',
+        mutasi_bumi: '',
+        nama: '',
+        nasional_darat: '',
+        nasional_sawah: '',
+        no_persil_bangunan: '',
+        no_persil_darat: '',
+        no_persil_sawah: '',
+        nomor: 0,
+        pajak_bangunan:'',
+        pajak_darat: '',
+        pajak_sawah: '',
+    })
 
     const handleChange = e => {
         setData({...data, [e.target.name]: e.target.value})
@@ -27,7 +47,7 @@ const TambahData = () => {
     }
 
     return(
-        <div>
+        <div className='bg-mac-panel-light p-4 min-h-screen'>
             <h1 className='mb-6 text-3xl font-bold'>Tambah Data</h1>
             <form onChange={handleChange} onSubmit={handleSubmit} >
             <div>

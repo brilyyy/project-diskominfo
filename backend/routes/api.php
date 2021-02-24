@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LettercController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VillageController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,5 +29,10 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::apiResource('lettercs', LettercController::class);
     Route::apiResource('permissions', PermissionController::class);
     Route::get('letter-detail/{id}', [LettercController::class, 'detailLetter']);
+    Route::get('users', [UserController::class, 'index']);
+    Route::get('users/detail/{id}', [UserController::class, 'show']);
+    Route::put('users', [UserController::class, 'update']);
 });
+
+
 

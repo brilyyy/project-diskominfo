@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import axios from 'axios'
 import TitleBar from './TitleBar'
 import SidebarLink from './sidebar/SidebarLink'
 import DataDesa from './data-desa/DataDesa'
@@ -7,8 +9,8 @@ import Letterc from './letterc/Letterc'
 import TambahDataLc from './letterc/crud/TambahData'
 import EditDataLc from './letterc/crud/EditData'
 import CetakSuratTanah from './cetak-surat/CetakSuratTanah'
-import axios from 'axios'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Konfigurasi from './konfigurasi/Konfigurasi'
+import ConfigUser from './konfigurasi/crud/EditData'
 
 const Dashboard = () => {
     const [open, setOpen] = useState(false)
@@ -53,10 +55,10 @@ const Dashboard = () => {
 
     return (
         <Router>
-            <div className='flex h-screen'>
+            <div className='flex bg-mac-image '>
                 <div className='fixed'>
-                <aside className={open ? 'w-64 border-r border-gray-light bg-gray-50 h-screen' : 'w-14 border-r border-gray-light bg-gray-50 h-screen'} >
-                        <div className='flex p-4 border-b border-gray-light justify-around'>
+                <aside className={'transition-all duration-300 border-r border-gray-light bg-blur-lg bg-mac-form-light bg-opacity-80 h-screen shadow-md ' + (open ? 'w-44' : 'w-14')} >
+                        <div className='flex p-4 justify-around'>
                             {
                             open ?
                             <>
@@ -76,9 +78,9 @@ const Dashboard = () => {
                     </aside>
                 </div>
 
-                <main className={ !open ? 'w-full ml-14' : 'w-full ml-64' }>
+                <main className={'w-full transition-all duration-300 ' + (!open ? 'ml-14' : 'ml-44') }>
                     <TitleBar title='Adiarta Dashboard' />
-                    <div className='p-4'>
+                    <div>
                         <Switch>
                             <Route exact path='/data-desa'  component={DataDesa} />
                             <Route exact path='/data-desa/detail/:id' component={EditDataDesa} />
@@ -86,7 +88,8 @@ const Dashboard = () => {
                             <Route exact path='/letterc/tambah' component={TambahDataLc} />
                             <Route exact path='/letterc/ubah/:id' component={EditDataLc} />
                             <Route exact path='/cetak-surat-tanah' component={CetakSuratTanah} />
-                            <Route exact path='/konfigurasi' component={null} />
+                            <Route exact path='/konfigurasi' component={Konfigurasi} />
+                            <Route exact path='/konfigurasi/:id' component={ConfigUser} />
                         </Switch>
                     </div>
                 </main>

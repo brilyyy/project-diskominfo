@@ -9,14 +9,19 @@ const TitleBar = (props) => {
               'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
           }
         })
-        localStorage.setItem('accessToken', '')
+        localStorage.removeItem('accessToken')
+        localStorage.removeItem('admin')
         window.location.reload()
     }
 
     return (
-        <div className='border-b border-gray-light w-full p-4 bg-gray-300'>
-            <p>{props.title}</p>
-            <button onClick={handleLogout}>logout</button>
+        <div className='w-full p-4 bg-gradient-to-b from-mac-light-gray to-mac-gray flex flex-row-reverse justify-between drop-shadow-md'>
+            <div>
+                <button onClick={handleLogout}>Log Out</button>
+            </div>
+            <div>
+                <p>{props.title}</p>
+            </div>
         </div>
     )
 }
