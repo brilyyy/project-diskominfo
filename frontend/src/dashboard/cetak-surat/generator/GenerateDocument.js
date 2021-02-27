@@ -33,6 +33,8 @@ const generateSuratTanah = async (id) => {
           throw error
         }
 
+        console.log(data)
+
         zip = new PizZip(content)
         doc = new Docxtemplater().loadZip(zip)
         data.map((detail, key) => {
@@ -42,7 +44,12 @@ const generateSuratTanah = async (id) => {
             no_surat: detail.no_surat,
             tahun: d.getFullYear(),
             kepala_desa: detail.kepala_desa,
-            kecamatan: detail.kecamatan
+            kecamatan: detail.kecamatan,
+            kecamatan_head: detail.kecamatan.toUpperCase(),
+            no_persil_sawah: detail.no_persil_sawah,
+            kelas_sawah: detail.kelas_sawah,
+            luas_sawah: detail.luas_sawah,
+            name: detail.name
           }
           return (doc.setData(detailData))
         })

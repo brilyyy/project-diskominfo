@@ -102,12 +102,16 @@ const Table = () => {
         setSearch(value)
         setCurrentPage(1)
       }} />
-      <select name="" id="" onChange={handleChange}>
+      {
+        localStorage.getItem('admin') === 'true' ? <select name="" id="" onChange={handleChange}>
         <option value="">All</option>
         { Array.from(village).map((village, key) => (
           <option value={village.id} key={key}>{village.nama}</option>
         )) }
-      </select>
+        </select>
+        :
+        <></>
+      }
 
       <Pagination 
           total = {totalItems}

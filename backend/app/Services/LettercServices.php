@@ -30,7 +30,11 @@ class LettercServices
     public function store(Request $request)
     {
         $letterc = new Letterc;
-        $letterc->user_id = Auth::id();
+        if (Auth::id() == 1){
+            $letterc->user_id = $request->get('user_id');
+        }else {
+            $letterc->user_id = Auth::id();
+        }
         $letterc->nama = $request->get('nama');
         $letterc->nomor = $request->get('nomor');
         $letterc->no_persil_sawah = $request->get('no_persil_sawah');

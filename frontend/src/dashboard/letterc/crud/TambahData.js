@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 const TambahData = () => {
     let history = useHistory()
-
     const [data, setData] = useState({
         desa_darat: '',
         desa_sawah: '',
@@ -25,7 +24,24 @@ const TambahData = () => {
         pajak_bangunan:'',
         pajak_darat: '',
         pajak_sawah: '',
+        user_id: 0
     })
+    const [village, setVillage] = useState({})
+    
+    useEffect(() => {
+        axios.get('http://localhost:8000/api/villages',{
+            headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
+        })
+        .then(response => {
+            setVillage(response.data.data)
+        })
+        .catch(err => {
+            console.log(err.response)
+        })
+    }, [])
+
+    const fileObj = []
+    const fileArray = []
 
     const handleChange = e => {
         setData({...data, [e.target.name]: e.target.value})
@@ -34,6 +50,7 @@ const TambahData = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
+
         axios.post('http://localhost:8000/api/lettercs', data, {
             headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
         })
@@ -49,7 +66,17 @@ const TambahData = () => {
     return(
         <div className='bg-mac-panel-light p-4 min-h-screen'>
             <h1 className='mb-6 text-3xl font-bold'>Tambah Data</h1>
-            <form onChange={handleChange} onSubmit={handleSubmit} >
+            <form onSubmit={handleSubmit} >
+            {
+        localStorage.getItem('admin') === 'true' ? <select name="user_id" onChange={handleChange}>
+        <option value="">All</option>
+        { Array.from(village).map((village, key) => (
+          <option value={village.id} key={key}>{village.nama}</option>
+        )) }
+        </select>
+        :
+        <></>
+      }
             <div>
                 <div>
                     {/* Input htmlForm */}
@@ -68,6 +95,7 @@ const TambahData = () => {
                             id="nama" 
                             name="nama" 
                             autoComplete="off"
+                            onChange={handleChange}
                             />
                         </div>
                         </div>
@@ -87,6 +115,7 @@ const TambahData = () => {
                             id="nomor" 
                             name="nomor" 
                             autoComplete="off"
+                            onChange={handleChange}
                             />
                         </div>
                         </div>
@@ -107,6 +136,7 @@ const TambahData = () => {
                             id="no_persil_sawah" 
                             name="no_persil_sawah" 
                             autoComplete="off"
+                            onChange={handleChange}
                             />
                         </div>
                         </div>
@@ -127,6 +157,7 @@ const TambahData = () => {
                             id="desa_sawah" 
                             name="desa_sawah" 
                             autoComplete="off"
+                            onChange={handleChange}
                             />
                         </div>
                         </div>
@@ -147,6 +178,7 @@ const TambahData = () => {
                             id="nasional_sawah" 
                             name="nasional_sawah" 
                             autoComplete="off"
+                            onChange={handleChange}
                             />
                         </div>
                         </div>
@@ -167,6 +199,7 @@ const TambahData = () => {
                             id="luas_sawah" 
                             name="luas_sawah" 
                             autoComplete="off"
+                            onChange={handleChange}
                             />
                         </div>
                         </div>
@@ -187,6 +220,7 @@ const TambahData = () => {
                             id="pajak_sawah" 
                             name="pajak_sawah" 
                             autoComplete="off"
+                            onChange={handleChange}
                             />
                         </div>
                         </div>
@@ -207,6 +241,7 @@ const TambahData = () => {
                             id="mutasi_bumi" 
                             name="mutasi_bumi" 
                             autoComplete="off"
+                            onChange={handleChange}
                             />
                         </div>
                         </div>
@@ -227,6 +262,7 @@ const TambahData = () => {
                             id="no_persil_darat" 
                             name="no_persil_darat" 
                             autoComplete="off"
+                            onChange={handleChange}
                             />
                         </div>
                         </div>
@@ -247,6 +283,7 @@ const TambahData = () => {
                             id="desa_darat" 
                             name="desa_darat" 
                             autoComplete="off"
+                            onChange={handleChange}
                             />
                         </div>
                         </div>
@@ -267,6 +304,7 @@ const TambahData = () => {
                             id="nasional_darat" 
                             name="nasional_darat" 
                             autoComplete="off"
+                            onChange={handleChange}
                             />
                         </div>
                         </div>
@@ -287,6 +325,7 @@ const TambahData = () => {
                             id="luas_darat" 
                             name="luas_darat" 
                             autoComplete="off"
+                            onChange={handleChange}
                             />
                         </div>
                         </div>
@@ -307,6 +346,7 @@ const TambahData = () => {
                             id="pajak_darat" 
                             name="pajak_darat" 
                             autoComplete="off"
+                            onChange={handleChange}
                             />
                         </div>
                         </div>
@@ -327,6 +367,7 @@ const TambahData = () => {
                             id="no_persil_bangunan" 
                             name="no_persil_bangunan" 
                             autoComplete="off"
+                            onChange={handleChange}
                             />
                         </div>
                         </div>
@@ -347,6 +388,7 @@ const TambahData = () => {
                             id="gol_bangunan" 
                             name="gol_bangunan" 
                             autoComplete="off"
+                            onChange={handleChange}
                             />
                         </div>
                         </div>
@@ -367,6 +409,7 @@ const TambahData = () => {
                             id="luas_bangunan" 
                             name="luas_bangunan" 
                             autoComplete="off"
+                            onChange={handleChange}
                             />
                         </div>
                         </div>
@@ -387,6 +430,7 @@ const TambahData = () => {
                             id="pajak_bangunan" 
                             name="pajak_bangunan" 
                             autoComplete="off"
+                            onChange={handleChange}
                             />
                         </div>
                         </div>
@@ -407,11 +451,11 @@ const TambahData = () => {
                             id="mutasi_bangunan" 
                             name="mutasi_bangunan" 
                             autoComplete="off"
+                            onChange={handleChange}
                             />
                         </div>
                         </div>
                     </div>
-
                     <div className='mb-6'>
                         <div className="text-gray-700 md:flex md:items-center">
                         <div className="mb-1 md:mb-0 md:w-1/3">
@@ -427,15 +471,17 @@ const TambahData = () => {
                             id="foto" 
                             name="foto" 
                             autoComplete="off"
+                            onChange={handleChange}
                             />
                         </div>
                         </div>
                     </div>
+                    
                     {/* End of input form */}
                 </div>
             </div>
             <div className='mt-10 flex flex-row-reverse'>
-                <button className="h-12 px-6 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800 focus:outline-none">Large</button>
+                <button className="h-12 px-6 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800 focus:outline-none">Simpan</button>
             </div>
             </form>
         </div>

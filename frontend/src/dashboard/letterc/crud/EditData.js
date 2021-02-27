@@ -490,7 +490,7 @@ const EditData = () => {
                 </div>
             </div>
             <div className='mt-10 flex flex-row-reverse'>
-                <button className="h-12 px-6 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800 focus:outline-none">Large</button>
+                <button className="h-12 px-6 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800 focus:outline-none">Simpan</button>
             </div>
             </form>
         </div>

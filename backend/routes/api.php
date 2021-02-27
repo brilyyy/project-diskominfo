@@ -5,6 +5,7 @@ use App\Http\Controllers\LettercController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VillageController;
+use App\Http\Controllers\PhotoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('users', [UserController::class, 'index']);
     Route::get('users/detail/{id}', [UserController::class, 'show']);
     Route::put('users', [UserController::class, 'update']);
+    Route::post('photos/{id}', [PhotoController::class, 'store']);
 });
 
 
