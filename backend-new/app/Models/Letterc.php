@@ -33,4 +33,7 @@ class Letterc extends Model
     public function user(){
         $this->belongsTo(User::class);
     }
+    public function image(){
+        $this->hasMany(Image::class);
+    }
 }

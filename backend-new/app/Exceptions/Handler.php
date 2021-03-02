@@ -12,6 +12,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use Illuminate\Database\QueryException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -69,6 +70,10 @@ class Handler extends ExceptionHandler
                 return $this->errorResponse($e->getMessage(), 500);
             }
             if($e instanceof RouteNotFoundException)
+            {
+                return $this->errorResponse($e->getMessage(), 500);
+            }
+            if($e instanceof QueryException)
             {
                 return $this->errorResponse($e->getMessage(), 500);
             }

@@ -34,7 +34,11 @@ class CreateLettercsTable extends Migration
             $table->string('luas_bangunan')->nullable();
             $table->string('pajak_bangunan')->nullable();
             $table->string('mutasi_bangunan')->nullable();
-            $table->string('foto')->nullable();
+            $table->string('foto1')->nullable();
+            $table->string('foto2')->nullable();
+            $table->string('foto3')->nullable();
+            $table->string('foto4')->nullable();
+            $table->string('foto5')->nullable();
             $table->timestamps();
         });
         Schema::table('lettercs', function(Blueprint $table){

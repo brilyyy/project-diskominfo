@@ -7,7 +7,7 @@ use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class AuthServices
 {
@@ -22,8 +22,16 @@ class AuthServices
             'password' => 'required|confirmed'
         ]);
 
+        $permissions = $request->get('permissions');
         $validatedData['password'] = Hash::make($request->password);
         $user = User::create($validatedData);
+        $permissionArray = explode('#', $permissions);
+
+        foreach ($permissionArray as $permissions) {
+            $user->givePermissionTo($permissions);
+        }
+
+
 
         return $this->successResponse($user, 'Registered Successfully', 201);
     }

@@ -18,12 +18,20 @@ class AuthServices
     {
         $validatedData = $request->validate([
             'name' => 'required|max:55',
-            'username' => 'required|unique:users',
-            'password' => 'required|confirmed'
+            'username' => 'required',
+            'password' => 'required|confirmed',
+            'email' => 'required|unique'
         ]);
 
         $validatedData['password'] = Hash::make($request->password);
         $user = User::create($validatedData);
+
+        $permissions = $request->get('permissions');
+        $permissionArray = explode('#', $permissions);
+
+        foreach ($permissionArray as $permissions) {
+            $user->givePermissionTo($permissions);
+        }
 
         return $this->successResponse($user, 'Registered Successfully', 201);
     }

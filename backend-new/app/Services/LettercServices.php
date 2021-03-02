@@ -2,12 +2,12 @@
 
 namespace App\Services;
 
-use App\Http\Resources\LettercResource;
 use App\Models\Letterc;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class LettercServices
 {
@@ -53,7 +53,6 @@ class LettercServices
         $letterc->luas_bangunan = $request->get('luas_bangunan');
         $letterc->pajak_bangunan = $request->get('pajak_bangunan');
         $letterc->mutasi_bangunan = $request->get('mutasi_bangunan');
-        $letterc->foto = $request->get('foto');
 
         if($letterc->save())
         {
@@ -91,7 +90,6 @@ class LettercServices
         $letterc->luas_bangunan = $request->get('luas_bangunan');
         $letterc->pajak_bangunan = $request->get('pajak_bangunan');
         $letterc->mutasi_bangunan = $request->get('mutasi_bangunan');
-        $letterc->foto = $request->get('foto');
 
         if($letterc->save())
         {
@@ -114,6 +112,5 @@ class LettercServices
         ->get();
         return $this->successResponse($data, 'Letterc Deleted Successfully', 200);
     }
-
 
 }
