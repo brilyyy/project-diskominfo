@@ -18,4 +18,7 @@ class Village extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+    public function letterc(){
+        return $this->hasMany(Letterc::class);
+    }
 }

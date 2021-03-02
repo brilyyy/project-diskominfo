@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateImagesTable extends Migration
+class CreateKrawangansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
+        Schema::create('krawangans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('letterc_id');
-            $table->string('path');
             $table->timestamps();
-            $table->foreign('letterc_id')->references('id')->on('images');
         });
     }
 
@@ -29,6 +26,6 @@ class CreateImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('krawangans');
     }
 }

@@ -11,6 +11,7 @@ import EditDataLc from './letterc/crud/EditData'
 import CetakSuratTanah from './cetak-surat/CetakSuratTanah'
 import Konfigurasi from './konfigurasi/Konfigurasi'
 import ConfigUser from './konfigurasi/crud/EditData'
+import AddUser from './konfigurasi/crud/TambahData'
 
 const Dashboard = () => {
     const [open, setOpen] = useState(false)
@@ -89,6 +90,7 @@ const Dashboard = () => {
                             <Route exact path='/letterc/ubah/:id' component={EditDataLc} />
                             <Route exact path='/cetak-surat-tanah' component={CetakSuratTanah} />
                             <Route exact path='/konfigurasi' component={Konfigurasi} />
+                            <Route exact path='/konfigurasi/tambah' component={AddUser} />
                             <Route exact path='/konfigurasi/:id' component={ConfigUser} />
                         </Switch>
                     </div>

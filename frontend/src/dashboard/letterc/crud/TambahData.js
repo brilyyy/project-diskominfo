@@ -7,7 +7,7 @@ const TambahData = () => {
     const [data, setData] = useState({
         desa_darat: '',
         desa_sawah: '',
-        foto: '',
+        tempat_tinggal: '',
         gol_bangunan: '',
         luas_bangunan: '',
         luas_darat: '',
@@ -24,7 +24,7 @@ const TambahData = () => {
         pajak_bangunan:'',
         pajak_darat: '',
         pajak_sawah: '',
-        user_id: 0
+        village_id: 0
     })
     const [village, setVillage] = useState({})
     
@@ -39,9 +39,6 @@ const TambahData = () => {
             console.log(err.response)
         })
     }, [])
-
-    const fileObj = []
-    const fileArray = []
 
     const handleChange = e => {
         setData({...data, [e.target.name]: e.target.value})
@@ -68,10 +65,10 @@ const TambahData = () => {
             <h1 className='mb-6 text-3xl font-bold'>Tambah Data</h1>
             <form onSubmit={handleSubmit} >
             {
-        localStorage.getItem('admin') === 'true' ? <select name="user_id" onChange={handleChange}>
+        localStorage.getItem('admin') === 'true' ? <select name="village_id" onChange={handleChange}>
         <option value="">All</option>
         { Array.from(village).map((village, key) => (
-          <option value={village.id} key={key}>{village.nama}</option>
+          <option value={village.id} key={key}>{village.nama_desa}</option>
         )) }
         </select>
         :
@@ -114,6 +111,26 @@ const TambahData = () => {
                             type="number" 
                             id="nomor" 
                             name="nomor" 
+                            autoComplete="off"
+                            onChange={handleChange}
+                            />
+                        </div>
+                        </div>
+                    </div>
+                    <div className='mb-6'>
+                        <div className="text-gray-700 md:flex md:items-center">
+                        <div className="mb-1 md:mb-0 md:w-1/3">
+                            <label 
+                            htmlFor="tempat_tinggal"
+                            >
+                            Tempat Tinggal</label>
+                        </div>
+                        <div className="md:w-2/3 md:flex-grow">
+                            <input 
+                            className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline" 
+                            type="text" 
+                            id="tempat_tinggal" 
+                            name="tempat_tinggal" 
                             autoComplete="off"
                             onChange={handleChange}
                             />
@@ -450,26 +467,6 @@ const TambahData = () => {
                             type="text" 
                             id="mutasi_bangunan" 
                             name="mutasi_bangunan" 
-                            autoComplete="off"
-                            onChange={handleChange}
-                            />
-                        </div>
-                        </div>
-                    </div>
-                    <div className='mb-6'>
-                        <div className="text-gray-700 md:flex md:items-center">
-                        <div className="mb-1 md:mb-0 md:w-1/3">
-                            <label 
-                            htmlFor="foto"
-                            >
-                            Foto</label>
-                        </div>
-                        <div className="md:w-2/3 md:flex-grow">
-                            <input 
-                            className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline" 
-                            type="text" 
-                            id="foto" 
-                            name="foto" 
                             autoComplete="off"
                             onChange={handleChange}
                             />

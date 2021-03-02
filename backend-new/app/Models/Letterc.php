@@ -12,6 +12,7 @@ class Letterc extends Model
     protected $fillable = [
         'nama',
         'nomor',
+        'tempat_tinggal',
         'no_persil_sawah',
         'desa_sawah',
         'nasional_sawah',
@@ -30,10 +31,7 @@ class Letterc extends Model
         'mutasi_bangunan',
         'foto',
     ];
-    public function user(){
-        $this->belongsTo(User::class);
-    }
-    public function image(){
-        $this->hasMany(Image::class);
+    public function village(){
+        $this->belongsTo(Village::class);
     }
 }

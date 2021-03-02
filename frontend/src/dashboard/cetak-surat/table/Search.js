@@ -12,7 +12,7 @@ const Search = ({onSearch}) => {
         <>
             <input 
                 type="text" 
-                placeholder='Cari...' 
+                placeholder='🔎 Cari...' 
                 className='p-2 border-2 w-1/3 rounded-lg border-gray-400 focus:bg-green-200 focus:outline-none '
                 value={search}
                 onChange={(e) => onInputChange( e.target.value )}

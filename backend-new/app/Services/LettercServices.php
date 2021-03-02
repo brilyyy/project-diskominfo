@@ -31,12 +31,13 @@ class LettercServices
     {
         $letterc = new Letterc;
         if (Auth::id() == 1){
-            $letterc->user_id = $request->get('user_id');
+            $letterc->village_id = $request->get('village_id');
         }else {
-            $letterc->user_id = Auth::id();
+            $letterc->village_id = Auth::id();
         }
         $letterc->nama = $request->get('nama');
         $letterc->nomor = $request->get('nomor');
+        $letterc->tempat_tinggal = $request->get('tempat_tinggal');
         $letterc->no_persil_sawah = $request->get('no_persil_sawah');
         $letterc->desa_sawah = $request->get('desa_sawah');
         $letterc->nasional_sawah = $request->get('nasional_sawah');
@@ -74,6 +75,7 @@ class LettercServices
         $letterc->user_id = $request->get('user_id');
         $letterc->nama = $request->get('nama');
         $letterc->nomor = $request->get('nomor');
+        $letterc->tempat_tinggal = $request->get('tempat_tinggal');
         $letterc->no_persil_sawah = $request->get('no_persil_sawah');
         $letterc->desa_sawah = $request->get('desa_sawah');
         $letterc->nasional_sawah = $request->get('nasional_sawah');
@@ -107,8 +109,8 @@ class LettercServices
 
     public function detailLetter($id){
         $data = DB::table('lettercs')
-        ->join('users', 'lettercs.user_id', '=', 'users.id')
-        ->join('villages', 'users.id', '=', 'villages.user_id')
+        ->join('villages', 'lettercs.village_id', '=', 'villages.id')
+        ->where('lettercs.id', $id)
         ->get();
         return $this->successResponse($data, 'Letterc Deleted Successfully', 200);
     }

@@ -7,6 +7,7 @@ const Header = () => {
                     <tr>
                         <th rowSpan="3" className="border border-green-600">Nama Wajib Pajak</th>
                         <th rowSpan="3" className="border border-green-600">Nomor</th>
+                        <th rowSpan="3" className="border border-green-600">Tempat Tinggal</th>
                         <th colSpan="6" className="border border-green-600">Bumi</th>
                         <th colSpan="2" rowSpan="2" className="border border-green-600">Bangunan</th>
                         <th rowSpan="3" className="border border-green-600">Action</th>

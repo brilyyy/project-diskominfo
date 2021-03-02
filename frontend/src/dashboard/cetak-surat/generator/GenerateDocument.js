@@ -39,7 +39,7 @@ const generateSuratTanah = async (id) => {
         doc = new Docxtemplater().loadZip(zip)
         data.map((detail, key) => {
           const detailData = {
-            nama: detail.nama.toUpperCase(),
+            nama: detail.nama_desa.toUpperCase(),
             alamat: detail.alamat,
             no_surat: detail.no_surat,
             tahun: d.getFullYear(),

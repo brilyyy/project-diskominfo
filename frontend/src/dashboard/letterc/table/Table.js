@@ -106,7 +106,7 @@ const Table = () => {
         localStorage.getItem('admin') === 'true' ? <select name="" id="" onChange={handleChange}>
         <option value="">All</option>
         { Array.from(village).map((village, key) => (
-          <option value={village.id} key={key}>{village.nama}</option>
+          <option value={village.id} key={key}>{village.nama_desa}</option>
         )) }
         </select>
         :
@@ -135,6 +135,7 @@ const Table = () => {
             key={key}>
               <td className="border border-green-600">{letterc.nama}</td>
               <td className="border border-green-600">{letterc.nomor}</td>
+              <td className="border border-green-600">{letterc.tempat_tinggal}</td>
               <td className="border border-green-600">{letterc.no_persil_sawah}</td>
               <td className="border border-green-600">{letterc.desa_sawah}</td>
               <td className="border border-green-600">
@@ -166,7 +167,7 @@ const Table = () => {
           )) 
           : 
           <tr className="text-center">
-              <td colSpan="11" className="border border-green-600 p-5">
+              <td colSpan="12" className="border border-green-600 p-5">
                 {loading ? <FadeLoader/> : <span className="text-xl">
                   Data Not Found
                 </span>}
