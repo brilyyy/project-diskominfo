@@ -25,6 +25,9 @@ class AuthServices
 
         $validatedData['password'] = Hash::make($request->password);
         $user = User::create($validatedData);
+        $user->village_id = $request->get('village_id');
+        $user->save();
+
         $user->syncPermissions($request->all()['permissions']);
 
         return $this->successResponse($user, 'Registered Successfully', 201);

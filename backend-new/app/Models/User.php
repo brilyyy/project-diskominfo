@@ -50,6 +50,6 @@ class User extends Authenticatable
     }
 
     public function village(){
-        return $this->hasOne(Village::class);
+        return $this->belongsTo(Village::class);
     }
 }

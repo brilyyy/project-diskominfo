@@ -30,7 +30,8 @@ const EditData = () => {
   const [villages, setVillages] = useState({});
 
   useEffect(() => {
-    axios
+    if ( localStorage.getItem('admin') === 'true') {
+      axios
       .get("http://localhost:8000/api/villages", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -42,6 +43,7 @@ const EditData = () => {
       .catch((err) => {
         console.log(err.response);
       });
+    }
 
     axios
       .get("http://localhost:8000/api/lettercs/" + id, {

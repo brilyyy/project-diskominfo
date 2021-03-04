@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { TiThMenu } from "react-icons/ti";
 import { MdClose } from "react-icons/md";
-import { IoIosPaper } from "react-icons/io";
 import axios from "axios";
 import TitleBar from "./TitleBar";
 import SidebarLink from "./sidebar/SidebarLink";
@@ -61,7 +60,7 @@ const Dashboard = () => {
         <div className="fixed">
           <aside
             className={
-              "transition-all duration-300 border-r border-gray-light bg-gray-800 bg-opacity-80 h-screen shadow-md flex flex-col justify-between " +
+              "transition-all duration-300 border-r border-gray-light bg-gray-800 h-screen shadow-md flex flex-col justify-between " +
               (open ? "w-48" : "w-14")
             }
           >

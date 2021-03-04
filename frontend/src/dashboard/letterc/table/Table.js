@@ -35,7 +35,10 @@ const Table = () => {
       .catch((err) => {
         console.log(err.response);
       });
-    axios
+      
+    if( localStorage.getItem('admin') === 'true' )
+    {
+      axios
       .get("http://localhost:8000/api/villages", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -47,6 +50,7 @@ const Table = () => {
       .catch((err) => {
         console.log(err.response);
       });
+    }
   }, []);
 
   const lettercData = useMemo(() => {

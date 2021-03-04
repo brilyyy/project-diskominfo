@@ -29,4 +29,9 @@ class VillageController extends Controller
     {
         return $this->village->update($request, $id);
     }
+
+    public function store(Request $request)
+    {
+        return $this->village->store($request);
+    }
 }

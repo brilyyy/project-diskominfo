@@ -20,5 +20,6 @@ module.exports = {
   },
   plugins: [
     require('tailwind-filter-utilities'),
+    require('tailwind-scrollbar'),
   ],
 }

@@ -29,7 +29,8 @@ const TambahData = () => {
   const [village, setVillage] = useState({});
 
   useEffect(() => {
-    axios
+    if ( localStorage.getItem('admin') === 'true'){
+      axios
       .get("http://localhost:8000/api/villages", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -41,6 +42,7 @@ const TambahData = () => {
       .catch((err) => {
         console.log(err.response);
       });
+    }
   }, []);
 
   const handleChange = (e) => {

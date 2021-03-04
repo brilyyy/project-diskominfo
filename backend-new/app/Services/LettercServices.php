@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Letterc;
+use App\Models\User;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,8 @@ class LettercServices
         }
         else
         {
-            $lettercs = Letterc::where('user_id', Auth::id())->get();
+            $user = User::find(Auth::id());
+            $lettercs = Letterc::where('village_id', $user->village_id)->get();
             return $this->successResponse($lettercs, 'Lettercs Data Retrieved Successfully');
         }
     }
@@ -33,7 +35,8 @@ class LettercServices
         if (Auth::id() == 1){
             $letterc->village_id = $request->get('village_id');
         }else {
-            $letterc->village_id = Auth::id();
+            $user = User::find(Auth::id());
+            $letterc->village_id = $user->village_id;
         }
         $letterc->nama = $request->get('nama');
         $letterc->nomor = $request->get('nomor');

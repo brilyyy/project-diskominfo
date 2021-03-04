@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
-use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserServices
 {
@@ -13,7 +13,9 @@ class UserServices
 
     public function index()
     {
-        $user = User::all();
+        $user = DB::table('users')
+        ->join('villages', 'users.village_id', '=', 'villages.id')
+        ->get();
         return $this->successResponse($user, 'User data retrieved successfully');
     }
 
@@ -22,10 +24,5 @@ class UserServices
         $user = User::find($id);
         $user->getAllPermissions();
         return $this->successResponse($user, 'User details retrieved successfully');
-    }
-
-    public function update(Request $request, $id)
-    {
-
     }
 }

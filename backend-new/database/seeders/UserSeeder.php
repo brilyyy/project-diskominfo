@@ -22,9 +22,7 @@ class UserSeeder extends Seeder
         ]);
 
         $admin->givePermissionTo('access lettercs');
-        $admin->givePermissionTo('access prints');
         $admin->givePermissionTo('access villages');
-        $admin->givePermissionTo('access photos');
         $admin->givePermissionTo('access users');
         $admin->givePermissionTo('access permissions');
     }

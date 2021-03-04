@@ -102,7 +102,7 @@ const Table = () => {
                   {user.email}
                 </td>
                 <td className="border border-gray-300 py-2">
-                  
+                  {user.nama_desa}
                 </td>
               </tr>
             ))
