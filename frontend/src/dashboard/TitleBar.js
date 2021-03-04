@@ -15,11 +15,11 @@ const TitleBar = (props) => {
     }
 
     return (
-        <div className='w-full p-4 bg-gradient-to-b from-mac-light-gray to-mac-gray flex flex-row-reverse justify-between drop-shadow-md'>
+        <div className='w-full p-4 flex flex-row-reverse justify-between bg-transparent'>
             <div>
                 <button onClick={handleLogout}>Log Out</button>
             </div>
-            <div>
+            <div className='text-vk-text-light font-semibold text-xl '>
                 <p>{props.title}</p>
             </div>
         </div>

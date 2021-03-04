@@ -4,19 +4,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'mac-panel-light': '#f7f7f7',
-        'mac-form-light': '#eeeeee',
-        'mac-placeholder': '#ACACAC',
-        'mac-input-outline': '#3B99FC',
-        'mac-light-blue': '#6CB3FA',
-        'mac-blue' : '#067DFF',
-        'mac-light' : '#EDEDED',
-        'mac-light-gray': '#EDECED',
-        'mac-gray' : '#D2D1D2'
+        'vk-light' : '#DFE6F1',
+        'vk-text-light' : '#4F4F4F',
       },
-      backgroundImage: theme => ({
-        'mac-image': "url('/src/img/bg.jpg')"
-      })
+      fontFamily:{
+        'poppins' : ['Poppins', 'sans-serif']
+      }
     },
   },
   variants: {

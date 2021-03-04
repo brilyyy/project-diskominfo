@@ -33,7 +33,7 @@ const generateSuratTanah = async (id) => {
           throw error
         }
 
-        console.log(data)
+        console.log(data) 
 
         zip = new PizZip(content)
         doc = new Docxtemplater().loadZip(zip)
