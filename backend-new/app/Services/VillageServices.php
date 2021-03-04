@@ -26,7 +26,7 @@ class VillageServices
     public function update(Request $request, $id){
         $village = Village::find($id);
         $village->kepala_desa = $request->get('kepala_desa');
-        $village->nip = $request->get('nip');
+        $village->nip_desa = $request->get('nip_desa');
         $village->save();
         return $this->successResponse($village, 'Village Updated Successfully');
     }

@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-const EditDesa = () => {
+const TambahDesa = () => {
   let history = useHistory();
-  let { id } = useParams();
   const [data, setData] = useState({
     nama_desa: '',
     status: '',
@@ -15,21 +14,6 @@ const EditDesa = () => {
     nip_desa: '',
   });
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/villages/" + id, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((response) => {
-        setData(response.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
-  }, []);
-
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
     console.log(data);
@@ -39,7 +23,7 @@ const EditDesa = () => {
     e.preventDefault();
 
     axios
-      .put("http://localhost:8000/api/villages/" + id, data, {
+      .post("http://localhost:8000/api/villages/", data, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -56,7 +40,7 @@ const EditDesa = () => {
   return (
     <div className="p-4 min-h-screen">
       <div className="bg-white px-5 py-4 rounded-lg shadow-md">
-        <h1 className="mb-6 text-3xl font-bold">Ubah Data Desa</h1>
+        <h1 className="mb-6 text-3xl font-bold">Tambah Data Desa</h1>
         <hr/>
         <form onSubmit={handleSubmit} className='mt-6'>
           
@@ -74,7 +58,6 @@ const EditDesa = () => {
                       name="nama_desa"
                       autoComplete="off"
                       onChange={handleChange}
-                      value={data.nama_desa}
                     />
                   </div>
                 </div>
@@ -93,7 +76,6 @@ const EditDesa = () => {
                       name="status"
                       autoComplete="off"
                       onChange={handleChange}
-                      value={data.status}
                     />
                   </div>
                 </div>
@@ -112,7 +94,6 @@ const EditDesa = () => {
                       name="alamat"
                       autoComplete="off"
                       onChange={handleChange}
-                      value={data.alamat}
                     />
                   </div>
                 </div>
@@ -131,7 +112,6 @@ const EditDesa = () => {
                       name="kecamatan"
                       autoComplete="off"
                       onChange={handleChange}
-                      value={data.kecamatan}
                     />
                   </div>
                 </div>
@@ -150,7 +130,6 @@ const EditDesa = () => {
                       name="no_surat"
                       autoComplete="off"
                       onChange={handleChange}
-                      value={data.no_surat}
                     />
                   </div>
                 </div>
@@ -169,7 +148,6 @@ const EditDesa = () => {
                       name="kepala_desa"
                       autoComplete="off"
                       onChange={handleChange}
-                      value={data.kepala_desa}
                     />
                   </div>
                 </div>
@@ -188,13 +166,10 @@ const EditDesa = () => {
                       name="nip_desa"
                       autoComplete="off"
                       onChange={handleChange}
-                      value={data.nip_desa}
                     />
                   </div>
                 </div>
               </div>
-              
-
               {/* End of input form */}
             
           <div className="mt-10 flex flex-row-reverse">
@@ -208,4 +183,4 @@ const EditDesa = () => {
   );
 };
 
-export default EditDesa;
+export default TambahDesa;

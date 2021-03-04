@@ -72,7 +72,7 @@ class LettercServices
     {
         $letterc = Letterc::find($id);
 
-        $letterc->user_id = $request->get('user_id');
+        $letterc->village_id = $request->get('village_id');
         $letterc->nama = $request->get('nama');
         $letterc->nomor = $request->get('nomor');
         $letterc->tempat_tinggal = $request->get('tempat_tinggal');

@@ -15,16 +15,14 @@ class CreateVillagesTable extends Migration
     {
         Schema::create('villages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('nama_desa');
             $table->string('status');
             $table->string('alamat');
             $table->string('kecamatan');
             $table->string('no_surat');
-            $table->string('kepala_desa')->default('');
-            $table->string('nip_desa')->default('');
+            $table->string('kepala_desa')->nullable();
+            $table->string('nip_desa')->nullable();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

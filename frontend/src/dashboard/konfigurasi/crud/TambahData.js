@@ -4,7 +4,6 @@ import axios from 'axios'
 
 const TambahData = () => {
     let history = useHistory()
-    const [check, setCheck] = useState([])
     const [data, setData] = useState({
         name: '',
         username: '',
@@ -62,6 +61,11 @@ const TambahData = () => {
     const handleCheckBox = e => {
         console.log(e.target.value)
         data.permissions = [...data.permissions, e.target.value]
+        if( data.permissions.includes(e.target.value) )
+        {
+            console.log('ok')
+
+        }
     }
 
     return (

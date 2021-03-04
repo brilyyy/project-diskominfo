@@ -34,14 +34,14 @@ const Login = () => {
     }
 
     return (
-        <div className='w-full h-screen flex justify-center items-center flex-col bg-gray-400'>
-            <div className='p-8 rounded-xl bg-blur-lg bg-mac-form-light bg-opacity-80 w-80 drop-shadow'>
+        <div className='w-full h-screen flex justify-center items-center flex-col bg-pattern-light'>
+            <div className='p-8 rounded-xl bg-white bg-opacity-80 w-80 drop-shadow'>
                 <form className='w-full' onSubmit={handleSubmit} onChange={handleChange} >
                     <input type="text" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full placeholder-mac-placeholder outline-none focus:border-mac-input-outline hover:shadow-md transition duration-200" name="username" autoComplete="off" placeholder="Username" required />
                     <input type="password" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full placeholder-mac-placeholder outline-none focus:border-mac-input-outline hover:shadow-md transition duration-200" name="password" placeholder="Password" required minLength="5" />
 
-                    <button type="submit" className="transition duration-200 bg-gradient-to-b from-mac-light-blue to-mac-blue hover:bg-blue-600 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center mt-3 focus:outline-none flex items-center justify-center">
-                        <span className="">Login</span>
+                    <button type="submit" className="transition duration-200 hover:bg-blue-600 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center mt-3 focus:outline-none flex items-center justify-center bg-blue-400">
+                        <span className="">Masuk</span>
                         <span className="ml-2">
                             <ClipLoader color='#fff' loading={loading} size={20} />
                         </span>

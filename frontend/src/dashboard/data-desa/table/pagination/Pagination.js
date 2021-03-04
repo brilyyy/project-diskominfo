@@ -33,8 +33,8 @@ const Pagination = ({total = 0, itemsPerPage = 10, currentPage = 1, onPageChange
     if ( totalPages === 0 ) return null
 
     return (
-        <div className="flex text-gray-700">
-            <div className="flex h-8 font-medium rounded-full bg-gray-200">
+        <div className="flex">
+            <div className="flex font-medium">
             <PaginationPrev onClick={() => onPageChange(currentPage - 1)} disable={ currentPage === 1 } />
             {
                 paginationItems

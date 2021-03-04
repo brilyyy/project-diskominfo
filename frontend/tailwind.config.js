@@ -5,11 +5,14 @@ module.exports = {
     extend: {
       colors: {
         'vk-light' : '#DFE6F1',
-        'vk-text-light' : '#4F4F4F',
+        'vk-text-light' : '#4F4F4F'
       },
       fontFamily:{
         'poppins' : ['Poppins', 'sans-serif']
-      }
+      },
+      backgroundImage: theme => ({
+        'pattern-light': "url('https://sso.uns.ac.id/module.php/uns/img/symphony.png')"
+      })
     },
   },
   variants: {

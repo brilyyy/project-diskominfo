@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { TiThMenu } from "react-icons/ti";
+import { MdClose } from "react-icons/md";
+import { IoIosPaper } from "react-icons/io";
 import axios from "axios";
 import TitleBar from "./TitleBar";
 import SidebarLink from "./sidebar/SidebarLink";
 import DataDesa from "./data-desa/DataDesa";
 import EditDataDesa from "./data-desa/crud/EditDesa";
+import TambahDataDesa from "./data-desa/crud/TambahDesa";
 import Letterc from "./letterc/Letterc";
 import TambahDataLc from "./letterc/crud/TambahData";
 import EditDataLc from "./letterc/crud/EditData";
@@ -57,106 +61,78 @@ const Dashboard = () => {
         <div className="fixed">
           <aside
             className={
-              "transition-all duration-300 border-r border-gray-light bg-white bg-opacity-80 h-screen shadow-md flex flex-col justify-between " +
-              (open ? "w-48" : "w-16")
+              "transition-all duration-300 border-r border-gray-light bg-gray-800 bg-opacity-80 h-screen shadow-md flex flex-col justify-between " +
+              (open ? "w-48" : "w-14")
             }
           >
-          <div>
-            <div className="flex p-4 justify-around">
-              {open ? (
-                <>
-                  <p className="text-xl antialiased">Adiarta</p>
-                  <p
-                    className="text-xl antialiased cursor-pointer"
-                    onClick={handleClose}
-                  >
-                    ❌
-                  </p>
-                </>
-              ) : (
-                <p
-                  className="text-xl antialiased cursor-pointer"
-                  onClick={handleOpen}
-                >
-                  🔄
-                </p>
-              )}
-            </div>
             <div>
-              {letterc ? (
-                <SidebarLink
-                  title="Letter C"
-                  icon="👍"
-                  linkto="/letterc"
-                  open={open}
-                />
-              ) : (
-                <></>
-              )}
-              <SidebarLink
-                title="Cetak Surat Tanah"
-                icon="📧"
-                linkto="/cetak-surat-tanah"
-                open={open}
-              />
-              {desa ? (
-                <SidebarLink
-                  title="Data Desa"
-                  icon="🏠"
-                  linkto="/data-desa"
-                  open={open}
-                />
-              ) : (
-                <></>
-              )}
-              {konfigurasi ? (
-                <SidebarLink
-                  title="Konfigurasi"
-                  icon="⚙"
-                  linkto="/konfigurasi"
-                  open={open}
-                />
-              ) : (
-                <></>
-              )}
-            </div>
-          </div>
-
-            <div className="flex p-4 justify-around">
-              {open ? (
-                <>
-                  <p className="text-xl antialiased">Adiarta</p>
-                  <p
-                    className="text-xl antialiased cursor-pointer"
-                    onClick={handleClose}
-                  >
-                    ❌
-                  </p>
-                </>
-              ) : (
-                <p
-                  className="text-xl antialiased cursor-pointer"
-                  onClick={handleOpen}
+              <div className="flex p-4 justify-around">
+                {open ? 
+                <p className="font-semibold text-xl antialiased text-white">Adiarta</p> 
+                : <></>}
+                <button
+                  onClick={open ? handleClose : handleOpen}
+                  type="button"
+                  className="focus:outline-none text-white rounded-md text-2xl"
                 >
-                  🔄
-                </p>
-              )}
+                  {!open ? <TiThMenu /> : <MdClose />}
+                </button>
+              </div>
+              <div className="flex flex-col">
+                {letterc ? (
+                  <SidebarLink
+                    title="Letter C"
+                    icon="👍"
+                    linkto="/letterc"
+                    open={open}
+                  />
+                ) : (
+                  <></>
+                )}
+                <SidebarLink
+                  title="Surat Tanah"
+                  icon="📧"
+                  linkto="/cetak-surat-tanah"
+                  open={open}
+                />
+                {desa ? (
+                  <SidebarLink
+                    title="Data Desa"
+                    icon="🏠"
+                    linkto="/data-desa"
+                    open={open}
+                  />
+                ) : (
+                  <></>
+                )}
+                {konfigurasi ? (
+                  <SidebarLink
+                    title="Konfigurasi"
+                    icon="⚙"
+                    linkto="/konfigurasi"
+                    open={open}
+                  />
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
           </aside>
         </div>
 
         <main
           className={
-            "w-full transition-all duration-300 " + (!open ? "ml-16" : "ml-48")
+            "w-full transition-all duration-300 " + (!open ? "ml-14" : "ml-48")
           }
         >
           <TitleBar title="Adiarta Dashboard" />
           <div>
             <Switch>
               <Route exact path="/data-desa" component={DataDesa} />
+              <Route exact path="/data-desa/tambah" component={TambahDataDesa} />
               <Route
                 exact
-                path="/data-desa/detail/:id"
+                path="/data-desa/ubah/:id"
                 component={EditDataDesa}
               />
               <Route exact path="/letterc" component={Letterc} />

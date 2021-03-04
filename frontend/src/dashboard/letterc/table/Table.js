@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import Pagination from "./pagination/Pagination";
 import Search from "./Search";
 import axios from "axios";
-import FadeLoader from "react-spinners/FadeLoader";
+import { BiPencil, BiPrinter, BiTrash } from "react-icons/bi";
 
 const Table = () => {
   const history = useHistory();
@@ -60,7 +60,7 @@ const Table = () => {
     if (searchVillage) {
       computedData = computedData.filter((i) => {
         console.log(i);
-        return String(i.user_id) === searchVillage;
+        return String(i.village_id) === searchVillage;
       });
       console.log(computedData);
     }
@@ -104,9 +104,7 @@ const Table = () => {
       <div
         className={
           "transition-all duration-500 flex items-center w-full justify-between mb-4 select-none sticky top-0 " +
-          (!navbar
-            ? ""
-            : "bg-gradient-to-b from-mac-light-gray to-mac-gray drop-shadow-md p-3 rounded-sm")
+          (!navbar ? "" : "bg-gray-100 drop-shadow-md p-3 rounded-sm")
         }
       >
         <Search
@@ -122,7 +120,7 @@ const Table = () => {
             onChange={handleChange}
             className="bg-white h-10 p-2 rounded-lg text-sm focus:outline-none border-gray-200 border-2"
           >
-            <option value="">All</option>
+            <option value="">Semua Desa</option>
             {Array.from(village).map((village, key) => (
               <option value={village.id} key={key}>
                 {village.nama_desa}
@@ -152,44 +150,83 @@ const Table = () => {
       <table className="w-full">
         <thead className="bg-gray-100 text-base select-none ">
           <tr>
-            <th rowSpan="3" className="border border-gray-300 p-3">
+            <th
+              rowSpan="3"
+              className="border border-gray-300 px-3 py-1 font-medium"
+            >
               Nama Wajib Pajak
             </th>
-            <th rowSpan="3" className="border border-gray-300 p-3">
+            <th
+              rowSpan="3"
+              className="border border-gray-300 px-3 py-1 font-medium"
+            >
               Nomor
             </th>
-            <th rowSpan="3" className="border border-gray-300">
+            <th
+              rowSpan="3"
+              className="border border-gray-300 px-3 py-1 font-medium"
+            >
               Tempat Tinggal
             </th>
-            <th colSpan="6" className="border border-gray-300">
+            <th
+              colSpan="6"
+              className="border border-gray-300 px-3 py-1 font-medium"
+            >
               Bumi
             </th>
-            <th colSpan="2" rowSpan="2" className="border border-gray-300">
+            <th
+              colSpan="2"
+              rowSpan="2"
+              className="border border-gray-300 px-3 py-1 font-medium"
+            >
               Bangunan
             </th>
-            <th rowSpan="3" className="border border-gray-300">
+            <th
+              rowSpan="3"
+              className="border border-gray-300 px-3 py-1 font-medium"
+            >
               Action
             </th>
           </tr>
           <tr>
-            <th colSpan="3" className="border border-gray-300">
+            <th
+              colSpan="3"
+              className="border border-gray-300 px-3 py-1 font-medium"
+            >
               Sawah
             </th>
-            <th colSpan="3" className="border border-gray-300">
+            <th
+              colSpan="3"
+              className="border border-gray-300 px-3 py-1 font-medium"
+            >
               Darat
             </th>
           </tr>
           <tr>
-            <th className="border border-gray-300">Nomor Persil</th>
-            <th className="border border-gray-300">Desa</th>
-            <th className="border border-gray-300">Nasional</th>
-            <th className="border border-gray-300">Nomor Persil</th>
-            <th className="border border-gray-300">Desa</th>
-            <th className="border border-gray-300">Nasional</th>
-            <th className="border border-gray-300">
+            <th className="border border-gray-300 px-3 py-1 font-medium">
+              Nomor Persil
+            </th>
+            <th className="border border-gray-300 px-3 py-1 font-medium">
+              Desa
+            </th>
+            <th className="border border-gray-300 px-3 py-1 font-medium">
+              Nasional
+            </th>
+            <th className="border border-gray-300 px-3 py-1 font-medium">
+              Nomor Persil
+            </th>
+            <th className="border border-gray-300 px-3 py-1 font-medium">
+              Desa
+            </th>
+            <th className="border border-gray-300 px-3 py-1 font-medium">
+              Nasional
+            </th>
+            <th className="border border-gray-300 px-3 py-1 font-medium">
               Di Persil dan Bagian Persil Nomor
             </th>
-            <th className="border border-gray-300">Gol/Kelas</th>
+            <th className="border border-gray-300 px-3 py-1 font-medium">
+              Gol/Kelas
+            </th>
           </tr>
         </thead>
 
@@ -200,64 +237,73 @@ const Table = () => {
                 className="text-center h-11 select-none cursor-pointer hover:bg-gray-50"
                 key={key}
               >
-                <td className="border border-gray-300">{letterc.nama}</td>
-                <td className="border border-gray-300">{letterc.nomor}</td>
-                <td className="border border-gray-300">
+                <td className="border border-gray-300 py-2">{letterc.nama}</td>
+                <td className="border border-gray-300 py-2">{letterc.nomor}</td>
+                <td className="border border-gray-300 py-2">
                   {letterc.tempat_tinggal}
                 </td>
-                <td className="border border-gray-300">
+                <td className="border border-gray-300 py-2">
                   {letterc.no_persil_sawah}
                 </td>
-                <td className="border border-gray-300">{letterc.desa_sawah}</td>
-                <td className="border border-gray-300">
+                <td className="border border-gray-300 py-2">
+                  {letterc.desa_sawah}
+                </td>
+                <td className="border border-gray-300 py-2">
                   {letterc.nasional_sawah}
                 </td>
-                <td className="border border-gray-300">
+                <td className="border border-gray-300 py-2">
                   {letterc.no_persil_darat}
                 </td>
-                <td className="border border-gray-300">{letterc.desa_darat}</td>
-                <td className="border border-gray-300">
+                <td className="border border-gray-300 py-2">
+                  {letterc.desa_darat}
+                </td>
+                <td className="border border-gray-300 py-2">
                   {letterc.nasional_darat}
                 </td>
-                <td className="border border-gray-300">
+                <td className="border border-gray-300 py-2">
                   {letterc.no_persil_bangunan}
                 </td>
-                <td className="border border-gray-300">
+                <td className="border border-gray-300 py-2">
                   {letterc.gol_bangunan}
                 </td>
-                <td className="border border-gray-300">
-                  <span
-                    className="px-1 cursor-pointer"
-                    onClick={() => {
-                      history.push(`/letterc/ubah/${letterc.id}`);
-                    }}
-                  >
-                    ✏
-                  </span>
-                  <span
-                    className="px-1 cursor-pointer"
-                    onClick={() => {
-                      history.push(`/letterc/cetak/${letterc.id}`);
-                    }}
-                  >
-                    🖨
-                  </span>
-                  <span
-                    className="px-1 cursor-pointer"
-                    onClick={() => {
-                      setDeleteModal(true);
-                      setActiveItem(letterc.id);
-                      setNamaItem(letterc.nama);
-                    }}
-                  >
-                    🗑
-                  </span>
+                <td className="border border-gray-300 py-2">
+                  <div className="flex m-1" role="group">
+                    <button
+                      type="button"
+                      className="focus:outline-none text-white text-sm p-2 bg-yellow-500 rounded-l-md hover:bg-yellow-600 hover:shadow-lg"
+                      onClick={() => {
+                        history.push(`/letterc/ubah/${letterc.id}`);
+                      }}
+                    >
+                      <BiPencil />
+                    </button>
+                    <button
+                      type="button"
+                      className="focus:outline-none text-white text-sm p-2 bg-green-500 hover:bg-green-600 hover:shadow-lg"
+                      onClick={() => {
+                        history.push(`/letterc/cetak/${letterc.id}`);
+                      }}
+                    >
+                      <BiPrinter />
+                    </button>
+                    <button
+                      type="button"
+                      className="focus:outline-none text-white text-sm p-2 bg-red-500 rounded-r-md hover:bg-red-600 hover:shadow-lg"
+                      onClick={() => {
+                        setDeleteModal(true);
+                        setActiveItem(letterc.id);
+                        setNamaItem(letterc.nama);
+                      }}
+                    >
+                      <BiTrash />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))
           ) : (
             <tr className="text-center">
-              <td colSpan="12" className="border border-gray-400 p-5">
+              <td colSpan="12" className="border border-gray-300 p-5">
                 {loading ? (
                   <span className="text-xl">Loading...</span>
                 ) : (
