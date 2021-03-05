@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { TiThMenu } from "react-icons/ti";
+import { BsGearFill } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
+import { FaEnvelope, FaPrint, FaUserAstronaut, FaHome } from "react-icons/fa";
 import axios from "axios";
 import TitleBar from "./TitleBar";
 import SidebarLink from "./sidebar/SidebarLink";
@@ -78,10 +80,16 @@ const Dashboard = () => {
                 </button>
               </div>
               <div className="flex flex-col">
+              <SidebarLink
+                    title="Krawangan"
+                    icon={ <FaHome /> }
+                    linkto="/krawangan"
+                    open={open}
+                  />
                 {letterc ? (
                   <SidebarLink
                     title="Letter C"
-                    icon="👍"
+                    icon={ <FaEnvelope /> }
                     linkto="/letterc"
                     open={open}
                   />
@@ -90,14 +98,14 @@ const Dashboard = () => {
                 )}
                 <SidebarLink
                   title="Surat Tanah"
-                  icon="📧"
+                  icon={ <FaPrint /> }
                   linkto="/cetak-surat-tanah"
                   open={open}
                 />
                 {desa ? (
                   <SidebarLink
                     title="Data Desa"
-                    icon="🏠"
+                    icon={ <FaUserAstronaut /> }
                     linkto="/data-desa"
                     open={open}
                   />
@@ -107,7 +115,7 @@ const Dashboard = () => {
                 {konfigurasi ? (
                   <SidebarLink
                     title="Konfigurasi"
-                    icon="⚙"
+                    icon={ <BsGearFill /> }
                     linkto="/konfigurasi"
                     open={open}
                   />

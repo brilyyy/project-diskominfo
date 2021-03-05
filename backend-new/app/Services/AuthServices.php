@@ -20,16 +20,29 @@ class AuthServices
             'name' => 'required|max:55',
             'username' => 'required',
             'password' => 'required|confirmed',
-            'email' => 'required'
+            'email' => 'required',
+            'village_id' => 'required',
         ]);
 
         $validatedData['password'] = Hash::make($request->password);
+        $validatedData['village_id'] = $request->get('village_id');
         $user = User::create($validatedData);
+        $user->syncPermissions($request->all()['permissions']);
+
+        return $this->successResponse($user, 'Registered Successfully', 201);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->username = $request->get('username');
+        $user->password = Hash::make($request->get('password'));
         $user->village_id = $request->get('village_id');
         $user->save();
 
         $user->syncPermissions($request->all()['permissions']);
-
         return $this->successResponse($user, 'Registered Successfully', 201);
     }
 

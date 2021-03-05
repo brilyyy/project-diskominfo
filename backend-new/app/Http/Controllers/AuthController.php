@@ -33,4 +33,9 @@ class AuthController extends Controller
     {
         return $this->auth->details();
     }
+
+    public function update(Request $request, $id)
+    {
+        return $this->auth->update($request, $id);
+    }
 }

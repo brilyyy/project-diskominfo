@@ -7,8 +7,8 @@ const SidebarLink = (props) => {
       to={props.linkto}
       activeClassName="bg-blue-400"
       className={
-        "text-white hover:bg-blue-200 cursor-pointer p-3 " +
-        (props.open ? "" : "text-center text-md")
+        "text-white hover:bg-blue-200 cursor-pointer p-3 flex " +
+        (props.open ? "" : "text-md justify-center")
       }
     >
       {props.open ? (

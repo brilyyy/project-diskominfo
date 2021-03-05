@@ -4,6 +4,7 @@ import Pagination from "./pagination/Pagination";
 import Search from "./Search";
 import axios from "axios";
 import { BiPencil, BiPrinter, BiTrash } from "react-icons/bi";
+import { generateLetterc } from "../../cetak-surat/generator/GenerateDocument";
 
 const Table = () => {
   const history = useHistory();
@@ -284,9 +285,7 @@ const Table = () => {
                     <button
                       type="button"
                       className="focus:outline-none text-white text-sm p-2 bg-green-500 hover:bg-green-600 hover:shadow-lg"
-                      onClick={() => {
-                        history.push(`/letterc/cetak/${letterc.id}`);
-                      }}
+                      onClick={() => generateLetterc(letterc.id)}
                     >
                       <BiPrinter />
                     </button>

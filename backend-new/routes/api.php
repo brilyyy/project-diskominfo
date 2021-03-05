@@ -23,6 +23,7 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth:api']], function () {
+    Route::put('update-user/{id}', [AuthController::class, 'update']);
     Route::post('logout', [AuthController::class, 'logout']);
     Route::get('details', [AuthController::class, 'details']);
     Route::apiResource('villages', VillageController::class);

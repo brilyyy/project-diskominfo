@@ -22,6 +22,7 @@ const Table = () => {
       })
       .then((response) => {
         setData(response.data.data);
+        console.log(response.data.data);
         setLoading(false);
       })
       .catch((err) => {
@@ -102,7 +103,7 @@ const Table = () => {
                   {user.email}
                 </td>
                 <td className="border border-gray-300 py-2">
-                  {user.nama_desa}
+                  {user.village.nama_desa}
                 </td>
               </tr>
             ))
