@@ -18,7 +18,8 @@ class UserSeeder extends Seeder
             'name' => 'Super Admin',
             'username' => 'admin',
             'email' => 'admin@superadmin.com',
-            'password' => Hash::make('admin')
+            'password' => Hash::make('admin'),
+            'village_id' => 1
         ]);
 
         $admin->givePermissionTo('access lettercs');
