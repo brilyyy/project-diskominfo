@@ -38,7 +38,6 @@ class AuthServices
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->username = $request->get('username');
-        $user->password = Hash::make($request->get('password'));
         $user->village_id = $request->get('village_id');
         $user->save();
 

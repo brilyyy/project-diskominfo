@@ -15,7 +15,13 @@ class CreateKrawanganDetailsTable extends Migration
     {
         Schema::create('krawangan_details', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('krawangan_id');
+            $table->integer('nomor_letterc');
+            $table->string('nama');
+            $table->integer('luas');
+            $table->string('mutasi');
             $table->timestamps();
+            $table->foreign('krawangan_id')->references('id')->on('krawangans');
         });
     }
 

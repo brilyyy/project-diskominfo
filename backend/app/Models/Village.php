@@ -21,4 +21,7 @@ class Village extends Model
     public function letterc(){
         return $this->hasMany(Letterc::class);
     }
+    public function krawangan(){
+        return $this->hasMany(Krawangan::class);
+    }
 }

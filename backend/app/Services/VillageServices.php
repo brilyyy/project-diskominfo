@@ -3,8 +3,6 @@
 namespace App\Services;
 
 use App\Models\Village;
-use App\Http\Resources\VillageResource;
-use App\Services\JsonResponse;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 

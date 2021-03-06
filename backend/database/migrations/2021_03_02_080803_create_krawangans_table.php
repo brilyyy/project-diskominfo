@@ -15,7 +15,10 @@ class CreateKrawangansTable extends Migration
     {
         Schema::create('krawangans', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('village_id');
+            $table->integer('no_persil');
             $table->timestamps();
+            $table->foreign('village_id')->references('id')->on('villages');
         });
     }
 

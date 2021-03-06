@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import Close from "../../component/CloseButton";
 
 const TambahData = () => {
   let history = useHistory();
@@ -29,19 +30,19 @@ const TambahData = () => {
   const [village, setVillage] = useState({});
 
   useEffect(() => {
-    if ( localStorage.getItem('admin') === 'true'){
+    if (localStorage.getItem("admin") === "true") {
       axios
-      .get("http://localhost:8000/api/villages", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((response) => {
-        setVillage(response.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
+        .get("http://localhost:8000/api/villages", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+        .then((response) => {
+          setVillage(response.data.data);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
     }
   }, []);
 
@@ -71,9 +72,12 @@ const TambahData = () => {
   return (
     <div className="p-4 min-h-screen">
       <div className="bg-white px-5 py-4 rounded-lg shadow-md">
-        <h1 className="mb-6 text-3xl font-bold">Tambah Data</h1>
-        <hr/>
-        <form onSubmit={handleSubmit} className='mt-6'>
+        <div className='flex justify-between'>
+          <h1 className="mb-6 text-3xl font-bold">Tambah Data Letter C</h1>
+          <Close />
+        </div>
+        <hr />
+        <form onSubmit={handleSubmit} className="mt-6">
           {localStorage.getItem("admin") === "true" ? (
             <div className="mb-6">
               <div className="text-gray-700 md:flex md:items-center">
@@ -158,11 +162,11 @@ const TambahData = () => {
 
               {/* 1.Bumi */}
 
-              <h1 className='text-2xl font-semibold mb-6 '>Bumi</h1>
+              <h1 className="text-2xl font-semibold mb-6 ">Bumi</h1>
 
               {/* 1a. Sawah */}
 
-              <h1 className='text-xl font-semibold mb-6 ml-4'>Sawah</h1>
+              <h1 className="text-xl font-semibold mb-6 ml-4">Sawah</h1>
 
               <div className="mb-6 ml-4">
                 <div className="text-gray-700 md:flex md:items-center">
@@ -274,7 +278,7 @@ const TambahData = () => {
                 </div>
               </div>
 
-              <h1 className='text-xl font-semibold mb-6 ml-4'>Darat</h1>
+              <h1 className="text-xl font-semibold mb-6 ml-4">Darat</h1>
 
               <div className="mb-6 ml-4">
                 <div className="text-gray-700 md:flex md:items-center">
@@ -368,7 +372,7 @@ const TambahData = () => {
                 </div>
               </div>
 
-              <h1 className='text-2xl font-semibold mb-6 '>Bangunan</h1>
+              <h1 className="text-2xl font-semibold mb-6 ">Bangunan</h1>
 
               <div className="mb-6">
                 <div className="text-gray-700 md:flex md:items-center">

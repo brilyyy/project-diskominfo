@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import Close from "../../component/CloseButton";
 import axios from "axios";
 
-const TambahData = () => {
+const EditData = () => {
   let { id } = useParams();
   let history = useHistory();
   const [data, setData] = useState({
@@ -95,8 +96,12 @@ const TambahData = () => {
   return (
     <div className="p-4 min-h-screen">
       <div className="bg-white px-5 py-4 rounded-lg shadow-md">
-        <h1 className="mb-6 text-3xl font-bold">Ubah Data User</h1>
-        <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6">
+        <div className="flex justify-between">
+          <h1 className="mb-6 text-3xl font-bold">Ubah Data User</h1>
+          <Close />
+        </div>
+        <hr/>
+        <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6 mt-6">
           <div>
             {/* Input htmlForm */}
             <div className="mb-6">
@@ -112,7 +117,11 @@ const TambahData = () => {
                   >
                     <option value="">Semua Desa</option>
                     {Array.from(village).map((village, key) => (
-                      <option value={village.id} key={key} selected={village.id === data.village_id}>
+                      <option
+                        value={village.id}
+                        key={key}
+                        selected={village.id === data.village_id}
+                      >
                         {village.nama_desa}
                       </option>
                     ))}
@@ -178,35 +187,17 @@ const TambahData = () => {
             <div className="mb-6">
               <div className="text-gray-700 md:flex md:items-center">
                 <div className="mb-1 md:mb-0 md:w-1/3">
-                  <label htmlFor="password">Password</label>
+                  <label htmlFor="username">Ubah Password</label>
                 </div>
                 <div className="md:w-2/3 md:flex-grow">
-                  <input
+                  <button
                     className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                    type="password"
-                    id="password"
-                    name="password"
+                    type="text"
+                    id="username"
+                    name="username"
                     autoComplete="off"
                     onChange={handleChange}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="mb-6">
-              <div className="text-gray-700 md:flex md:items-center">
-                <div className="mb-1 md:mb-0 md:w-1/3">
-                  <label htmlFor="password_confirmation">
-                    Konfirmasi Password
-                  </label>
-                </div>
-                <div className="md:w-2/3 md:flex-grow">
-                  <input
-                    className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                    type="password"
-                    id="password_confirmation"
-                    name="password_confirmation"
-                    autoComplete="off"
-                    onChange={handleChange}
+                    value={data.username}
                   />
                 </div>
               </div>
@@ -224,7 +215,7 @@ const TambahData = () => {
                     value={permission.name}
                     onChange={handleCheckBox}
                     className="w-6 h-6 px-3 border rounded-lg focus:shadow-outline mr-3"
-                    defaultChecked={ data.permissions.includes(permission.name) }
+                    defaultChecked={data.permissions.includes(permission.name)}
                   />
                   <div className="mb-1 md:mb-0 md:w-1/3">
                     <label htmlFor="password_confirmation">
@@ -246,4 +237,4 @@ const TambahData = () => {
   );
 };
 
-export default TambahData;
+export default EditData;

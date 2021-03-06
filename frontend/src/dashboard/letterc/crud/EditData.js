@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
+import Close from "../../component/CloseButton";
 
 const EditData = () => {
   let history = useHistory();
@@ -30,19 +31,19 @@ const EditData = () => {
   const [villages, setVillages] = useState({});
 
   useEffect(() => {
-    if ( localStorage.getItem('admin') === 'true') {
+    if (localStorage.getItem("admin") === "true") {
       axios
-      .get("http://localhost:8000/api/villages", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((response) => {
-        setVillages(response.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
+        .get("http://localhost:8000/api/villages", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+        .then((response) => {
+          setVillages(response.data.data);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
     }
 
     axios
@@ -85,9 +86,12 @@ const EditData = () => {
   return (
     <div className="p-4 min-h-screen">
       <div className="bg-white px-5 py-4 rounded-lg shadow-md">
-        <h1 className="mb-6 text-3xl font-bold">Ubah Data</h1>
-        <hr/>
-        <form onSubmit={handleSubmit} className='mt-6'>
+        <div className="flex justify-between">
+          <h1 className="mb-6 text-3xl font-bold">Ubah Data Letter C</h1>
+          <Close />
+        </div>
+        <hr />
+        <form onSubmit={handleSubmit} className="mt-6">
           {localStorage.getItem("admin") === "true" ? (
             <div className="mb-6">
               <div className="text-gray-700 md:flex md:items-center">
@@ -102,7 +106,11 @@ const EditData = () => {
                   >
                     <option value="">Semua Desa</option>
                     {Array.from(villages).map((village, key) => (
-                      <option value={village.id} key={key} selected={village.id === data.village_id}>
+                      <option
+                        value={village.id}
+                        key={key}
+                        selected={village.id === data.village_id}
+                      >
                         {village.nama_desa}
                       </option>
                     ))}
@@ -175,11 +183,11 @@ const EditData = () => {
 
               {/* 1.Bumi */}
 
-              <h1 className='text-2xl font-semibold mb-6 '>Bumi</h1>
+              <h1 className="text-2xl font-semibold mb-6 ">Bumi</h1>
 
               {/* 1a. Sawah */}
 
-              <h1 className='text-xl font-semibold mb-6 ml-4'>Sawah</h1>
+              <h1 className="text-xl font-semibold mb-6 ml-4">Sawah</h1>
 
               <div className="mb-6 ml-4">
                 <div className="text-gray-700 md:flex md:items-center">
@@ -297,7 +305,7 @@ const EditData = () => {
                 </div>
               </div>
 
-              <h1 className='text-xl font-semibold mb-6 ml-4'>Darat</h1>
+              <h1 className="text-xl font-semibold mb-6 ml-4">Darat</h1>
 
               <div className="mb-6 ml-4">
                 <div className="text-gray-700 md:flex md:items-center">
@@ -396,7 +404,7 @@ const EditData = () => {
                 </div>
               </div>
 
-              <h1 className='text-2xl font-semibold mb-6 '>Bangunan</h1>
+              <h1 className="text-2xl font-semibold mb-6 ">Bangunan</h1>
 
               <div className="mb-6">
                 <div className="text-gray-700 md:flex md:items-center">

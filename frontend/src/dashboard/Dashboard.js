@@ -17,6 +17,7 @@ import CetakSuratTanah from "./cetak-surat/CetakSuratTanah";
 import Konfigurasi from "./konfigurasi/Konfigurasi";
 import ConfigUser from "./konfigurasi/crud/EditData";
 import AddUser from "./konfigurasi/crud/TambahData";
+import Home from "./home/Home";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
@@ -68,9 +69,13 @@ const Dashboard = () => {
           >
             <div>
               <div className="flex p-4 justify-around">
-                {open ? 
-                <p className="font-semibold text-xl antialiased text-white">Adiarta</p> 
-                : <></>}
+                {open ? (
+                  <p className="font-semibold text-xl antialiased text-white">
+                    Adiarta
+                  </p>
+                ) : (
+                  <></>
+                )}
                 <button
                   onClick={open ? handleClose : handleOpen}
                   type="button"
@@ -80,16 +85,16 @@ const Dashboard = () => {
                 </button>
               </div>
               <div className="flex flex-col">
-              <SidebarLink
-                    title="Krawangan"
-                    icon={ <FaHome /> }
-                    linkto="/krawangan"
-                    open={open}
-                  />
+                <SidebarLink
+                  title="Krawangan"
+                  icon={<FaHome />}
+                  linkto="/krawangan"
+                  open={open}
+                />
                 {letterc ? (
                   <SidebarLink
                     title="Letter C"
-                    icon={ <FaEnvelope /> }
+                    icon={<FaEnvelope />}
                     linkto="/letterc"
                     open={open}
                   />
@@ -98,14 +103,14 @@ const Dashboard = () => {
                 )}
                 <SidebarLink
                   title="Surat Tanah"
-                  icon={ <FaPrint /> }
+                  icon={<FaPrint />}
                   linkto="/cetak-surat-tanah"
                   open={open}
                 />
                 {desa ? (
                   <SidebarLink
                     title="Data Desa"
-                    icon={ <FaUserAstronaut /> }
+                    icon={<FaUserAstronaut />}
                     linkto="/data-desa"
                     open={open}
                   />
@@ -115,7 +120,7 @@ const Dashboard = () => {
                 {konfigurasi ? (
                   <SidebarLink
                     title="Konfigurasi"
-                    icon={ <BsGearFill /> }
+                    icon={<BsGearFill />}
                     linkto="/konfigurasi"
                     open={open}
                   />
@@ -135,8 +140,13 @@ const Dashboard = () => {
           <TitleBar title="Adiarta Dashboard" />
           <div>
             <Switch>
+              <Route exact path="/" component={Home} />
               <Route exact path="/data-desa" component={DataDesa} />
-              <Route exact path="/data-desa/tambah" component={TambahDataDesa} />
+              <Route
+                exact
+                path="/data-desa/tambah"
+                component={TambahDataDesa}
+              />
               <Route
                 exact
                 path="/data-desa/ubah/:id"

@@ -92,7 +92,7 @@ const Table = () => {
         <tbody>
           {usersData.length !== 0 ? (
             usersData.map((user, key) => (
-              <tr
+              user.id !== 1 ? <tr
                 className="text-center h-11 select-none cursor-pointer hover:bg-gray-50"
                 key={key}
                 onClick={()=>{history.push(`/konfigurasi/${user.id}`)}}
@@ -105,7 +105,7 @@ const Table = () => {
                 <td className="border border-gray-300 py-2">
                   {user.village.nama_desa}
                 </td>
-              </tr>
+              </tr> : <></>
             ))
           ) : (
             <tr className="text-center">

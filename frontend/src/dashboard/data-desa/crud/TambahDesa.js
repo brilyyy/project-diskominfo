@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import Close from '../../component/CloseButton';
 import axios from "axios";
 
 const TambahDesa = () => {
@@ -40,7 +41,10 @@ const TambahDesa = () => {
   return (
     <div className="p-4 min-h-screen">
       <div className="bg-white px-5 py-4 rounded-lg shadow-md">
-        <h1 className="mb-6 text-3xl font-bold">Tambah Data Desa</h1>
+        <div className='flex justify-between'>
+          <h1 className="mb-6 text-3xl font-bold">Tambah Data Desa</h1>
+          <Close />
+        </div>
         <hr/>
         <form onSubmit={handleSubmit} className='mt-6'>
           

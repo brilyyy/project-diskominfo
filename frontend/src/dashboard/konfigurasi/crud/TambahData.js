@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import Close from '../../component/CloseButton';
 import axios from "axios";
 
 const TambahData = () => {
@@ -78,8 +79,12 @@ const TambahData = () => {
   return (
     <div className="p-4 min-h-screen">
       <div className="bg-white px-5 py-4 rounded-lg shadow-md">
-        <h1 className="mb-6 text-3xl font-bold">Tambah Data</h1>
-        <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6">
+        <div className='flex justify-between'>
+          <h1 className="mb-6 text-3xl font-bold">Tambah Data User</h1>
+          <Close />
+        </div>
+        <hr/>
+        <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6 mt-6">
           <div>
 
             {/* Input htmlForm */}
