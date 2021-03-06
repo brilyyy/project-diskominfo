@@ -18,6 +18,7 @@ import Konfigurasi from "./konfigurasi/Konfigurasi";
 import ConfigUser from "./konfigurasi/crud/EditData";
 import AddUser from "./konfigurasi/crud/TambahData";
 import Home from "./home/Home";
+import Krawangan from "./krawangan/Krawangan";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
@@ -163,6 +164,7 @@ const Dashboard = () => {
               <Route exact path="/konfigurasi" component={Konfigurasi} />
               <Route exact path="/konfigurasi/tambah" component={AddUser} />
               <Route exact path="/konfigurasi/:id" component={ConfigUser} />
+              <Route exact path="/krawangan" component={Krawangan} />
             </Switch>
           </div>
         </main>

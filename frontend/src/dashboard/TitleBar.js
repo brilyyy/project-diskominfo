@@ -1,29 +1,56 @@
-import React from 'react'
-import axios from 'axios'
+import React from "react";
+import axios from "axios";
+import { FaUserCircle } from "react-icons/fa";
 
 const TitleBar = (props) => {
+  const [ open, setOpen ] = React.useState(false);
+  const handleLogout = () => {
+    axios.post("http://127.0.0.1:8000/api/logout", {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+      },
+    });
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("admin");
+    window.location.reload();
+  };
+  const handleUser = () => {
+    open ? setOpen(false) : setOpen(true);
+  }
 
-    const handleLogout = () => {
-        axios.post('http://127.0.0.1:8000/api/logout', {
-            headers: {
-              'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-          }
-        })
-        localStorage.removeItem('accessToken')
-        localStorage.removeItem('admin')
-        window.location.reload()
-    }
+  return (
+    <div className="w-full py-4 px-5 flex flex-row justify-between">
+      <h1 className="text-vk-text-light font-semibold text-xl">
+        {props.title}
+      </h1>
+      <button
+        className={"text-2xl focus:outline-none " + (open ? "text-blue-500" : "text-vk-text-light") }
+        onClick={handleUser}
+      >
+        <FaUserCircle />
+      </button>
 
-    return (
-        <div className='w-full p-4 flex flex-row-reverse justify-between bg-transparent'>
-            <div>
-                <button onClick={handleLogout}>Log Out</button>
-            </div>
-            <div className='text-vk-text-light font-semibold text-xl '>
-                <p>{props.title}</p>
-            </div>
+      <div
+        className={"origin-top-right right-0 mt-11 mr-2 w-56 rounded-md shadow-md bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none z-10 " + ( open ? "absolute" : "hidden" ) }
+      >
+        <div className="py-1" role="none">
+          <span
+            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+            role="menuitem"
+          >
+            Konfigurasi
+          </span>
+          <span
+            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+            role="menuitem"
+            onClick={ handleLogout }
+          >
+            Logout
+          </span>
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
-export default TitleBar
+export default TitleBar;
