@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Close from "../../component/CloseButton";
+import API from "../../../config/API"
 
 const TambahData = () => {
   let history = useHistory();
@@ -32,11 +33,7 @@ const TambahData = () => {
   useEffect(() => {
     if (localStorage.getItem("admin") === "true") {
       axios
-        .get("http://localhost:8000/api/villages", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        })
+        .get(API.url + "villages", API.header)
         .then((response) => {
           setVillage(response.data.data);
         })
@@ -55,11 +52,7 @@ const TambahData = () => {
     e.preventDefault();
 
     axios
-      .post("http://localhost:8000/api/lettercs", data, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      .post(API.url + "lettercs", data, API.header)
       .then((response) => {
         console.log(response);
       })

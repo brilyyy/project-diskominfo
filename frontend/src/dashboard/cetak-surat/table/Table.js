@@ -4,6 +4,7 @@ import Pagination from "./pagination/Pagination";
 import Search from "./Search";
 import axios from "axios";
 import { generateSuratTanah } from '../generator/GenerateDocument';
+import API from "../../../config/API"
 
 const Table = () => {
   const history = useHistory();
@@ -21,11 +22,7 @@ const Table = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/lettercs", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      .get(API.url + "lettercs", API.header)
       .then((response) => {
         setData(response.data.data);
         setLoading(false);
@@ -34,11 +31,7 @@ const Table = () => {
         console.log(err.response);
       });
     axios
-      .get("http://localhost:8000/api/villages", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      .get(API.url + "villages", API.header)
       .then((response) => {
         setVillage(response.data.data);
       })

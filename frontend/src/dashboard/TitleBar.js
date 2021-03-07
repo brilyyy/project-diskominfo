@@ -1,15 +1,12 @@
 import React from "react";
 import axios from "axios";
 import { FaUserCircle } from "react-icons/fa";
+import API from "../config/API"
 
 const TitleBar = (props) => {
   const [ open, setOpen ] = React.useState(false);
   const handleLogout = () => {
-    axios.post("http://127.0.0.1:8000/api/logout", {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
-      },
-    });
+    axios.post(API.url + "logout", API.header);
     localStorage.removeItem("accessToken");
     localStorage.removeItem("admin");
     window.location.reload();
@@ -33,7 +30,7 @@ const TitleBar = (props) => {
       <div
         className={"origin-top-right right-0 mt-11 mr-2 w-56 rounded-md shadow-md bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none z-10 " + ( open ? "absolute" : "hidden" ) }
       >
-        <div className="py-1" role="none">
+        <div className="py-1 select-none cursor-pointer" role="none">
           <span
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
             role="menuitem"

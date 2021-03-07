@@ -5,6 +5,7 @@ import { BsGearFill } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
 import { FaEnvelope, FaPrint, FaUserAstronaut, FaHome } from "react-icons/fa";
 import axios from "axios";
+import API from "../config/API";
 import TitleBar from "./TitleBar";
 import SidebarLink from "./sidebar/SidebarLink";
 import DataDesa from "./data-desa/DataDesa";
@@ -22,9 +23,6 @@ import Krawangan from "./krawangan/Krawangan";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
-  const [letterc, setLetterc] = useState();
-  const [desa, setDesa] = useState();
-  const [konfigurasi, setKonfigurasi] = useState();
 
   const handleClose = () => {
     setOpen(false);
@@ -36,27 +34,52 @@ const Dashboard = () => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/details", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        },
-      })
+      .get(API.url + "details", API.header)
       .then((response) => {
         const permission = response.data.data.permissions;
-        for (let i = 0; i < permission.length; i++) {
-          const access = permission[i].name;
-          if (access === "access lettercs") {
-            setLetterc(true);
-          }
-          if (access === "access villages") {
-            setDesa(true);
-          }
-          if (access === "access permissions" || access === "access users") {
-            setKonfigurasi(true);
-          }
-        }
+        // for (let i = 0; i < permission.length; i++) {
+        //   const access = permission[i].name;
+        //   if (access === "access lettercs") {
+        //     menuArray.push(<SidebarLink
+        //       title="Letter C"
+        //       icon={<FaEnvelope />}
+        //       linkto="/letterc"
+        //       open={open}
+        //     />)
+        //   }
+        //   if (access === "access villages") {
+        //     menuArray.push(<SidebarLink
+        //       title="Data Desa"
+        //       icon={<FaUserAstronaut />}
+        //       linkto="/data-desa"
+        //       open={open}
+        //     />)
+        //   }
+        //   if (access === "access permissions" || access === "access users") {
+        //     menuArray.push(<SidebarLink
+        //       title="Konfigurasi"
+        //       icon={<BsGearFill />}
+        //       linkto="/konfigurasi"
+        //       open={open}
+        //     />)
+        //   }
+        //   if (access === "access krawangans") {
+        //     menuArray.push(<SidebarLink
+        //       title="Krawangan"
+        //       icon={<FaHome />}
+        //       linkto="/krawangan"
+        //       open={open}
+        //     />)
+        //   }
+        // }
+        // menuArray.push(<SidebarLink
+        //   title="Surat Tanah"
+        //   icon={<FaPrint />}
+        //   linkto="/cetak-surat-tanah"
+        //   open={open}
+        // />)
       });
-  });
+  }, []);
 
   return (
     <Router>
@@ -86,48 +109,7 @@ const Dashboard = () => {
                 </button>
               </div>
               <div className="flex flex-col">
-                <SidebarLink
-                  title="Krawangan"
-                  icon={<FaHome />}
-                  linkto="/krawangan"
-                  open={open}
-                />
-                {letterc ? (
-                  <SidebarLink
-                    title="Letter C"
-                    icon={<FaEnvelope />}
-                    linkto="/letterc"
-                    open={open}
-                  />
-                ) : (
-                  <></>
-                )}
-                <SidebarLink
-                  title="Surat Tanah"
-                  icon={<FaPrint />}
-                  linkto="/cetak-surat-tanah"
-                  open={open}
-                />
-                {desa ? (
-                  <SidebarLink
-                    title="Data Desa"
-                    icon={<FaUserAstronaut />}
-                    linkto="/data-desa"
-                    open={open}
-                  />
-                ) : (
-                  <></>
-                )}
-                {konfigurasi ? (
-                  <SidebarLink
-                    title="Konfigurasi"
-                    icon={<BsGearFill />}
-                    linkto="/konfigurasi"
-                    open={open}
-                  />
-                ) : (
-                  <></>
-                )}
+                
               </div>
             </div>
           </aside>

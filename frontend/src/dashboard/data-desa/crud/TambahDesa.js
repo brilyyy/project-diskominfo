@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Close from '../../component/CloseButton';
 import axios from "axios";
+import API from "../../../config/API"
 
 const TambahDesa = () => {
   let history = useHistory();
@@ -24,11 +25,7 @@ const TambahDesa = () => {
     e.preventDefault();
 
     axios
-      .post("http://localhost:8000/api/villages/", data, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      .post(API.url + "villages/", data, API.header)
       .then((response) => {
         console.log(response);
       })

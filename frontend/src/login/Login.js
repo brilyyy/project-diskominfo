@@ -4,9 +4,11 @@ import { useHistory } from 'react-router-dom'
 import ClipLoader from 'react-spinners/ClipLoader'
 import axios from 'axios'
 import qs from 'qs'
+import API from '../config/API'
 
 const Login = () => {
     let history = useHistory()
+    let url = API.url
     const [user, setUser] = useState({})
     const [failed, setFailed] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -19,7 +21,7 @@ const Login = () => {
         event.preventDefault()
         setLoading(true)
         axios
-            .post('http://localhost:8000/api/login', user)
+            .post(API.url + 'login', user)
             .then(response => {
                 setLoading(false)
                 response.data.data.user.name === 'Super Admin' ? localStorage.setItem('admin', true) : localStorage.setItem('admin', false) 

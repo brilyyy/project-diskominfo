@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import Pagination from "./pagination/Pagination";
 import axios from "axios";
+import API from "../../../config/API";
 
 const Table = () => {
   const history = useHistory();
@@ -15,11 +16,7 @@ const Table = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/villages", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      .get(API.url + "villages", API.header )
       .then((response) => {
         setData(response.data.data);
         setLoading(false);

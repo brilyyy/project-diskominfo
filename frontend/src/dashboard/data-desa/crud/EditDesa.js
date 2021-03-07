@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import Close from '../../component/CloseButton';
 import axios from "axios";
+import API from "../../../config/API"
 
 const EditDesa = () => {
   let history = useHistory();
@@ -18,11 +19,7 @@ const EditDesa = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/villages/" + id, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      .get(API.url + "villages/" + id, API.header)
       .then((response) => {
         setData(response.data.data);
       })
@@ -40,11 +37,7 @@ const EditDesa = () => {
     e.preventDefault();
 
     axios
-      .put("http://localhost:8000/api/villages/" + id, data, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      .put(API.url + "villages/" + id, data, API.header)
       .then((response) => {
         console.log(response);
       })

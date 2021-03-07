@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import Close from "../../component/CloseButton";
 import axios from "axios";
+import API from "../../../config/API"
 
 const EditData = () => {
   let { id } = useParams();
@@ -20,11 +21,7 @@ const EditData = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/villages", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      .get(API.url + "villages", API.header)
       .then((response) => {
         setVillage(response.data.data);
       })
@@ -33,11 +30,7 @@ const EditData = () => {
       });
 
     axios
-      .get("http://localhost:8000/api/users/detail/" + id, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      .get(API.url + "users/detail/" + id, API.header)
       .then((response) => {
         setData(response.data.data);
       })
@@ -46,11 +39,7 @@ const EditData = () => {
       });
 
     axios
-      .get("http://localhost:8000/api/permissions", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      .get(API.url + "permissions", API.header)
       .then((response) => {
         setPermission(response.data.data);
       })
@@ -67,11 +56,7 @@ const EditData = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put("http://localhost:8000/api/update-user/" + id, data, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      .put(API.url + "update-user/" + id, data, API.header)
       .then((response) => {
         console.log(response);
       })

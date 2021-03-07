@@ -5,6 +5,7 @@ import Search from "./Search";
 import axios from "axios";
 import { BiPencil, BiPrinter, BiTrash } from "react-icons/bi";
 import { generateLetterc } from "../../cetak-surat/generator/GenerateDocument";
+import API from "../../../config/API"
 
 const Table = () => {
   const history = useHistory();
@@ -24,11 +25,7 @@ const Table = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/lettercs", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      .get(API.url + "lettercs", API.header)
       .then((response) => {
         setData(response.data.data);
         setLoading(false);
@@ -40,11 +37,7 @@ const Table = () => {
     if( localStorage.getItem('admin') === 'true' )
     {
       axios
-      .get("http://localhost:8000/api/villages", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      .get(API.url + "villages", API.header)
       .then((response) => {
         setVillage(response.data.data);
       })
@@ -80,11 +73,7 @@ const Table = () => {
 
   const handleDelete = () => {
     axios
-      .delete("http://localhost:8000/api/lettercs/" + activeItem, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      .delete(API.url + "lettercs/" + activeItem, API.header)
       .then((response) => {
         setDeleteModal(false);
         history.go(0);

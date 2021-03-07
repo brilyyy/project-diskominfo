@@ -5,14 +5,11 @@ import { saveAs } from "file-saver";
 import axios from "axios";
 import surattanah from "../document/kepemilikantanah.docx";
 import letterc from "../document/letterc.docx";
+import API from "../../../config/API"
 
 function getData(id) {
   return axios
-    .get("http://localhost:8000/api/letter-detail/" + id, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    .get(API.url + "letter-detail/" + id, API.header)
     .then((response) => {
       return response.data.data;
     })
