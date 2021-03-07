@@ -9,7 +9,11 @@ import API from "../../../config/API"
 
 function getData(id) {
   return axios
-    .get(API.url + "letter-detail/" + id, API.header)
+    .get(API.url + "letter-detail/" + id, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+      }
+    })
     .then((response) => {
       return response.data.data;
     })

@@ -19,7 +19,11 @@ const EditDesa = () => {
 
   useEffect(() => {
     axios
-      .get(API.url + "villages/" + id, API.header)
+      .get(API.url + "villages/" + id, {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("accessToken"),
+    }
+  })
       .then((response) => {
         setData(response.data.data);
       })
@@ -37,7 +41,11 @@ const EditDesa = () => {
     e.preventDefault();
 
     axios
-      .put(API.url + "villages/" + id, data, API.header)
+      .put(API.url + "villages/" + id, data, {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("accessToken"),
+    }
+  })
       .then((response) => {
         console.log(response);
       })

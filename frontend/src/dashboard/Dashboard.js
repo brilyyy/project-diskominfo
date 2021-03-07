@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { TiThMenu } from "react-icons/ti";
 import { BsGearFill } from "react-icons/bs";
@@ -23,6 +23,7 @@ import Krawangan from "./krawangan/Krawangan";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
+  const [menu, setMenu] = useState([]);
 
   const handleClose = () => {
     setOpen(false);
@@ -34,52 +35,62 @@ const Dashboard = () => {
 
   useEffect(() => {
     axios
-      .get(API.url + "details", API.header)
+      .get(API.url + "details", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        }
+      })
       .then((response) => {
-        const permission = response.data.data.permissions;
-        // for (let i = 0; i < permission.length; i++) {
-        //   const access = permission[i].name;
-        //   if (access === "access lettercs") {
-        //     menuArray.push(<SidebarLink
-        //       title="Letter C"
-        //       icon={<FaEnvelope />}
-        //       linkto="/letterc"
-        //       open={open}
-        //     />)
-        //   }
-        //   if (access === "access villages") {
-        //     menuArray.push(<SidebarLink
-        //       title="Data Desa"
-        //       icon={<FaUserAstronaut />}
-        //       linkto="/data-desa"
-        //       open={open}
-        //     />)
-        //   }
-        //   if (access === "access permissions" || access === "access users") {
-        //     menuArray.push(<SidebarLink
-        //       title="Konfigurasi"
-        //       icon={<BsGearFill />}
-        //       linkto="/konfigurasi"
-        //       open={open}
-        //     />)
-        //   }
-        //   if (access === "access krawangans") {
-        //     menuArray.push(<SidebarLink
-        //       title="Krawangan"
-        //       icon={<FaHome />}
-        //       linkto="/krawangan"
-        //       open={open}
-        //     />)
-        //   }
-        // }
-        // menuArray.push(<SidebarLink
-        //   title="Surat Tanah"
-        //   icon={<FaPrint />}
-        //   linkto="/cetak-surat-tanah"
-        //   open={open}
-        // />)
+        setMenu(response.data.data.permissions);
       });
   }, []);
+
+  const menuItems = useMemo(() => {
+    const menus = []
+    for (let i = 0; i < menu.length; i++) {
+        const access = menu[i].name;
+        if (access === "access lettercs") {
+          menus[1] = <SidebarLink
+            title="Letter C"
+            icon={<FaEnvelope />}
+            linkto="/letterc"
+            open={open}
+          />
+        }
+        if (access === "access villages") {
+          menus[3] = <SidebarLink
+            title="Data Desa"
+            icon={<FaUserAstronaut />}
+            linkto="/data-desa"
+            open={open}
+          />
+        }
+        if (access === "access permissions") {
+          menus[4] = <SidebarLink
+            title="Konfigurasi"
+            icon={<BsGearFill />}
+            linkto="/konfigurasi"
+            open={open}
+          />
+        }
+        if (access === "access krawangans") {
+          menus[0] = <SidebarLink
+            title="Krawangan"
+            icon={<FaHome />}
+            linkto="/krawangan"
+            open={open}
+          />
+        }
+      }
+      menus[2] = <SidebarLink
+        title="Surat Tanah"
+        icon={<FaPrint />}
+        linkto="/cetak-surat-tanah"
+        open={open}
+      />
+
+      return menus
+  }, [menu, open])
 
   return (
     <Router>
@@ -109,7 +120,9 @@ const Dashboard = () => {
                 </button>
               </div>
               <div className="flex flex-col">
-                
+                {
+                  menuItems
+                }
               </div>
             </div>
           </aside>

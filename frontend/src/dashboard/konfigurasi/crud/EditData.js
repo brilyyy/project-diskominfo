@@ -21,7 +21,11 @@ const EditData = () => {
 
   useEffect(() => {
     axios
-      .get(API.url + "villages", API.header)
+      .get(API.url + "villages", {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("accessToken"),
+    }
+  })
       .then((response) => {
         setVillage(response.data.data);
       })
@@ -30,7 +34,11 @@ const EditData = () => {
       });
 
     axios
-      .get(API.url + "users/detail/" + id, API.header)
+      .get(API.url + "users/detail/" + id, {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("accessToken"),
+    }
+  })
       .then((response) => {
         setData(response.data.data);
       })
@@ -39,7 +47,11 @@ const EditData = () => {
       });
 
     axios
-      .get(API.url + "permissions", API.header)
+      .get(API.url + "permissions", {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("accessToken"),
+    }
+  })
       .then((response) => {
         setPermission(response.data.data);
       })
@@ -56,7 +68,11 @@ const EditData = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(API.url + "update-user/" + id, data, API.header)
+      .put(API.url + "update-user/" + id, data, {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("accessToken"),
+    }
+  })
       .then((response) => {
         console.log(response);
       })

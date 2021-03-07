@@ -33,7 +33,11 @@ const TambahData = () => {
   useEffect(() => {
     if (localStorage.getItem("admin") === "true") {
       axios
-        .get(API.url + "villages", API.header)
+        .get(API.url + "villages", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          }
+        })
         .then((response) => {
           setVillage(response.data.data);
         })
@@ -52,7 +56,11 @@ const TambahData = () => {
     e.preventDefault();
 
     axios
-      .post(API.url + "lettercs", data, API.header)
+      .post(API.url + "lettercs", data, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        }
+      })
       .then((response) => {
         console.log(response);
       })

@@ -25,7 +25,11 @@ const TambahDesa = () => {
     e.preventDefault();
 
     axios
-      .post(API.url + "villages/", data, API.header)
+      .post(API.url + "villages/", data, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        }
+      })
       .then((response) => {
         console.log(response);
       })

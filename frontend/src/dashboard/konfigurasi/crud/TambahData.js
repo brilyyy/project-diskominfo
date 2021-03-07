@@ -20,7 +20,11 @@ const TambahData = () => {
 
   useEffect(() => {
     axios
-      .get(API.url + "villages", API.header)
+      .get(API.url + "villages", {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("accessToken"),
+    }
+  })
       .then((response) => {
         setVillage(response.data.data);
       })
@@ -28,7 +32,11 @@ const TambahData = () => {
         console.log(err.response);
       });
     axios
-      .get(API.url + "permissions", API.header)
+      .get(API.url + "permissions", {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("accessToken"),
+    }
+  })
       .then((response) => {
         setPermission(response.data.data);
       })
@@ -45,7 +53,11 @@ const TambahData = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(API.url + "register", data, API.header)
+      .post(API.url + "register", data, {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("accessToken"),
+    }
+  })
       .then((response) => {
         console.log(response);
       })

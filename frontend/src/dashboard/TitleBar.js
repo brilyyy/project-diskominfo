@@ -6,7 +6,11 @@ import API from "../config/API"
 const TitleBar = (props) => {
   const [ open, setOpen ] = React.useState(false);
   const handleLogout = () => {
-    axios.post(API.url + "logout", API.header);
+    axios.post(API.url + "logout", {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+      }
+    });
     localStorage.removeItem("accessToken");
     localStorage.removeItem("admin");
     window.location.reload();

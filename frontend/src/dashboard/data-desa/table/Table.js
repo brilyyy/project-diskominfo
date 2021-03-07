@@ -16,7 +16,11 @@ const Table = () => {
 
   useEffect(() => {
     axios
-      .get(API.url + "villages", API.header )
+      .get(API.url + "villages", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        }
+      } )
       .then((response) => {
         setData(response.data.data);
         setLoading(false);

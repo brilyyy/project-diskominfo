@@ -25,7 +25,11 @@ const Table = () => {
 
   useEffect(() => {
     axios
-      .get(API.url + "lettercs", API.header)
+      .get(API.url + "lettercs", {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("accessToken"),
+    }
+  })
       .then((response) => {
         setData(response.data.data);
         setLoading(false);
@@ -37,7 +41,11 @@ const Table = () => {
     if( localStorage.getItem('admin') === 'true' )
     {
       axios
-      .get(API.url + "villages", API.header)
+      .get(API.url + "villages", {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("accessToken"),
+    }
+  })
       .then((response) => {
         setVillage(response.data.data);
       })
@@ -73,7 +81,11 @@ const Table = () => {
 
   const handleDelete = () => {
     axios
-      .delete(API.url + "lettercs/" + activeItem, API.header)
+      .delete(API.url + "lettercs/" + activeItem, {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("accessToken"),
+    }
+  })
       .then((response) => {
         setDeleteModal(false);
         history.go(0);

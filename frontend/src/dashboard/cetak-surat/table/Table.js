@@ -22,7 +22,11 @@ const Table = () => {
 
   useEffect(() => {
     axios
-      .get(API.url + "lettercs", API.header)
+      .get(API.url + "lettercs", {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("accessToken"),
+    }
+  })
       .then((response) => {
         setData(response.data.data);
         setLoading(false);
@@ -31,7 +35,11 @@ const Table = () => {
         console.log(err.response);
       });
     axios
-      .get(API.url + "villages", API.header)
+      .get(API.url + "villages", {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("accessToken"),
+    }
+  })
       .then((response) => {
         setVillage(response.data.data);
       })
