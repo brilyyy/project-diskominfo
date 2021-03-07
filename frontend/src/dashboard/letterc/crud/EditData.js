@@ -62,7 +62,11 @@ const EditData = () => {
     e.preventDefault();
 
     axios
-      .put(API.url + "lettercs/" + id, data, API.header)
+      .put(API.url + "lettercs/" + id, data, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        }
+      })
       .then((response) => {
         console.log(response);
       })
