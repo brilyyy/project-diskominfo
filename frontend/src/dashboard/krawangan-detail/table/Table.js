@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import Pagination from "./pagination/Pagination";
 import axios from "axios";
 import API from "../../../config/API";
-import { AiTwotoneEye } from "react-icons/ai";
 
 const Table = (props) => {
   const history = useHistory();
@@ -12,8 +11,6 @@ const Table = (props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [navbar, setNavbar] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [village, setVillage] = useState({});
-  const [searchVillage, setSearchVillage] = useState("");
 
   const ITEMS_PER_PAGE = 20;
 
@@ -32,20 +29,6 @@ const Table = (props) => {
       .catch((err) => {
         console.log(err.response);
       });
-    if (localStorage.getItem("admin") === "true") {
-      axios
-        .get(API.url + "villages", {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("accessToken"),
-          },
-        })
-        .then((response) => {
-          setVillage(response.data.data);
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
-    }
   }, []);
 
   const krawangansData = useMemo(() => {
@@ -61,10 +44,6 @@ const Table = (props) => {
 
   const changeNavbar = () => {
     window.scrollY >= 100 ? setNavbar(true) : setNavbar(false);
-  };
-
-  const handleChange = (e) => {
-    setSearchVillage(e.target.value);
   };
 
   window.addEventListener("scroll", changeNavbar);
@@ -86,7 +65,7 @@ const Table = (props) => {
         <button
           className="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg"
           onClick={() => {
-            history.push("/krawangan/tambah");
+            history.push("/krawangan/details/tambah/" + props.id);
           }}
         >
           Tambah

@@ -22,6 +22,7 @@ import Home from "./home/Home";
 import Krawangan from "./krawangan/Krawangan";
 import TambahDataKrawangan from "./krawangan/crud/TambahData";
 import KrawanganDetail from "./krawangan-detail/KrawanganDetail";
+import TambahDataKrawanganDetail from "./krawangan-detail/crud/TambahData";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
@@ -44,6 +45,9 @@ const Dashboard = () => {
       })
       .then((response) => {
         setMenu(response.data.data.permissions);
+      })
+      .catch((err) => {
+        console.log(err.response);
       });
   }, []);
 
@@ -178,6 +182,11 @@ const Dashboard = () => {
                 exact
                 path="/krawangan/details/:id"
                 component={KrawanganDetail}
+              />
+              <Route
+                exact
+                path="/krawangan/details/tambah/:id"
+                component={TambahDataKrawanganDetail}
               />
             </Switch>
           </div>
