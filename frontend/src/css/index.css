@@ -2,15 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-::-webkit-scrollbar{
-    width: 5px;
+::-webkit-scrollbar {
+  width: 5px;
 }
 
-::-webkit-scrollbar-thumb{
-    background: rgb(59, 130, 246);
-    border-radius: 20px;
+::-webkit-scrollbar-thumb {
+  background: rgb(59, 130, 246);
+  border-radius: 20px;
 }
 
-::-webkit-scrollbar-track{
-    opacity: 0.8;
+::-webkit-scrollbar-track {
+  opacity: 0.8;
 }
