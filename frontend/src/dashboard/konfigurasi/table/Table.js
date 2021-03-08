@@ -14,7 +14,7 @@ const Table = () => {
   const [loading, setLoading] = useState(true);
   const [deleteModal, setDeleteModal] = useState(false);
   const [activeItem, setActiveItem] = useState(0);
-  const [namaItem, setNamaItem] = useState('');
+  const [namaItem, setNamaItem] = useState("");
 
   const ITEMS_PER_PAGE = 20;
 
@@ -23,7 +23,7 @@ const Table = () => {
       .get(API.url + "users", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        }
+        },
       })
       .then((response) => {
         setData(response.data.data);
@@ -40,7 +40,7 @@ const Table = () => {
       .delete(API.url + "users/" + activeItem, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        }
+        },
       })
       .then((response) => {
         setDeleteModal(false);
@@ -48,7 +48,7 @@ const Table = () => {
       })
       .catch((err) => {
         console.log(err.response);
-      })
+      });
   };
 
   const usersData = useMemo(() => {
@@ -118,44 +118,58 @@ const Table = () => {
 
         <tbody>
           {usersData.length !== 0 ? (
-            usersData.map((user, key) => (
-              user.id !== 1 ? <tr
-                className="text-center h-11 select-none cursor-pointer hover:bg-gray-50 text-sm"
-                key={key}
-              >
-                <td className="border border-gray-300 p-1">{key + '.'}</td>
-                <td className="border border-gray-300 p-1">{user.name}</td>
-                <td className="border border-gray-300 p-1">{user.username}</td>
-                <td className="border border-gray-300 p-1">
-                  {user.email}
-                </td>
-                <td className="border border-gray-300 p-1">
-                  {user.village.nama_desa}
-                </td>
-                <td className="border border-gray-300 p-1 flex justify-center">
-                  <div className="flex m-1" role="group">
-                    <button
-                      type="button"
-                      className="focus:outline-none text-white text-sm p-2 bg-yellow-500 rounded-l-md hover:bg-yellow-600 hover:shadow-lg"
-                      onClick={() => { history.push(`/konfigurasi/${user.id}`) }}
-                    >
-                      <BiPencil />
-                    </button>
-                    <button
-                      type="button"
-                      className="focus:outline-none text-white text-sm p-2 bg-red-500 rounded-r-md hover:bg-red-600 hover:shadow-lg"
-                      onClick={() => {
-                        setDeleteModal(true);
-                        setActiveItem(user.id);
-                        setNamaItem(user.name);
-                      }}
-                    >
-                      <BiTrash />
-                    </button>
-                  </div>
-                </td>
-              </tr> : <></>
-            ))
+            usersData.map((user, key) =>
+              user.id !== 1 ? (
+                <tr
+                  className="text-center h-11 select-none cursor-pointer hover:bg-gray-50 text-sm"
+                  key={key}
+                >
+                  <td className="border border-gray-300 p-1">{key + "."}</td>
+                  <td className="border border-gray-300 p-1">{user.name}</td>
+                  <td className="border border-gray-300 p-1">
+                    {user.username}
+                  </td>
+                  <td className="border border-gray-300 p-1">{user.email}</td>
+                  <td className="border border-gray-300 p-1">
+                    {user.village.nama_desa}
+                  </td>
+                  <td className="border border-gray-300 p-1 flex justify-center">
+                    <div className="flex m-1" role="group">
+                      <button
+                        type="button"
+                        className="focus:outline-none text-white text-sm p-2 bg-yellow-500 rounded-l-md hover:bg-yellow-600 hover:shadow-lg"
+                        onClick={() => {
+                          history.push(`/konfigurasi/${user.id}`);
+                        }}
+                      >
+                        <BiPencil />
+                      </button>
+                      <button
+                        type="button"
+                        className="focus:outline-none text-white text-sm p-2 bg-red-500 rounded-r-md hover:bg-red-600 hover:shadow-lg"
+                        onClick={() => {
+                          setDeleteModal(true);
+                          setActiveItem(user.id);
+                          setNamaItem(user.name);
+                        }}
+                      >
+                        <BiTrash />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ) : (
+                <tr className="text-center">
+                  <td colSpan="12" className="border border-gray-300 p-5">
+                    {loading ? (
+                      <span className="text-xl">Loading...</span>
+                    ) : (
+                      <span className="text-xl">Data Not Found</span>
+                    )}
+                  </td>
+                </tr>
+              )
+            )
           ) : (
             <tr className="text-center">
               <td colSpan="12" className="border border-gray-300 p-5">
