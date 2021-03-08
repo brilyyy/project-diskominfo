@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Close from "../../component/CloseButton";
-import API from "../../../config/API"
+import API from "../../../config/API";
 
 const TambahData = () => {
   let history = useHistory();
@@ -36,7 +36,7 @@ const TambahData = () => {
         .get(API.url + "villages", {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("accessToken"),
-          }
+          },
         })
         .then((response) => {
           setVillage(response.data.data);
@@ -59,7 +59,7 @@ const TambahData = () => {
       .post(API.url + "lettercs", data, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        }
+        },
       })
       .then((response) => {
         console.log(response);
@@ -73,7 +73,7 @@ const TambahData = () => {
   return (
     <div className="p-4 min-h-screen">
       <div className="bg-white px-5 py-4 rounded-lg shadow-md">
-        <div className='flex justify-between'>
+        <div className="flex justify-between">
           <h1 className="mb-6 text-3xl font-bold">Tambah Data Letter C</h1>
           <Close />
         </div>

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import Close from '../../component/CloseButton';
+import Close from "../../component/CloseButton";
 import axios from "axios";
-import API from '../../../config/API'
+import API from "../../../config/API";
 
 const TambahData = () => {
   let history = useHistory();
@@ -24,7 +24,7 @@ const TambahData = () => {
       .get(API.url + "villages", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        }
+        },
       })
       .then((response) => {
         setVillage(response.data.data);
@@ -36,7 +36,7 @@ const TambahData = () => {
       .get(API.url + "permissions", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        }
+        },
       })
       .then((response) => {
         setPermission(response.data.data);
@@ -58,7 +58,7 @@ const TambahData = () => {
         .post(API.url + "register", data, {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("accessToken"),
-          }
+          },
         })
         .then((response) => {
           console.log(response);
@@ -67,8 +67,7 @@ const TambahData = () => {
           console.log(err.response);
         });
       history.push("/konfigurasi");
-    }
-    else {
+    } else {
       setNotmatch(true);
     }
   };
@@ -86,14 +85,13 @@ const TambahData = () => {
   return (
     <div className="p-4 min-h-screen">
       <div className="bg-white px-5 py-4 rounded-lg shadow-md">
-        <div className='flex justify-between'>
+        <div className="flex justify-between">
           <h1 className="mb-6 text-3xl font-bold">Tambah Data User</h1>
           <Close />
         </div>
         <hr />
-        <form onSubmit={handleSubmit} >
+        <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-6 mt-6">
-
             <div>
               {/* Input htmlForm */}
               <div className="mb-6">
@@ -195,7 +193,7 @@ const TambahData = () => {
                   <div className="mb-1 md:mb-0 md:w-1/3">
                     <label htmlFor="password_confirmation">
                       Konfirmasi Password
-                  </label>
+                    </label>
                   </div>
                   <div className="md:w-2/3 md:flex-grow">
                     <input
@@ -205,13 +203,17 @@ const TambahData = () => {
                       name="password_confirmation"
                       autoComplete="off"
                       onChange={handleChange}
-                      onClick={() => { setNotmatch(false) }}
+                      onClick={() => {
+                        setNotmatch(false);
+                      }}
                     />
-                    {notmatch ?
+                    {notmatch ? (
                       <span className="text-xs text-red-500 ml-1">
                         Password tidak sama
-                    </span>
-                      : <></>}
+                      </span>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 </div>
               </div>
@@ -231,7 +233,7 @@ const TambahData = () => {
                       className="w-6 h-6 px-3 border rounded-lg focus:shadow-outline mr-3"
                     />
                     <div className="mb-1 md:mb-0 md:w-1/3">
-                      <label htmlFor="password_confirmation" >
+                      <label htmlFor="password_confirmation">
                         {permission.name.toUpperCase()}
                       </label>
                     </div>

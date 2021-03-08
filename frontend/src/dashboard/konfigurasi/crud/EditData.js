@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import Close from "../../component/CloseButton";
 import axios from "axios";
-import API from "../../../config/API"
+import API from "../../../config/API";
 
 const EditData = () => {
   let { id } = useParams();
@@ -24,7 +24,7 @@ const EditData = () => {
       .get(API.url + "villages", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        }
+        },
       })
       .then((response) => {
         setVillage(response.data.data);
@@ -37,7 +37,7 @@ const EditData = () => {
       .get(API.url + "users/detail/" + id, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        }
+        },
       })
       .then((response) => {
         setData(response.data.data);
@@ -50,7 +50,7 @@ const EditData = () => {
       .get(API.url + "permissions", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        }
+        },
       })
       .then((response) => {
         setPermission(response.data.data);
@@ -58,7 +58,7 @@ const EditData = () => {
       .catch((err) => {
         console.log(err.response);
       });
-  }, []);
+  }, [id]);
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -71,7 +71,7 @@ const EditData = () => {
       .put(API.url + "update-user/" + id, data, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        }
+        },
       })
       .then((response) => {
         console.log(response);
@@ -102,7 +102,7 @@ const EditData = () => {
           <Close />
         </div>
         <hr />
-        <form onSubmit={handleSubmit} >
+        <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-6 mt-6">
             <div>
               {/* Input htmlForm */}
@@ -192,8 +192,10 @@ const EditData = () => {
                     <label>Ubah Password</label>
                   </div>
                   <div className="md:w-2/3 md:flex-grow">
-                    <button className="h-10 px-6 text-md text-white transition-colors duration-150 bg-red-700 rounded-lg hover:bg-red-800 focus:outline-none"
-                      type="button">
+                    <button
+                      className="h-10 px-6 text-md text-white transition-colors duration-150 bg-red-700 rounded-lg hover:bg-red-800 focus:outline-none"
+                      type="button"
+                    >
                       Ubah
                     </button>
                   </div>
@@ -212,7 +214,9 @@ const EditData = () => {
                       value={permission.name}
                       onChange={handleCheckBox}
                       className="w-6 h-6 px-3 border rounded-lg focus:shadow-outline mr-3"
-                      defaultChecked={data.permissions.includes(permission.name)}
+                      defaultChecked={data.permissions.includes(
+                        permission.name
+                      )}
                     />
                     <div className="mb-1 md:mb-0 md:w-1/3">
                       <label htmlFor="password_confirmation">
@@ -225,8 +229,10 @@ const EditData = () => {
             </div>
           </div>
           <div className="mt-10 flex flex-row-reverse">
-            <button className="h-12 px-6 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800 focus:outline-none"
-              type="submit">
+            <button
+              className="h-12 px-6 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800 focus:outline-none"
+              type="submit"
+            >
               Simpan
             </button>
           </div>

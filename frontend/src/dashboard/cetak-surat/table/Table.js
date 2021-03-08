@@ -1,16 +1,12 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { useHistory } from "react-router-dom";
 import Pagination from "./pagination/Pagination";
 import Search from "./Search";
 import axios from "axios";
-import { generateSuratTanah } from '../generator/GenerateDocument';
+import { generateSuratTanah } from "../generator/GenerateDocument";
 import API from "../../../config/API";
 import { BiPrinter } from "react-icons/bi";
 
-
-
 const Table = () => {
-  const history = useHistory();
   const [data, setData] = useState({});
   const [totalItems, setTotalItems] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,7 +23,7 @@ const Table = () => {
       .get(API.url + "lettercs", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        }
+        },
       })
       .then((response) => {
         setData(response.data.data);
@@ -40,7 +36,7 @@ const Table = () => {
       .get(API.url + "villages", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        }
+        },
       })
       .then((response) => {
         setVillage(response.data.data);
@@ -54,7 +50,9 @@ const Table = () => {
     let computedData = Array.from(data);
     if (search) {
       computedData = computedData.filter(
-        (data) => data.nama.toLowerCase().indexOf(search.toLowerCase()) > -1 || data.nomor.toString().includes(search)
+        (data) =>
+          data.nama.toLowerCase().indexOf(search.toLowerCase()) > -1 ||
+          data.nomor.toString().includes(search)
       );
     }
 
@@ -220,8 +218,10 @@ const Table = () => {
                 className="text-center h-11 select-none cursor-pointer hover:bg-gray-50 text-sm"
                 key={key}
               >
-                <td className="border border-gray-300 p-1">{key + 1 + '.'}</td>
-                <td className="border border-gray-300 p-1 max-w-0 overflow-ellipsis whitespace-nowrap overflow-hidden">{letterc.nama}</td>
+                <td className="border border-gray-300 p-1">{key + 1 + "."}</td>
+                <td className="border border-gray-300 p-1 max-w-0 overflow-ellipsis whitespace-nowrap overflow-hidden">
+                  {letterc.nama}
+                </td>
                 <td className="border border-gray-300 p-1">{letterc.nomor}</td>
                 <td className="border border-gray-300 p-1">
                   {letterc.tempat_tinggal}
@@ -265,7 +265,7 @@ const Table = () => {
             <tr className="text-center">
               <td colSpan="13" className="border border-gray-300 p-5">
                 {loading ? (
-                  <span className="text-xl">Loading...</span>
+                  <span className="text-xl animate-spin">Loading...</span>
                 ) : (
                   <span className="text-xl">Data Not Found</span>
                 )}

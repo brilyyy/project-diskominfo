@@ -65,7 +65,7 @@ const EditData = () => {
       .put(API.url + "lettercs/" + id, data, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        }
+        },
       })
       .then((response) => {
         console.log(response);
