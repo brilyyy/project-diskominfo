@@ -23,7 +23,7 @@ function getData(id) {
 }
 
 const checkUndefined = (cek) => {
-  return cek !== null ? cek : " ";
+  return cek ? cek : "  ";
 };
 
 const generateSuratTanah = async (id) => {
@@ -77,7 +77,10 @@ const generateSuratTanah = async (id) => {
       mimeType:
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     });
-    saveAs(out, "SuratTanah.docx");
+    saveAs(
+      out,
+      `${new Date().toJSON().slice(0, 10).replace(/-/g, "_")}_Surat_Tanah.docx`
+    );
   });
 };
 const generateLetterc = async (id) => {
@@ -99,25 +102,25 @@ const generateLetterc = async (id) => {
     doc = new Docxtemplater().loadZip(zip);
     data.map((detail, key) => {
       const detailData = {
-        desa_darat: detail.desa_darat,
-        desa_sawah: detail.desa_sawah,
-        tempat_tinggal: detail.tempat_tinggal,
-        gol_bangunan: detail.gol_bangunan,
-        luas_bangunan: detail.luas_bangunan,
-        luas_darat: detail.luas_darat,
-        luas_sawah: detail.luas_sawah,
-        mutasi_bangunan: detail.mutasi_bangunan,
-        mutasi_bumi: detail.mutasi_bumi,
-        nama: detail.nama,
-        nasional_darat: detail.nasional_darat,
-        nasional_sawah: detail.nasional_sawah,
-        no_persil_bangunan: detail.no_persil_bangunan,
-        no_persil_darat: detail.no_persil_darat,
-        no_persil_sawah: detail.no_persil_sawah,
-        nomor: detail.nomor,
-        pajak_bangunan: detail.pajak_bangunan,
-        pajak_darat: detail.pajak_darat,
-        pajak_sawah: detail.pajak_sawah,
+        desa_darat: checkUndefined(detail.desa_darat),
+        desa_sawah: checkUndefined(detail.desa_sawah),
+        tempat_tinggal: checkUndefined(detail.tempat_tinggal),
+        gol_bangunan: checkUndefined(detail.gol_bangunan),
+        luas_bangunan: checkUndefined(detail.luas_bangunan),
+        luas_darat: checkUndefined(detail.luas_darat),
+        luas_sawah: checkUndefined(detail.luas_sawah),
+        mutasi_bangunan: checkUndefined(detail.mutasi_bangunan),
+        mutasi_bumi: checkUndefined(detail.mutasi_bumi),
+        nama: checkUndefined(detail.nama),
+        nasional_darat: checkUndefined(detail.nasional_darat),
+        nasional_sawah: checkUndefined(detail.nasional_sawah),
+        no_persil_bangunan: checkUndefined(detail.no_persil_bangunan),
+        no_persil_darat: checkUndefined(detail.no_persil_darat),
+        no_persil_sawah: checkUndefined(detail.no_persil_sawah),
+        nomor: checkUndefined(detail.nomor),
+        pajak_bangunan: checkUndefined(detail.pajak_bangunan),
+        pajak_darat: checkUndefined(detail.pajak_darat),
+        pajak_sawah: checkUndefined(detail.pajak_sawah),
       };
       return doc.setData(detailData);
     });
@@ -138,7 +141,10 @@ const generateLetterc = async (id) => {
       mimeType:
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     });
-    saveAs(out, "LetterC.docx");
+    saveAs(
+      out,
+      `${new Date().toJSON().slice(0, 10).replace(/-/g, "_")}_Letter_C.docx`
+    );
   });
 };
 

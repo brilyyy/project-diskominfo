@@ -122,9 +122,13 @@ const Table = () => {
             <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
               Nomor Persil
             </th>
-            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Desa
-            </th>
+            {localStorage.getItem("admin") === "true" ? (
+              <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
+                Desa
+              </th>
+            ) : (
+              <></>
+            )}
             <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
               Action
             </th>
@@ -144,9 +148,13 @@ const Table = () => {
                 <td className="border border-gray-300 p-1">
                   {krawangan.no_persil}
                 </td>
-                <td className="border border-gray-300 p-1">
-                  {krawangan.village.nama_desa}
-                </td>
+                {localStorage.getItem("admin") === "true" ? (
+                  <td className="border border-gray-300 p-1">
+                    {krawangan.village.nama_desa}
+                  </td>
+                ) : (
+                  <></>
+                )}
                 <td className="border border-gray-300 p-1">
                   <button
                     type="button"

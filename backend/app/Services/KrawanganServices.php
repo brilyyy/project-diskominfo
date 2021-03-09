@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Krawangan;
 use App\Models\User;
+use App\Models\Village;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,10 +38,17 @@ class KrawanganServices
             $image = $request->file('image');
             $image_uploaded_path = $image->store($uploadFolder, 'public');
         }
+
         $krawangan = new Krawangan();
-        $krawangan->village_id = $request->get('village_id');
         $krawangan->no_persil = $request->get('no_persil');
         $krawangan->foto = Storage::disk('public')->url($image_uploaded_path);
+
+        if (Auth::id() != 1) {
+            $user = User::find(Auth::id());
+            $krawangan->village_id = $user['village_id'];
+        } else {
+            $krawangan->village_id = $request->get('village_id');
+        }
 
         if ($krawangan->save()) {
             return $this->successResponse($krawangan, 'Krawangan Data Added Successfully');

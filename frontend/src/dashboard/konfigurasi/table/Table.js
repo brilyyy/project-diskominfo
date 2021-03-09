@@ -159,15 +159,7 @@ const Table = () => {
                   </td>
                 </tr>
               ) : (
-                <tr className="text-center">
-                  <td colSpan="12" className="border border-gray-300 p-5">
-                    {loading ? (
-                      <span className="text-xl">Loading...</span>
-                    ) : (
-                      <span className="text-xl">Data Not Found</span>
-                    )}
-                  </td>
-                </tr>
+                <></>
               )
             )
           ) : (

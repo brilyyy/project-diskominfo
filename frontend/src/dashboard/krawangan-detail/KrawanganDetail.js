@@ -36,7 +36,7 @@ const KrawanganDetail = () => {
         <hr />
         <div className="mt-6">
           <div className="w-full flex flex-row justify-center mb-6">
-            <img src={data.foto} alt="foto" className="w-2/3" />
+            <img src={data.foto} alt="foto" className="w-1/3" />
           </div>
           <Table id={id} />
         </div>

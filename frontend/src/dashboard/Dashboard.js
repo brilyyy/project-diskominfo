@@ -3,7 +3,14 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { TiThMenu } from "react-icons/ti";
 import { BsGearFill } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
-import { FaEnvelope, FaPrint, FaUserAstronaut, FaHome } from "react-icons/fa";
+import {
+  FaEnvelope,
+  FaPrint,
+  FaUserAstronaut,
+  FaHome,
+  FaRegNewspaper,
+} from "react-icons/fa";
+import { BiChevronRightCircle, BiChevronDownCircle } from "react-icons/bi";
 import axios from "axios";
 import API from "../config/API";
 import TitleBar from "./TitleBar";
@@ -27,6 +34,11 @@ import TambahDataKrawanganDetail from "./krawangan-detail/crud/TambahData";
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
   const [menu, setMenu] = useState([]);
+  const [dropdown, setDropdown] = useState(false);
+
+  const handleDropdown = () => {
+    dropdown ? setDropdown(false) : setDropdown(true);
+  };
 
   const handleClose = () => {
     setOpen(false);
@@ -62,6 +74,7 @@ const Dashboard = () => {
             icon={<FaEnvelope />}
             linkto="/letterc"
             open={open}
+            tooltip="Letter C"
           />
         );
       }
@@ -72,6 +85,7 @@ const Dashboard = () => {
             icon={<FaUserAstronaut />}
             linkto="/data-desa"
             open={open}
+            tooltip="Data Desa"
           />
         );
       }
@@ -82,6 +96,7 @@ const Dashboard = () => {
             icon={<BsGearFill />}
             linkto="/konfigurasi"
             open={open}
+            tooltip="Konfigurasi"
           />
         );
       }
@@ -92,21 +107,49 @@ const Dashboard = () => {
             icon={<FaHome />}
             linkto="/krawangan"
             open={open}
+            tooltip="Krawangan"
           />
         );
       }
     }
     menus[2] = (
-      <SidebarLink
-        title="Surat Tanah"
-        icon={<FaPrint />}
-        linkto="/cetak-surat-tanah"
-        open={open}
-      />
+      <div className="select-none">
+        <div
+          onClick={handleDropdown}
+          className={
+            "text-white hover:bg-blue-200 cursor-pointer p-3 flex " +
+            (open ? "" : "justify-center")
+          }
+        >
+          <span className={open ? "mr-3" : ""}>
+            <FaPrint />
+          </span>
+          <span className={open ? "" : "hidden"}>Cetak Surat</span>
+          <span className={open ? "ml-3" : "hidden"}>
+            {dropdown ? (
+              <BiChevronDownCircle className="mt-1" />
+            ) : (
+              <BiChevronRightCircle className="mt-1" />
+            )}
+          </span>
+        </div>
+        <div>
+          <div className={!dropdown ? "hidden" : ""}>
+            <SidebarLink
+              title="Surat Tanah"
+              icon={<FaRegNewspaper />}
+              linkto="/cetak-surat-tanah"
+              open={open}
+              dropdown={dropdown}
+              tooltip="Cetak Surat Tanah"
+            />
+          </div>
+        </div>
+      </div>
     );
 
     return menus;
-  }, [menu, open]);
+  }, [menu, open, dropdown, handleDropdown]);
 
   return (
     <Router>
