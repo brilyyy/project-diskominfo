@@ -19,8 +19,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [
-    require("tailwind-filter-utilities"),
-    require("tailwind-scrollbar"),
-  ],
+  plugins: [require("tailwind-filter-utilities")],
 };

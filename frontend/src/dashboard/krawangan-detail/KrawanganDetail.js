@@ -22,7 +22,7 @@ const KrawanganDetail = () => {
       .catch((err) => {
         console.log(err.response);
       });
-  }, []);
+  }, [id]);
 
   return (
     <div className="min-h-screen p-4">
