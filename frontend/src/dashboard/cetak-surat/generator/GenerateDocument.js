@@ -7,7 +7,13 @@ import surattanah from "../document/kepemilikantanah.docx";
 import letterc from "../document/letterc.docx";
 import API from "../../../config/API";
 
-function getData(id) {
+/**
+ * dokumentasi
+ * @param {any} id ID dari tabel Letter C yang akan digunakan untuk mengambil data dari server
+ * @returns data yang berupa JSON
+ */
+const getData = (id) => {
+  // pengambilan data letter c menggunakan axios
   return axios
     .get(API.url + "letter-detail/" + id, {
       headers: {
@@ -20,12 +26,22 @@ function getData(id) {
     .catch((err) => {
       return err.response;
     });
-}
+};
 
+/**
+ * dokumentasi
+ * @param {string} cek string yang akan dilakukan pengecekan apakah null atau tidak
+ * @returns jika string yang dicek null, maka akan diganti dengan spasi
+ */
 const checkUndefined = (cek) => {
   return cek ? cek : "  ";
 };
 
+/**
+ * dokumentasi fungsi generateSuratTanah
+ * untuk mencetak Surat Tanah dari data yang didapat
+ * @param {any} id merupakan id yang didapat dari tabel letter c
+ */
 const generateSuratTanah = async (id) => {
   const data = await getData(id);
 
@@ -44,6 +60,8 @@ const generateSuratTanah = async (id) => {
 
     zip = new PizZip(content);
     doc = new Docxtemplater().loadZip(zip);
+
+    // mapping data dari server dengan merubah key sesuai template docx
     data.map((detail, key) => {
       const detailData = {
         nama_desa: checkUndefined(detail.village.nama_desa.toUpperCase()),
@@ -83,6 +101,12 @@ const generateSuratTanah = async (id) => {
     );
   });
 };
+
+/**
+ * dokumentasi fungsi generateLetterc
+ * untuk mencetak tabel Letter C dari data yang didapat
+ * @param {any} id ID yang didapat dari tabel Letter C
+ */
 const generateLetterc = async (id) => {
   const data = await getData(id);
 
@@ -100,6 +124,8 @@ const generateLetterc = async (id) => {
 
     zip = new PizZip(content);
     doc = new Docxtemplater().loadZip(zip);
+
+    // mapping data dari server dengan merubah key sesuai template docx
     data.map((detail, key) => {
       const detailData = {
         desa_darat: checkUndefined(detail.desa_darat),

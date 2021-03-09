@@ -1,7 +1,11 @@
+/* CSS menggunakan framework Tailwind */
+
+/* Import Tailwind ke CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Kustomisasi Scrollbar */
 ::-webkit-scrollbar {
   width: 5px;
 }

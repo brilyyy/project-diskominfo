@@ -52,7 +52,7 @@ class AuthServices
             'password' => 'required'
         ]);
 
-        if(!auth()->attempt($loginData)){
+        if (!auth()->attempt($loginData)) {
             return $this->errorResponse('User does not exist', 400);
         }
 
@@ -65,8 +65,8 @@ class AuthServices
     public function logout(Request $request)
     {
         $logout = $request->user()->token()->revoke();
-        if($logout){
-            return $this->successResponse('','User Logged Out Successfully', 200);
+        if ($logout) {
+            return $this->successResponse('', 'User Logged Out Successfully', 200);
         }
     }
 

@@ -192,29 +192,6 @@ const Dashboard = () => {
           <div>
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route exact path="/data-desa" component={DataDesa} />
-              <Route
-                exact
-                path="/data-desa/tambah"
-                component={TambahDataDesa}
-              />
-              <Route
-                exact
-                path="/data-desa/ubah/:id"
-                component={EditDataDesa}
-              />
-              <Route exact path="/letterc" component={Letterc} />
-              <Route exact path="/letterc/tambah" component={TambahDataLc} />
-              <Route exact path="/letterc/ubah/:id" component={EditDataLc} />
-              <Route
-                exact
-                path="/cetak-surat-tanah"
-                component={CetakSuratTanah}
-              />
-              <Route exact path="/konfigurasi" component={Konfigurasi} />
-              <Route exact path="/konfigurasi/tambah" component={AddUser} />
-              <Route exact path="/konfigurasi/:id" component={ConfigUser} />
-              <Route exact path="/krawangan" component={Krawangan} />
               <Route
                 exact
                 path="/krawangan/tambah"
@@ -231,6 +208,34 @@ const Dashboard = () => {
                 path="/krawangan/details/tambah/:id"
                 component={TambahDataKrawanganDetail}
               />
+              <Route exact path="/letterc" component={Letterc} />
+              <Route exact path="/letterc/tambah" component={TambahDataLc} />
+              <Route exact path="/letterc/ubah/:id" component={EditDataLc} />
+              <Route
+                exact
+                path="/cetak-surat-tanah"
+                component={CetakSuratTanah}
+              />
+              {localStorage.getItem("admin") === "true" ? (
+                <>
+                  <Route exact path="/data-desa" component={DataDesa} />
+                  <Route
+                    exact
+                    path="/data-desa/tambah"
+                    component={TambahDataDesa}
+                  />
+                  <Route
+                    exact
+                    path="/data-desa/ubah/:id"
+                    component={EditDataDesa}
+                  />
+
+                  <Route exact path="/konfigurasi" component={Konfigurasi} />
+                  <Route exact path="/konfigurasi/tambah" component={AddUser} />
+                  <Route exact path="/konfigurasi/:id" component={ConfigUser} />
+                  <Route exact path="/krawangan" component={Krawangan} />
+                </>
+              ) : null}
             </Switch>
           </div>
         </main>

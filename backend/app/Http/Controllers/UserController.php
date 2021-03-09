@@ -28,4 +28,9 @@ class UserController extends Controller
     {
         return $this->user->destroy($id);
     }
+
+    public function userDetail()
+    {
+        return $this->user->userDetail();
+    }
 }

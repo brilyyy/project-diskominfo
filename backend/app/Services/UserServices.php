@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserServices
@@ -13,7 +14,6 @@ class UserServices
 
     public function index()
     {
-        // $user = User::all();
         $user = User::with('village')->get();
         return $this->successResponse($user, 'User data retrieved successfully');
     }
@@ -42,5 +42,11 @@ class UserServices
         $user = User::find($id);
         $user->delete();
         return $this->successResponse($user, 'User Deleted Successfully', 200);
+    }
+
+    public function userDetail()
+    {
+        $user = User::with('village')->where('id', Auth::id())->get();
+        dd($user);
     }
 }

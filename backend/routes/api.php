@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::apiResource('permissions', PermissionController::class);
     Route::get('letter-detail/{id}', [LettercController::class, 'detailLetter']);
     Route::get('users', [UserController::class, 'index']);
+    Route::get('user-detail', [UserController::class, 'userDetail']);
     Route::get('users/detail/{id}', [UserController::class, 'show']);
     Route::put('users', [UserController::class, 'update']);
     Route::delete('users/{id}', [UserController::class, 'destroy']);
