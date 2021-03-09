@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import Pagination from "./pagination/Pagination";
 import axios from "axios";
 import API from "../../../config/API";
-import { BiPencil } from "react-icons/bi";
+import { AiTwotoneEye } from "react-icons/ai";
 
 const Table = () => {
   const history = useHistory();
@@ -12,15 +12,17 @@ const Table = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [navbar, setNavbar] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [village, setVillage] = useState({});
+  const [searchVillage, setSearchVillage] = useState("");
 
   const ITEMS_PER_PAGE = 20;
 
   useEffect(() => {
     axios
-      .get(API.url + "villages", {
+      .get(API.url + "krawangans", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        }
+        },
       })
       .then((response) => {
         setData(response.data.data);
@@ -29,10 +31,30 @@ const Table = () => {
       .catch((err) => {
         console.log(err.response);
       });
+    if (localStorage.getItem("admin") === "true") {
+      axios
+        .get(API.url + "villages", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          },
+        })
+        .then((response) => {
+          setVillage(response.data.data);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    }
   }, []);
 
-  const villagesData = useMemo(() => {
+  const krawangansData = useMemo(() => {
     let computedData = Array.from(data);
+
+    if (searchVillage) {
+      computedData = computedData.filter((i) => {
+        return String(i.village_id) === searchVillage;
+      });
+    }
 
     setTotalItems(computedData.length);
 
@@ -40,10 +62,14 @@ const Table = () => {
       (currentPage - 1) * ITEMS_PER_PAGE,
       (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
     );
-  }, [data, currentPage]);
+  }, [data, currentPage, searchVillage]);
 
   const changeNavbar = () => {
     window.scrollY >= 80 ? setNavbar(true) : setNavbar(false);
+  };
+
+  const handleChange = (e) => {
+    setSearchVillage(e.target.value);
   };
 
   window.addEventListener("scroll", changeNavbar);
@@ -56,6 +82,21 @@ const Table = () => {
           (!navbar ? "" : "bg-gray-100 drop-shadow-md p-3 rounded-sm")
         }
       >
+        {localStorage.getItem("admin") === "true" ? (
+          <select
+            onChange={handleChange}
+            className="bg-white h-10 p-2 rounded-lg text-sm focus:outline-none border-gray-200 border-2"
+          >
+            <option value="">Semua Desa</option>
+            {Array.from(village).map((village, key) => (
+              <option value={village.id} key={key}>
+                {village.nama_desa}
+              </option>
+            ))}
+          </select>
+        ) : (
+          <></>
+        )}
         <Pagination
           total={totalItems}
           itemsPerPage={ITEMS_PER_PAGE}
@@ -65,7 +106,7 @@ const Table = () => {
         <button
           className="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg"
           onClick={() => {
-            history.push("/data-desa/tambah");
+            history.push("/krawangan/tambah");
           }}
         >
           Tambah
@@ -79,22 +120,10 @@ const Table = () => {
               No.
             </th>
             <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Nama Desa
+              Nomor Persil
             </th>
             <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Status
-            </th>
-            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Alamat
-            </th>
-            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Kecamatan
-            </th>
-            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Kepala Desa
-            </th>
-            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              NIP
+              Desa
             </th>
             <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
               Action
@@ -103,34 +132,30 @@ const Table = () => {
         </thead>
 
         <tbody>
-          {villagesData.length !== 0 ? (
-            villagesData.map((village, key) => (
+          {krawangansData.length !== 0 ? (
+            krawangansData.map((krawangan, key) => (
               <tr
                 className="text-center h-11 select-none cursor-pointer hover:bg-gray-50 text-sm"
                 key={key}
               >
-                <td className="border border-gray-300 p-1">{(village.id - 1) + '.'}</td>
-                <td className="border border-gray-300 p-1">{village.nama_desa}</td>
-                <td className="border border-gray-300 p-1">{village.status}</td>
                 <td className="border border-gray-300 p-1">
-                  {village.alamat}
+                  {krawangan.id + "."}
                 </td>
                 <td className="border border-gray-300 p-1">
-                  {village.kecamatan}
+                  {krawangan.no_persil}
                 </td>
-                <td className="border border-gray-300 p-1 max-w-0 overflow-ellipsis whitespace-nowrap overflow-hidden">
-                  {village.kepala_desa}
-                </td>
-                <td className="border border-gray-300 p-1 max-w-0 overflow-ellipsis whitespace-nowrap overflow-hidden">
-                  {village.nip_desa}
+                <td className="border border-gray-300 p-1">
+                  {krawangan.village.nama_desa}
                 </td>
                 <td className="border border-gray-300 p-1">
                   <button
                     type="button"
-                    className="focus:outline-none text-white text-sm p-2 bg-yellow-500 rounded-md hover:bg-yellow-600 hover:shadow-lg"
-                    onClick={() => { history.push(`/data-desa/ubah/${village.id}`) }}
+                    className="focus:outline-none text-white text-sm p-2 bg-green-500 rounded-md hover:bg-green-600 hover:shadow-lg"
+                    onClick={() => {
+                      history.push(`/krawangan/details/${krawangan.id}`);
+                    }}
                   >
-                    <BiPencil />
+                    <AiTwotoneEye />
                   </button>
                 </td>
               </tr>

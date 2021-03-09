@@ -31,7 +31,8 @@ class Letterc extends Model
         'mutasi_bangunan',
         'foto',
     ];
-    public function village(){
-        $this->belongsTo(Village::class);
+    public function village()
+    {
+        return $this->belongsTo(Village::class);
     }
 }

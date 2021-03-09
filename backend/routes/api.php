@@ -6,6 +6,8 @@ use App\Http\Controllers\LettercController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VillageController;
+use App\Http\Controllers\KrawanganController;
+use App\Http\Controllers\KrawanganDetailController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,4 +35,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('users', [UserController::class, 'index']);
     Route::get('users/detail/{id}', [UserController::class, 'show']);
     Route::put('users', [UserController::class, 'update']);
+    Route::delete('users/{id}', [UserController::class, 'destroy']);
+    Route::apiResource('krawangans', KrawanganController::class);
+    Route::apiResource('krawangan/details', KrawanganDetailController::class);
 });

@@ -20,6 +20,8 @@ import ConfigUser from "./konfigurasi/crud/EditData";
 import AddUser from "./konfigurasi/crud/TambahData";
 import Home from "./home/Home";
 import Krawangan from "./krawangan/Krawangan";
+import TambahDataKrawangan from "./krawangan/crud/TambahData";
+import KrawanganDetail from "./krawangan-detail/KrawanganDetail";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
@@ -38,7 +40,7 @@ const Dashboard = () => {
       .get(API.url + "details", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        }
+        },
       })
       .then((response) => {
         setMenu(response.data.data.permissions);
@@ -46,51 +48,61 @@ const Dashboard = () => {
   }, []);
 
   const menuItems = useMemo(() => {
-    const menus = []
+    const menus = [];
     for (let i = 0; i < menu.length; i++) {
-        const access = menu[i].name;
-        if (access === "access lettercs") {
-          menus[1] = <SidebarLink
+      const access = menu[i].name;
+      if (access === "access lettercs") {
+        menus[1] = (
+          <SidebarLink
             title="Letter C"
             icon={<FaEnvelope />}
             linkto="/letterc"
             open={open}
           />
-        }
-        if (access === "access villages") {
-          menus[3] = <SidebarLink
+        );
+      }
+      if (access === "access villages") {
+        menus[3] = (
+          <SidebarLink
             title="Data Desa"
             icon={<FaUserAstronaut />}
             linkto="/data-desa"
             open={open}
           />
-        }
-        if (access === "access permissions") {
-          menus[4] = <SidebarLink
+        );
+      }
+      if (access === "access permissions") {
+        menus[4] = (
+          <SidebarLink
             title="Konfigurasi"
             icon={<BsGearFill />}
             linkto="/konfigurasi"
             open={open}
           />
-        }
-        if (access === "access krawangans") {
-          menus[0] = <SidebarLink
+        );
+      }
+      if (access === "access krawangans") {
+        menus[0] = (
+          <SidebarLink
             title="Krawangan"
             icon={<FaHome />}
             linkto="/krawangan"
             open={open}
           />
-        }
+        );
       }
-      menus[2] = <SidebarLink
+    }
+    menus[2] = (
+      <SidebarLink
         title="Surat Tanah"
         icon={<FaPrint />}
         linkto="/cetak-surat-tanah"
         open={open}
       />
+    );
 
-      return menus
-  }, [menu, open])
+    return menus;
+  }, [menu, open]);
 
   return (
     <Router>
@@ -119,11 +131,7 @@ const Dashboard = () => {
                   {!open ? <TiThMenu /> : <MdClose />}
                 </button>
               </div>
-              <div className="flex flex-col">
-                {
-                  menuItems
-                }
-              </div>
+              <div className="flex flex-col">{menuItems}</div>
             </div>
           </aside>
         </div>
@@ -160,6 +168,17 @@ const Dashboard = () => {
               <Route exact path="/konfigurasi/tambah" component={AddUser} />
               <Route exact path="/konfigurasi/:id" component={ConfigUser} />
               <Route exact path="/krawangan" component={Krawangan} />
+              <Route
+                exact
+                path="/krawangan/tambah"
+                component={TambahDataKrawangan}
+              />
+              <Route exact path="/krawangan" component={Krawangan} />
+              <Route
+                exact
+                path="/krawangan/details/:id"
+                component={KrawanganDetail}
+              />
             </Switch>
           </div>
         </main>

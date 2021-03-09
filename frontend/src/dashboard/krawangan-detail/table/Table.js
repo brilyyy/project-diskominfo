@@ -3,35 +3,52 @@ import { useHistory } from "react-router-dom";
 import Pagination from "./pagination/Pagination";
 import axios from "axios";
 import API from "../../../config/API";
-import { BiPencil } from "react-icons/bi";
+import { AiTwotoneEye } from "react-icons/ai";
 
-const Table = () => {
+const Table = (props) => {
   const history = useHistory();
   const [data, setData] = useState({});
   const [totalItems, setTotalItems] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [navbar, setNavbar] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [village, setVillage] = useState({});
+  const [searchVillage, setSearchVillage] = useState("");
 
   const ITEMS_PER_PAGE = 20;
 
   useEffect(() => {
     axios
-      .get(API.url + "villages", {
+      .get(API.url + "krawangan/details/" + props.id, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        }
+        },
       })
       .then((response) => {
         setData(response.data.data);
+        console.log(data);
         setLoading(false);
       })
       .catch((err) => {
         console.log(err.response);
       });
+    if (localStorage.getItem("admin") === "true") {
+      axios
+        .get(API.url + "villages", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          },
+        })
+        .then((response) => {
+          setVillage(response.data.data);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    }
   }, []);
 
-  const villagesData = useMemo(() => {
+  const krawangansData = useMemo(() => {
     let computedData = Array.from(data);
 
     setTotalItems(computedData.length);
@@ -43,13 +60,17 @@ const Table = () => {
   }, [data, currentPage]);
 
   const changeNavbar = () => {
-    window.scrollY >= 80 ? setNavbar(true) : setNavbar(false);
+    window.scrollY >= 100 ? setNavbar(true) : setNavbar(false);
+  };
+
+  const handleChange = (e) => {
+    setSearchVillage(e.target.value);
   };
 
   window.addEventListener("scroll", changeNavbar);
 
   return (
-    <div className="bg-white px-3 py-4 rounded-lg shadow-md">
+    <div>
       <div
         className={
           "transition-all duration-500 flex items-center w-full justify-between mb-4 select-none sticky top-0 " +
@@ -65,7 +86,7 @@ const Table = () => {
         <button
           className="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg"
           onClick={() => {
-            history.push("/data-desa/tambah");
+            history.push("/krawangan/tambah");
           }}
         >
           Tambah
@@ -79,59 +100,41 @@ const Table = () => {
               No.
             </th>
             <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Nama Desa
+              Blok/Bagian Persil
             </th>
             <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Status
+              Nomor Letterc
             </th>
             <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Alamat
+              Nama
             </th>
             <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Kecamatan
+              Luas
             </th>
             <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Kepala Desa
-            </th>
-            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              NIP
-            </th>
-            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Action
+              Mutasi
             </th>
           </tr>
         </thead>
 
         <tbody>
-          {villagesData.length !== 0 ? (
-            villagesData.map((village, key) => (
+          {krawangansData.length !== 0 ? (
+            krawangansData.map((krawangan, key) => (
               <tr
                 className="text-center h-11 select-none cursor-pointer hover:bg-gray-50 text-sm"
                 key={key}
               >
-                <td className="border border-gray-300 p-1">{(village.id - 1) + '.'}</td>
-                <td className="border border-gray-300 p-1">{village.nama_desa}</td>
-                <td className="border border-gray-300 p-1">{village.status}</td>
+                <td className="border border-gray-300 p-1">{key + 1 + "."}</td>
                 <td className="border border-gray-300 p-1">
-                  {village.alamat}
+                  {krawangan.blok_persil}
                 </td>
                 <td className="border border-gray-300 p-1">
-                  {village.kecamatan}
+                  {krawangan.nomor_letterc}
                 </td>
-                <td className="border border-gray-300 p-1 max-w-0 overflow-ellipsis whitespace-nowrap overflow-hidden">
-                  {village.kepala_desa}
-                </td>
-                <td className="border border-gray-300 p-1 max-w-0 overflow-ellipsis whitespace-nowrap overflow-hidden">
-                  {village.nip_desa}
-                </td>
+                <td className="border border-gray-300 p-1">{krawangan.nama}</td>
+                <td className="border border-gray-300 p-1">{krawangan.luas}</td>
                 <td className="border border-gray-300 p-1">
-                  <button
-                    type="button"
-                    className="focus:outline-none text-white text-sm p-2 bg-yellow-500 rounded-md hover:bg-yellow-600 hover:shadow-lg"
-                    onClick={() => { history.push(`/data-desa/ubah/${village.id}`) }}
-                  >
-                    <BiPencil />
-                  </button>
+                  {krawangan.mutasi}
                 </td>
               </tr>
             ))

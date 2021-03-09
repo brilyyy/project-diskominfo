@@ -36,4 +36,11 @@ class UserServices
         ];
         return $this->successResponse($data, 'User details retrieved successfully');
     }
+
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return $this->successResponse($user, 'User Deleted Successfully', 200);
+    }
 }

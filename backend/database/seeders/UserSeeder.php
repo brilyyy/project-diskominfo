@@ -26,5 +26,6 @@ class UserSeeder extends Seeder
         $admin->givePermissionTo('access villages');
         $admin->givePermissionTo('access users');
         $admin->givePermissionTo('access permissions');
+        $admin->givePermissionTo('access krawangans');
     }
 }

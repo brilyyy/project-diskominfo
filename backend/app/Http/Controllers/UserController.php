@@ -23,4 +23,9 @@ class UserController extends Controller
     {
         return $this->user->show($id);
     }
+
+    public function destroy($id)
+    {
+        return $this->user->destroy($id);
+    }
 }

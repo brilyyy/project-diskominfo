@@ -6,24 +6,36 @@ use App\Models\KrawanganDetail;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 
-class VillageServices
+class KrawanganDetailServices
 {
     use ApiResponser;
 
     public function index()
     {
-
     }
 
-    public function show($id){
-
+    public function show($id)
+    {
+        $detail = KrawanganDetail::where('krawangan_id', $id)->get();
+        return $this->successResponse($detail, 'Success');
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
+        $detail = new KrawanganDetail();
+        $detail->krawangan_id = $request->get('krawangan_id');
+        $detail->nomor_letterc = $request->get('nomor_letterc');
+        $detail->nama = $request->get('nama');
+        $detail->luas = $request->get('luas');
+        $detail->mutasi = $request->get('mutasi');
+        $detail->blok_persil = $request->get('blok_persil');
 
+        if ($detail->save()) {
+            return $this->successResponse($detail, 'Krawangan Detail Stored Successfully', 201);
+        }
     }
 
-    public function update(Request $request, $id){
-
+    public function update(Request $request, $id)
+    {
     }
 }

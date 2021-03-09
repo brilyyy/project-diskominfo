@@ -5,14 +5,14 @@ import { saveAs } from "file-saver";
 import axios from "axios";
 import surattanah from "../document/kepemilikantanah.docx";
 import letterc from "../document/letterc.docx";
-import API from "../../../config/API"
+import API from "../../../config/API";
 
 function getData(id) {
   return axios
     .get(API.url + "letter-detail/" + id, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("accessToken"),
-      }
+      },
     })
     .then((response) => {
       return response.data.data;
@@ -21,6 +21,10 @@ function getData(id) {
       return err.response;
     });
 }
+
+const checkUndefined = (cek) => {
+  return cek !== null ? cek : " ";
+};
 
 const generateSuratTanah = async (id) => {
   const data = await getData(id);
@@ -42,17 +46,17 @@ const generateSuratTanah = async (id) => {
     doc = new Docxtemplater().loadZip(zip);
     data.map((detail, key) => {
       const detailData = {
-        nama_desa: detail.nama_desa.toUpperCase(),
-        alamat: detail.alamat,
-        no_surat: detail.no_surat,
+        nama_desa: checkUndefined(detail.village.nama_desa.toUpperCase()),
+        alamat: checkUndefined(detail.village.alamat),
+        no_surat: checkUndefined(detail.village.no_surat),
         tahun: d.getFullYear(),
-        kepala_desa: detail.kepala_desa,
-        kecamatan: detail.kecamatan,
-        kecamatan_head: detail.kecamatan.toUpperCase(),
-        no_persil_sawah: detail.no_persil_sawah,
-        kelas_sawah: detail.kelas_sawah,
-        luas_sawah: detail.luas_sawah,
-        nama: detail.nama,
+        kepala_desa: checkUndefined(detail.village.kepala_desa),
+        kecamatan: checkUndefined(detail.village.kecamatan),
+        kecamatan_head: checkUndefined(detail.village.kecamatan.toUpperCase()),
+        no_persil_sawah: checkUndefined(detail.no_persil_sawah),
+        kelas_sawah: checkUndefined(detail.kelas_sawah),
+        luas_sawah: checkUndefined(detail.luas_sawah),
+        nama: checkUndefined(detail.nama),
       };
       return doc.setData(detailData);
     });

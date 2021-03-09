@@ -22,10 +22,10 @@ const EditData = () => {
   useEffect(() => {
     axios
       .get(API.url + "villages", {
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("accessToken"),
-    }
-  })
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        }
+      })
       .then((response) => {
         setVillage(response.data.data);
       })
@@ -35,10 +35,10 @@ const EditData = () => {
 
     axios
       .get(API.url + "users/detail/" + id, {
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("accessToken"),
-    }
-  })
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        }
+      })
       .then((response) => {
         setData(response.data.data);
       })
@@ -48,10 +48,10 @@ const EditData = () => {
 
     axios
       .get(API.url + "permissions", {
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("accessToken"),
-    }
-  })
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        }
+      })
       .then((response) => {
         setPermission(response.data.data);
       })
@@ -69,10 +69,10 @@ const EditData = () => {
     e.preventDefault();
     axios
       .put(API.url + "update-user/" + id, data, {
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("accessToken"),
-    }
-  })
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        }
+      })
       .then((response) => {
         console.log(response);
       })
@@ -101,134 +101,132 @@ const EditData = () => {
           <h1 className="mb-6 text-3xl font-bold">Ubah Data User</h1>
           <Close />
         </div>
-        <hr/>
-        <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6 mt-6">
-          <div>
-            {/* Input htmlForm */}
-            <div className="mb-6">
-              <div className="text-gray-700 md:flex md:items-center">
-                <div className="mb-1 md:mb-0 md:w-1/3">
-                  <label htmlFor="nama">Pilih Desa</label>
-                </div>
-                <div className="md:w-2/3 md:flex-grow">
-                  <select
-                    name="village_id"
-                    onChange={handleChange}
-                    className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                  >
-                    <option value="">Semua Desa</option>
-                    {Array.from(village).map((village, key) => (
-                      <option
-                        value={village.id}
-                        key={key}
-                        selected={village.id === data.village_id}
-                      >
-                        {village.nama_desa}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div className="mb-6">
-              <div className="text-gray-700 md:flex md:items-center">
-                <div className="mb-1 md:mb-0 md:w-1/3">
-                  <label htmlFor="name">Nama User</label>
-                </div>
-                <div className="md:w-2/3 md:flex-grow">
-                  <input
-                    className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                    type="text"
-                    id="name"
-                    name="name"
-                    autoComplete="off"
-                    onChange={handleChange}
-                    value={data.name}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="mb-6">
-              <div className="text-gray-700 md:flex md:items-center">
-                <div className="mb-1 md:mb-0 md:w-1/3">
-                  <label htmlFor="email">Email</label>
-                </div>
-                <div className="md:w-2/3 md:flex-grow">
-                  <input
-                    className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                    type="email"
-                    id="email"
-                    name="email"
-                    autoComplete="off"
-                    onChange={handleChange}
-                    value={data.email}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="mb-6">
-              <div className="text-gray-700 md:flex md:items-center">
-                <div className="mb-1 md:mb-0 md:w-1/3">
-                  <label htmlFor="username">Username</label>
-                </div>
-                <div className="md:w-2/3 md:flex-grow">
-                  <input
-                    className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                    type="text"
-                    id="username"
-                    name="username"
-                    autoComplete="off"
-                    onChange={handleChange}
-                    value={data.username}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="mb-6">
-              <div className="text-gray-700 md:flex md:items-center">
-                <div className="mb-1 md:mb-0 md:w-1/3">
-                  <label htmlFor="username">Ubah Password</label>
-                </div>
-                <div className="md:w-2/3 md:flex-grow">
-                  <button
-                    className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                    type="text"
-                    id="username"
-                    name="username"
-                    autoComplete="off"
-                    onChange={handleChange}
-                    value={data.username}
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* End of input form */}
-          </div>
-          <div>
-            <h1 className="mb-6 text-xl font-medium">Hak Akses</h1>
-            {Array.from(permission).map((permission, key) => (
-              <div className="mb-6" key={key}>
+        <hr />
+        <form onSubmit={handleSubmit} >
+          <div className="grid grid-cols-2 gap-6 mt-6">
+            <div>
+              {/* Input htmlForm */}
+              <div className="mb-6">
                 <div className="text-gray-700 md:flex md:items-center">
-                  <input
-                    type="checkbox"
-                    value={permission.name}
-                    onChange={handleCheckBox}
-                    className="w-6 h-6 px-3 border rounded-lg focus:shadow-outline mr-3"
-                    defaultChecked={data.permissions.includes(permission.name)}
-                  />
                   <div className="mb-1 md:mb-0 md:w-1/3">
-                    <label htmlFor="password_confirmation">
-                      {permission.name.toUpperCase()}
-                    </label>
+                    <label htmlFor="nama">Pilih Desa</label>
+                  </div>
+                  <div className="md:w-2/3 md:flex-grow">
+                    <select
+                      name="village_id"
+                      onChange={handleChange}
+                      className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
+                    >
+                      <option value="">Semua Desa</option>
+                      {Array.from(village).map((village, key) => (
+                        <option
+                          value={village.id}
+                          key={key}
+                          selected={village.id === data.village_id}
+                        >
+                          {village.nama_desa}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
               </div>
-            ))}
+
+              <div className="mb-6">
+                <div className="text-gray-700 md:flex md:items-center">
+                  <div className="mb-1 md:mb-0 md:w-1/3">
+                    <label htmlFor="name">Nama User</label>
+                  </div>
+                  <div className="md:w-2/3 md:flex-grow">
+                    <input
+                      className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
+                      type="text"
+                      id="name"
+                      name="name"
+                      autoComplete="off"
+                      onChange={handleChange}
+                      value={data.name}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="mb-6">
+                <div className="text-gray-700 md:flex md:items-center">
+                  <div className="mb-1 md:mb-0 md:w-1/3">
+                    <label htmlFor="email">Email</label>
+                  </div>
+                  <div className="md:w-2/3 md:flex-grow">
+                    <input
+                      className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
+                      type="email"
+                      id="email"
+                      name="email"
+                      autoComplete="off"
+                      onChange={handleChange}
+                      value={data.email}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="mb-6">
+                <div className="text-gray-700 md:flex md:items-center">
+                  <div className="mb-1 md:mb-0 md:w-1/3">
+                    <label htmlFor="username">Username</label>
+                  </div>
+                  <div className="md:w-2/3 md:flex-grow">
+                    <input
+                      className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
+                      type="text"
+                      id="username"
+                      name="username"
+                      autoComplete="off"
+                      onChange={handleChange}
+                      value={data.username}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="mb-6">
+                <div className="text-gray-700 md:flex md:items-center">
+                  <div className="mb-1 md:mb-0 md:w-1/3">
+                    <label>Ubah Password</label>
+                  </div>
+                  <div className="md:w-2/3 md:flex-grow">
+                    <button className="h-10 px-6 text-md text-white transition-colors duration-150 bg-red-700 rounded-lg hover:bg-red-800 focus:outline-none"
+                      type="button">
+                      Ubah
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* End of input form */}
+            </div>
+            <div>
+              <h1 className="mb-6 text-xl font-medium">Hak Akses</h1>
+              {Array.from(permission).map((permission, key) => (
+                <div className="mb-6" key={key}>
+                  <div className="text-gray-700 md:flex md:items-center">
+                    <input
+                      type="checkbox"
+                      value={permission.name}
+                      onChange={handleCheckBox}
+                      className="w-6 h-6 px-3 border rounded-lg focus:shadow-outline mr-3"
+                      defaultChecked={data.permissions.includes(permission.name)}
+                    />
+                    <div className="mb-1 md:mb-0 md:w-1/3">
+                      <label htmlFor="password_confirmation">
+                        {permission.name.toUpperCase()}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="mt-10 flex flex-row-reverse">
-            <button className="h-12 px-6 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800 focus:outline-none">
+            <button className="h-12 px-6 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800 focus:outline-none"
+              type="submit">
               Simpan
             </button>
           </div>

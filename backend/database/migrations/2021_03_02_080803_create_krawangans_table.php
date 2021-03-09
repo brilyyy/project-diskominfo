@@ -17,6 +17,7 @@ class CreateKrawangansTable extends Migration
             $table->id();
             $table->unsignedBigInteger('village_id');
             $table->integer('no_persil');
+            $table->string('foto');
             $table->timestamps();
             $table->foreign('village_id')->references('id')->on('villages');
         });

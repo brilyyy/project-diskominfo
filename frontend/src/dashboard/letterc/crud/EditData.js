@@ -96,6 +96,7 @@ const EditData = () => {
                     name="village_id"
                     onChange={handleChange}
                     className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
+                    required
                   >
                     <option value="">Semua Desa</option>
                     {Array.from(villages).map((village, key) => (
@@ -133,6 +134,7 @@ const EditData = () => {
                       autoComplete="off"
                       onChange={handleChange}
                       value={data.nama}
+                      required
                     />
                   </div>
                 </div>
@@ -151,6 +153,7 @@ const EditData = () => {
                       autoComplete="off"
                       onChange={handleChange}
                       value={data.nomor}
+                      required
                     />
                   </div>
                 </div>
@@ -169,6 +172,7 @@ const EditData = () => {
                       autoComplete="off"
                       onChange={handleChange}
                       value={data.tempat_tinggal}
+                      required
                     />
                   </div>
                 </div>
@@ -182,9 +186,9 @@ const EditData = () => {
 
               <h1 className="text-xl font-semibold mb-6 ml-4">Sawah</h1>
 
-              <div className="mb-6 ml-4">
+              <div className="mb-6">
                 <div className="text-gray-700 md:flex md:items-center">
-                  <div className="mb-1 md:mb-0 md:w-1/3">
+                  <div className="mb-1 md:mb-0 md:w-1/3 pl-4">
                     <label htmlFor="no_persil_sawah">
                       Nomor Persil dan Bagian Persil
                     </label>
@@ -203,9 +207,9 @@ const EditData = () => {
                 </div>
               </div>
 
-              <div className="mb-6 ml-4">
+              <div className="mb-6">
                 <div className="text-gray-700 md:flex md:items-center">
-                  <div className="mb-1 md:mb-0 md:w-1/3">
+                  <div className="mb-1 md:mb-0 md:w-1/3 pl-4">
                     <label htmlFor="desa_sawah">Desa</label>
                   </div>
                   <div className="md:w-2/3 md:flex-grow">
@@ -222,9 +226,9 @@ const EditData = () => {
                 </div>
               </div>
 
-              <div className="mb-6 ml-4">
+              <div className="mb-6">
                 <div className="text-gray-700 md:flex md:items-center">
-                  <div className="mb-1 md:mb-0 md:w-1/3">
+                  <div className="mb-1 md:mb-0 md:w-1/3 pl-4">
                     <label htmlFor="nasional_sawah">Nasional</label>
                   </div>
                   <div className="md:w-2/3 md:flex-grow">
@@ -241,9 +245,9 @@ const EditData = () => {
                 </div>
               </div>
 
-              <div className="mb-6 ml-4">
+              <div className="mb-6">
                 <div className="text-gray-700 md:flex md:items-center">
-                  <div className="mb-1 md:mb-0 md:w-1/3">
+                  <div className="mb-1 md:mb-0 md:w-1/3 pl-4">
                     <label htmlFor="luas_sawah">Luas (m2) </label>
                   </div>
                   <div className="md:w-2/3 md:flex-grow">
@@ -260,9 +264,9 @@ const EditData = () => {
                 </div>
               </div>
 
-              <div className="mb-6 ml-4">
+              <div className="mb-6">
                 <div className="text-gray-700 md:flex md:items-center">
-                  <div className="mb-1 md:mb-0 md:w-1/3">
+                  <div className="mb-1 md:mb-0 md:w-1/3 pl-4">
                     <label htmlFor="pajak_sawah">Pajak (Rp) </label>
                   </div>
                   <div className="md:w-2/3 md:flex-grow">
@@ -279,9 +283,9 @@ const EditData = () => {
                 </div>
               </div>
 
-              <div className="mb-6 ml-4">
+              <div className="mb-6">
                 <div className="text-gray-700 md:flex md:items-center">
-                  <div className="mb-1 md:mb-0 md:w-1/3">
+                  <div className="mb-1 md:mb-0 md:w-1/3 pl-4">
                     <label htmlFor="mutasi_bumi">Mutasi </label>
                   </div>
                   <div className="md:w-2/3 md:flex-grow">
@@ -300,9 +304,9 @@ const EditData = () => {
 
               <h1 className="text-xl font-semibold mb-6 ml-4">Darat</h1>
 
-              <div className="mb-6 ml-4">
+              <div className="mb-6">
                 <div className="text-gray-700 md:flex md:items-center">
-                  <div className="mb-1 md:mb-0 md:w-1/3">
+                  <div className="mb-1 md:mb-0 md:w-1/3 pl-4">
                     <label htmlFor="no_persil_darat">
                       Nomor Persil dan Bagian Persil
                     </label>
@@ -321,9 +325,9 @@ const EditData = () => {
                 </div>
               </div>
 
-              <div className="mb-6 ml-4">
+              <div className="mb-6">
                 <div className="text-gray-700 md:flex md:items-center">
-                  <div className="mb-1 md:mb-0 md:w-1/3">
+                  <div className="mb-1 md:mb-0 md:w-1/3 pl-4">
                     <label htmlFor="desa_darat">Desa </label>
                   </div>
                   <div className="md:w-2/3 md:flex-grow">
@@ -340,9 +344,9 @@ const EditData = () => {
                 </div>
               </div>
 
-              <div className="mb-6 ml-4">
+              <div className="mb-6">
                 <div className="text-gray-700 md:flex md:items-center">
-                  <div className="mb-1 md:mb-0 md:w-1/3">
+                  <div className="mb-1 md:mb-0 md:w-1/3 pl-4">
                     <label htmlFor="nasional_darat">Nasional </label>
                   </div>
                   <div className="md:w-2/3 md:flex-grow">
@@ -359,9 +363,9 @@ const EditData = () => {
                 </div>
               </div>
 
-              <div className="mb-6 ml-4">
+              <div className="mb-6">
                 <div className="text-gray-700 md:flex md:items-center">
-                  <div className="mb-1 md:mb-0 md:w-1/3">
+                  <div className="mb-1 md:mb-0 md:w-1/3 pl-4">
                     <label htmlFor="luas_darat">Luas (m2) </label>
                   </div>
                   <div className="md:w-2/3 md:flex-grow">
@@ -378,9 +382,9 @@ const EditData = () => {
                 </div>
               </div>
 
-              <div className="mb-6 ml-4">
+              <div className="mb-6">
                 <div className="text-gray-700 md:flex md:items-center">
-                  <div className="mb-1 md:mb-0 md:w-1/3">
+                  <div className="mb-1 md:mb-0 md:w-1/3 pl-4">
                     <label htmlFor="pajak_darat">Pajak (Rp) </label>
                   </div>
                   <div className="md:w-2/3 md:flex-grow">

@@ -15,10 +15,12 @@ class KrawanganDetail extends Model
         'krawangan_id',
         'nomor_letterc',
         'luas',
-        'mutasi'
+        'mutasi',
+        'blok_persil'
     ];
 
-    public function krawangan(){
+    public function krawangan()
+    {
         return $this->belongsTo(Krawangan::class);
     }
 }

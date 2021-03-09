@@ -16,6 +16,7 @@ class CreateKrawanganDetailsTable extends Migration
         Schema::create('krawangan_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('krawangan_id');
+            $table->integer('blok_persil');
             $table->integer('nomor_letterc');
             $table->string('nama');
             $table->integer('luas');

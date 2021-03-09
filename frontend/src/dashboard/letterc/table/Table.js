@@ -5,7 +5,7 @@ import Search from "./Search";
 import axios from "axios";
 import { BiPencil, BiPrinter, BiTrash } from "react-icons/bi";
 import { generateLetterc } from "../../cetak-surat/generator/GenerateDocument";
-import API from "../../../config/API"
+import API from "../../../config/API";
 
 const Table = () => {
   const history = useHistory();
@@ -26,10 +26,10 @@ const Table = () => {
   useEffect(() => {
     axios
       .get(API.url + "lettercs", {
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("accessToken"),
-    }
-  })
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      })
       .then((response) => {
         setData(response.data.data);
         setLoading(false);
@@ -37,21 +37,20 @@ const Table = () => {
       .catch((err) => {
         console.log(err.response);
       });
-      
-    if( localStorage.getItem('admin') === 'true' )
-    {
+
+    if (localStorage.getItem("admin") === "true") {
       axios
-      .get(API.url + "villages", {
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("accessToken"),
-    }
-  })
-      .then((response) => {
-        setVillage(response.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
+        .get(API.url + "villages", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          },
+        })
+        .then((response) => {
+          setVillage(response.data.data);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
     }
   }, []);
 
@@ -59,7 +58,9 @@ const Table = () => {
     let computedData = Array.from(data);
     if (search) {
       computedData = computedData.filter(
-        (data) => data.nama.toLowerCase().indexOf(search.toLowerCase()) > -1
+        (data) =>
+          data.nama.toLowerCase().indexOf(search.toLowerCase()) > -1 ||
+          data.nomor.toString().includes(search)
       );
     }
 
@@ -82,10 +83,10 @@ const Table = () => {
   const handleDelete = () => {
     axios
       .delete(API.url + "lettercs/" + activeItem, {
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("accessToken"),
-    }
-  })
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      })
       .then((response) => {
         setDeleteModal(false);
         history.go(0);
@@ -158,38 +159,44 @@ const Table = () => {
           <tr>
             <th
               rowSpan="3"
-              className="border border-gray-300 px-3 py-1 font-medium"
+              className="border border-gray-300 px-2 py-1 font-medium text-sm"
+            >
+              No.
+            </th>
+            <th
+              rowSpan="3"
+              className="border border-gray-300 px-2 py-1 font-medium text-sm w-36"
             >
               Nama Wajib Pajak
             </th>
             <th
               rowSpan="3"
-              className="border border-gray-300 px-3 py-1 font-medium"
+              className="border border-gray-300 px-2 py-1 font-medium text-sm"
             >
               Nomor
             </th>
             <th
               rowSpan="3"
-              className="border border-gray-300 px-3 py-1 font-medium"
+              className="border border-gray-300 px-2 py-1 font-medium text-sm"
             >
               Tempat Tinggal
             </th>
             <th
               colSpan="6"
-              className="border border-gray-300 px-3 py-1 font-medium"
+              className="border border-gray-300 px-2 py-1 font-medium text-sm"
             >
               Bumi
             </th>
             <th
               colSpan="2"
               rowSpan="2"
-              className="border border-gray-300 px-3 py-1 font-medium"
+              className="border border-gray-300 px-2 py-1 font-medium text-sm"
             >
               Bangunan
             </th>
             <th
               rowSpan="3"
-              className="border border-gray-300 px-3 py-1 font-medium"
+              className="border border-gray-300 px-2 py-1 font-medium text-sm"
             >
               Action
             </th>
@@ -197,40 +204,40 @@ const Table = () => {
           <tr>
             <th
               colSpan="3"
-              className="border border-gray-300 px-3 py-1 font-medium"
+              className="border border-gray-300 px-2 py-1 font-medium text-sm"
             >
               Sawah
             </th>
             <th
               colSpan="3"
-              className="border border-gray-300 px-3 py-1 font-medium"
+              className="border border-gray-300 px-2 py-1 font-medium text-sm"
             >
               Darat
             </th>
           </tr>
           <tr>
-            <th className="border border-gray-300 px-3 py-1 font-medium">
+            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
               Nomor Persil
             </th>
-            <th className="border border-gray-300 px-3 py-1 font-medium">
+            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
               Desa
             </th>
-            <th className="border border-gray-300 px-3 py-1 font-medium">
+            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
               Nasional
             </th>
-            <th className="border border-gray-300 px-3 py-1 font-medium">
+            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
               Nomor Persil
             </th>
-            <th className="border border-gray-300 px-3 py-1 font-medium">
+            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
               Desa
             </th>
-            <th className="border border-gray-300 px-3 py-1 font-medium">
+            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
               Nasional
             </th>
-            <th className="border border-gray-300 px-3 py-1 font-medium">
+            <th className="border border-gray-300 px-2 py-1 font-medium w-32 text-sm">
               Di Persil dan Bagian Persil Nomor
             </th>
-            <th className="border border-gray-300 px-3 py-1 font-medium">
+            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
               Gol/Kelas
             </th>
           </tr>
@@ -240,39 +247,42 @@ const Table = () => {
           {lettercData.length !== 0 ? (
             lettercData.map((letterc, key) => (
               <tr
-                className="text-center h-11 select-none cursor-pointer hover:bg-gray-50"
+                className="text-center h-11 select-none cursor-pointer hover:bg-gray-50 text-sm"
                 key={key}
               >
-                <td className="border border-gray-300 py-2">{letterc.nama}</td>
-                <td className="border border-gray-300 py-2">{letterc.nomor}</td>
-                <td className="border border-gray-300 py-2">
+                <td className="border border-gray-300 p-1">{key + 1 + "."}</td>
+                <td className="border border-gray-300 p-1 max-w-0 overflow-ellipsis whitespace-nowrap overflow-hidden">
+                  {letterc.nama}
+                </td>
+                <td className="border border-gray-300 p-1">{letterc.nomor}</td>
+                <td className="border border-gray-300 p-1">
                   {letterc.tempat_tinggal}
                 </td>
-                <td className="border border-gray-300 py-2">
+                <td className="border border-gray-300 p-1">
                   {letterc.no_persil_sawah}
                 </td>
-                <td className="border border-gray-300 py-2">
+                <td className="border border-gray-300 p-1">
                   {letterc.desa_sawah}
                 </td>
-                <td className="border border-gray-300 py-2">
+                <td className="border border-gray-300 p-1">
                   {letterc.nasional_sawah}
                 </td>
-                <td className="border border-gray-300 py-2">
+                <td className="border border-gray-300 p-1">
                   {letterc.no_persil_darat}
                 </td>
-                <td className="border border-gray-300 py-2">
+                <td className="border border-gray-300 p-1">
                   {letterc.desa_darat}
                 </td>
-                <td className="border border-gray-300 py-2">
+                <td className="border border-gray-300 p-1">
                   {letterc.nasional_darat}
                 </td>
-                <td className="border border-gray-300 py-2">
+                <td className="border border-gray-300 p-1">
                   {letterc.no_persil_bangunan}
                 </td>
-                <td className="border border-gray-300 py-2">
+                <td className="border border-gray-300 p-1">
                   {letterc.gol_bangunan}
                 </td>
-                <td className="border border-gray-300 py-2">
+                <td className="border border-gray-300 p-1 flex justify-center">
                   <div className="flex m-1" role="group">
                     <button
                       type="button"
@@ -307,7 +317,7 @@ const Table = () => {
             ))
           ) : (
             <tr className="text-center">
-              <td colSpan="12" className="border border-gray-300 p-5">
+              <td colSpan="13" className="border border-gray-300 p-5">
                 {loading ? (
                   <span className="text-xl">Loading...</span>
                 ) : (

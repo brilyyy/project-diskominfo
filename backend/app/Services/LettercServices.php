@@ -16,13 +16,10 @@ class LettercServices
 
     public function index()
     {
-        if (Auth::id() == 1)
-        {
+        if (Auth::id() == 1) {
             $lettercs = Letterc::all();
             return $this->successResponse($lettercs, 'Lettercs Data Retrieved Successfully');
-        }
-        else
-        {
+        } else {
             $user = User::find(Auth::id());
             $lettercs = Letterc::where('village_id', $user->village_id)->get();
             return $this->successResponse($lettercs, 'Lettercs Data Retrieved Successfully');
@@ -32,9 +29,9 @@ class LettercServices
     public function store(Request $request)
     {
         $letterc = new Letterc;
-        if (Auth::id() == 1){
+        if (Auth::id() == 1) {
             $letterc->village_id = $request->get('village_id');
-        }else {
+        } else {
             $user = User::find(Auth::id());
             $letterc->village_id = $user->village_id;
         }
@@ -58,11 +55,9 @@ class LettercServices
         $letterc->pajak_bangunan = $request->get('pajak_bangunan');
         $letterc->mutasi_bangunan = $request->get('mutasi_bangunan');
 
-        if($letterc->save())
-        {
+        if ($letterc->save()) {
             return $this->successResponse($letterc, 'Letterc Stored Successfully', 201);
         }
-
     }
 
     public function show($id)
@@ -96,8 +91,7 @@ class LettercServices
         $letterc->pajak_bangunan = $request->get('pajak_bangunan');
         $letterc->mutasi_bangunan = $request->get('mutasi_bangunan');
 
-        if($letterc->save())
-        {
+        if ($letterc->save()) {
             return $this->successResponse($letterc, 'Letterc Stored Successfully', 200);
         }
     }
@@ -110,12 +104,9 @@ class LettercServices
         return $this->successResponse($letterc, 'Letterc Deleted Successfully', 200);
     }
 
-    public function detailLetter($id){
-        $data = DB::table('lettercs')
-        ->join('villages', 'lettercs.village_id', '=', 'villages.id')
-        ->where('lettercs.id', $id)
-        ->get();
-        return $this->successResponse($data, 'Letterc Deleted Successfully', 200);
+    public function detailLetter($id)
+    {
+        $data = Letterc::with('village')->where('lettercs.id', $id)->get();
+        return $this->successResponse($data, 'Letterc Details Successfully', 200);
     }
-
 }

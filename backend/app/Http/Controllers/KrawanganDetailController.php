@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\KrawanganDetail;
+use App\Services\KrawanganDetailServices;
 use Illuminate\Http\Request;
 
 class KrawanganDetailController extends Controller
 {
+    protected $krawanganDetail;
+    public function __construct()
+    {
+        $this->middleware(['permission:access krawangans']);
+        $this->krawanganDetail = new KrawanganDetailServices();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +42,7 @@ class KrawanganDetailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $this->krawanganDetail->store($request);
     }
 
     /**
@@ -44,9 +51,9 @@ class KrawanganDetailController extends Controller
      * @param  \App\Models\KrawanganDetail  $krawanganDetail
      * @return \Illuminate\Http\Response
      */
-    public function show(KrawanganDetail $krawanganDetail)
+    public function show($id)
     {
-        //
+        return $this->krawanganDetail->show($id);
     }
 
     /**
