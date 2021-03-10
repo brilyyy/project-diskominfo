@@ -34,7 +34,11 @@ const EditData = () => {
   useEffect(() => {
     if (localStorage.getItem("admin") === "true") {
       axios
-        .get(API.url + "villages", API.header)
+        .get(API.url + "villages", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          },
+        })
         .then((response) => {
           setVillages(response.data.data);
         })
@@ -44,7 +48,11 @@ const EditData = () => {
     }
 
     axios
-      .get(API.url + "lettercs/" + id, API.header)
+      .get(API.url + "lettercs/" + id, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      })
       .then((response) => {
         setData(response.data.data);
       })

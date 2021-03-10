@@ -13,6 +13,8 @@ module.exports = {
       backgroundImage: (theme) => ({
         "pattern-light":
           "url('https://sso.uns.ac.id/module.php/uns/img/symphony.png')",
+        "pattern-dashboard":
+          "url('https://jurnal.uns.ac.id/plugins/themes/unsbaru/img/background.png')",
       }),
     },
   },

@@ -153,7 +153,7 @@ const Dashboard = () => {
 
   return (
     <Router>
-      <div className="flex bg-vk-light font-poppins">
+      <div className="flex bg-pattern-dashboard font-poppins">
         <div className="fixed">
           <aside
             className={

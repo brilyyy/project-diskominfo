@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
 class RoleSeeder extends Seeder
@@ -16,12 +17,10 @@ class RoleSeeder extends Seeder
     public function run()
     {
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
-
         Permission::create(['name' => 'access lettercs', 'guard_name' => 'api']);
         Permission::create(['name' => 'access villages', 'guard_name' => 'api']);
         Permission::create(['name' => 'access krawangans', 'guard_name' => 'api']);
         Permission::create(['name' => 'access users', 'guard_name' => 'api']);
         Permission::create(['name' => 'access permissions', 'guard_name' => 'api']);
-        Permission::create(['name' => 'limited access villages', 'guard_name' => 'api']);
     }
 }

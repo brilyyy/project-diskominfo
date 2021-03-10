@@ -119,7 +119,7 @@ const Table = () => {
         <tbody>
           {usersData.length !== 0 ? (
             usersData.map((user, key) =>
-              user.id !== 1 ? (
+              user.id !== 0 ? (
                 <tr
                   className="text-center h-11 select-none cursor-pointer hover:bg-gray-50 text-sm"
                   key={key}
