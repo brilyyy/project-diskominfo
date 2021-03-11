@@ -10,7 +10,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['permission:access users']);
+        $this->middleware(['permission:user']);
         $this->user = new UserServices();
     }
 

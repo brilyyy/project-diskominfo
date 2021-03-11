@@ -22,10 +22,6 @@ class UserSeeder extends Seeder
             'village_id' => 1
         ]);
 
-        $admin->givePermissionTo('access lettercs');
-        $admin->givePermissionTo('access villages');
-        $admin->givePermissionTo('access users');
-        $admin->givePermissionTo('access permissions');
-        $admin->givePermissionTo('access krawangans');
+        $admin->syncPermissions(['letterc', 'desa', 'user', 'krawangan', 'permission']);
     }
 }

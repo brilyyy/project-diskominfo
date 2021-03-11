@@ -17,10 +17,11 @@ class RoleSeeder extends Seeder
     public function run()
     {
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
-        Permission::create(['name' => 'access lettercs', 'guard_name' => 'api']);
-        Permission::create(['name' => 'access villages', 'guard_name' => 'api']);
-        Permission::create(['name' => 'access krawangans', 'guard_name' => 'api']);
-        Permission::create(['name' => 'access users', 'guard_name' => 'api']);
-        Permission::create(['name' => 'access permissions', 'guard_name' => 'api']);
+        Permission::create(['name' => 'letterc', 'guard_name' => 'api']);
+        Permission::create(['name' => 'desa', 'guard_name' => 'api']);
+        Permission::create(['name' => 'krawangan', 'guard_name' => 'api']);
+        Permission::create(['name' => 'user', 'guard_name' => 'api']);
+        Permission::create(['name' => 'permission', 'guard_name' => 'api']);
+        Permission::create(['name' => 'ubah desa', 'guard_name' => 'api']);
     }
 }

@@ -13,7 +13,7 @@ class KrawanganController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['permission:access krawangans', 'permission:access krawangans']);
+        $this->middleware(['permission:krawangan']);
         $this->krawangan = new KrawanganServices();
     }
 
