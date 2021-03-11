@@ -12,7 +12,7 @@ class VillageController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:desa');
+        $this->middleware('permission:ubah desa')->except('index');
         $this->village = new VillageServices();
     }
     public function index()
