@@ -59,7 +59,7 @@ const Login = () => {
             name="password"
             placeholder="Password"
             required
-            minLength="5"
+            minLength="4"
           />
 
           <button

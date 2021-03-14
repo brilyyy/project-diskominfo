@@ -43,7 +43,7 @@ const TambahData = () => {
     <div className="p-4 min-h-screen">
       <div className="bg-white px-5 py-4 rounded-lg shadow-md">
         <div className="flex justify-between">
-          <h1 className="mb-6 text-3xl font-bold">Tambah Data</h1>
+          <h1 className="mb-6 text-3xl font-bold">Tambah Data Krawangan</h1>
           <Close />
         </div>
         <hr />

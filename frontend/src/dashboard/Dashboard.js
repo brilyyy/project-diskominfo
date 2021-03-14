@@ -67,7 +67,7 @@ const Dashboard = () => {
     const menus = [];
     for (let i = 0; i < menu.length; i++) {
       const access = menu[i].name;
-      if (access === "access lettercs") {
+      if (access === "letterc") {
         menus[1] = (
           <SidebarLink
             title="Letter C"
@@ -78,7 +78,7 @@ const Dashboard = () => {
           />
         );
       }
-      if (access === "access villages") {
+      if (access === "desa") {
         menus[3] = (
           <SidebarLink
             title="Data Desa"
@@ -89,7 +89,7 @@ const Dashboard = () => {
           />
         );
       }
-      if (access === "access permissions") {
+      if (access === "permission") {
         menus[4] = (
           <SidebarLink
             title="Konfigurasi"
@@ -100,7 +100,7 @@ const Dashboard = () => {
           />
         );
       }
-      if (access === "access krawangans") {
+      if (access === "krawangan") {
         menus[0] = (
           <SidebarLink
             title="Krawangan"
@@ -153,7 +153,10 @@ const Dashboard = () => {
 
   return (
     <Router>
-      <div className="flex bg-pattern-dashboard font-poppins">
+      <div
+        className="flex bg-pattern-light
+       font-poppins"
+      >
         <div className="fixed">
           <aside
             className={

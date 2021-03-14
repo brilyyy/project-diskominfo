@@ -12,7 +12,6 @@ class LettercController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['permission:letterc']);
         $this->letterc = new LettercServices();
     }
 

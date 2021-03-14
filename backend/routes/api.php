@@ -28,15 +28,51 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::put('update-user/{id}', [AuthController::class, 'update']);
     Route::post('logout', [AuthController::class, 'logout']);
     Route::get('details', [AuthController::class, 'details']);
-    Route::apiResource('villages', VillageController::class);
-    Route::apiResource('lettercs', LettercController::class);
-    Route::apiResource('permissions', PermissionController::class);
+});
+
+
+Route::group(['middleware' => ['auth:api', 'permission:ubah desa']], function () {
+    Route::get('villages/{id}', [VillageController::class, 'show']);
+    Route::get('villages', [VillageController::class, 'index']);
+    Route::put('villages/{id}', [VillageController::class, 'update']);
+});
+
+Route::group(['middleware' => ['auth:api', 'permission:desa']], function () {
+    Route::get('villages/{id}', [VillageController::class, 'show']);
+    Route::get('villages', [VillageController::class, 'index']);
+    Route::post('villages', [VillageController::class, 'store']);
+    Route::put('villages/{id}', [VillageController::class, 'update']);
+});
+
+Route::group(['middleware' => ['auth:api', 'permission:letterc']], function () {
+    Route::get('lettercs', [LettercController::class, 'index']);
+    Route::post('lettercs', [LettercController::class, 'store']);
+    Route::get('lettercs/{id}', [LettercController::class, 'show']);
+    Route::put('lettercs/{id}', [LettercController::class, 'update']);
+    Route::delete('lettercs/{id}', [LettercController::class, 'destroy']);
     Route::get('letter-detail/{id}', [LettercController::class, 'detailLetter']);
+});
+
+Route::group(['middleware' => ['auth:api', 'permission:krawangan']], function () {
+    Route::get('krawangans', [KrawanganController::class, 'index']);
+    Route::post('krawangans', [KrawanganController::class, 'store']);
+    Route::get('krawangans/{id}', [KrawanganController::class, 'show']);
+    Route::put('krawangans/{id}', [KrawanganController::class, 'update']);
+    Route::put('krawangans/{id}', [KrawanganController::class, 'update']);
+    Route::get('krawangan/details/{id}', [KrawanganDetailController::class, 'show']);
+    Route::post('krawangan/details/{id}', [KrawanganDetailController::class, 'store']);
+});
+
+Route::group(['middleware' => ['auth:api', 'permission:permission']], function () {
+    Route::get('permissions', [PermissionController::class, 'index']);
+    Route::put('permissions/{id}', [PermissionController::class, 'update']);
+    Route::delete('permissions/{id}', [PermissionController::class, 'destroy']);
+});
+
+Route::group(['middleware' => ['auth:api', 'permission:user']], function () {
     Route::get('users', [UserController::class, 'index']);
-    Route::get('user-detail', [UserController::class, 'userDetail']);
-    Route::get('users/detail/{id}', [UserController::class, 'show']);
-    Route::put('users', [UserController::class, 'update']);
+    Route::get('users/{id}', [UserController::class, 'show']);
+    Route::put('users/{id}', [UserController::class, 'update']);
     Route::delete('users/{id}', [UserController::class, 'destroy']);
-    Route::apiResource('krawangans', KrawanganController::class);
-    Route::apiResource('krawangan/details', KrawanganDetailController::class);
+    Route::get('user-detail', [UserController::class, 'userDetail']);
 });

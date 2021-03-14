@@ -47,6 +47,6 @@ class UserServices
     public function userDetail()
     {
         $user = User::with('village')->where('id', Auth::id())->get();
-        dd($user);
+        return $this->successResponse($user, 'User data retreived successfully');
     }
 }

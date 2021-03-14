@@ -11,7 +11,6 @@ class KrawanganDetailController extends Controller
     protected $krawanganDetail;
     public function __construct()
     {
-        $this->middleware(['permission:krawangan']);
         $this->krawanganDetail = new KrawanganDetailServices();
     }
     /**
