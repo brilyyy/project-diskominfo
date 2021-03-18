@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth:api']], function () {
 });
 
 
-Route::group(['middleware' => ['role:super-admin']], function () {
+Route::group(['middleware' => ['auth:api', 'role:super-admin']], function () {
     Route::get('villages/{id}', [VillageController::class, 'show']);
     Route::post('villages', [VillageController::class, 'store']);
 });

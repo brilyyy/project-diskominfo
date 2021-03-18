@@ -21,9 +21,20 @@ const TambahData = () => {
     console.log(data);
   };
 
+  const changeCapital = (x) => {
+    const newText = [];
+    const text = x.split(" ");
+    text.forEach((element) => {
+      newText.push(element.charAt(0).toUpperCase() + element.slice(1));
+    });
+    return newText.join(" ");
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     data.krawangan_id = id;
+    data.nama = changeCapital(data.nama);
+    data.mutasi = changeCapital(data.mutasi);
     axios
       .post(API.url + "krawangan/details/", data, {
         headers: {

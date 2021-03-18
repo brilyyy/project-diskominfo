@@ -51,7 +51,21 @@ const generateSuratTanah = async (id) => {
     let zip = null;
     let doc = null;
     let d = new Date();
-
+    const months = [
+      "Januari",
+      "Februari",
+      "Maret",
+      "April",
+      "Mei",
+      "Juni",
+      "Juli",
+      "Agustus",
+      "September",
+      "Oktober",
+      "November",
+      "Desember",
+    ];
+    let date = `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
     if (error) {
       throw error;
     }
@@ -64,7 +78,8 @@ const generateSuratTanah = async (id) => {
     // mapping data dari server dengan merubah key sesuai template docx
     data.map((detail, key) => {
       const detailData = {
-        nama_desa: checkUndefined(detail.village.nama_desa.toUpperCase()),
+        nama_desa: checkUndefined(detail.village.nama_desa),
+        desa_head: checkUndefined(detail.village.nama_desa.toUpperCase()),
         alamat: checkUndefined(detail.village.alamat),
         no_surat: checkUndefined(detail.village.no_surat),
         tahun: d.getFullYear(),
@@ -75,6 +90,7 @@ const generateSuratTanah = async (id) => {
         kelas_sawah: checkUndefined(detail.kelas_sawah),
         luas_sawah: checkUndefined(detail.luas_sawah),
         nama: checkUndefined(detail.nama),
+        tanggal: date,
       };
       return doc.setData(detailData);
     });
@@ -131,25 +147,25 @@ const generateLetterc = async (id) => {
     console.log(data[0].nama);
     data.map((detail, key) => {
       const detailData = {
-        desa_darat: checkUndefined(detail.desa_darat),
-        desa_sawah: checkUndefined(detail.desa_sawah),
-        tempat_tinggal: checkUndefined(detail.tempat_tinggal),
-        gol_bangunan: checkUndefined(detail.gol_bangunan),
-        luas_bangunan: checkUndefined(detail.luas_bangunan),
-        luas_darat: checkUndefined(detail.luas_darat),
-        luas_sawah: checkUndefined(detail.luas_sawah),
-        mutasi_bangunan: checkUndefined(detail.mutasi_bangunan),
-        mutasi_bumi: checkUndefined(detail.mutasi_bumi),
         nama: checkUndefined(detail.nama),
-        nasional_darat: checkUndefined(detail.nasional_darat),
-        nasional_sawah: checkUndefined(detail.nasional_sawah),
-        no_persil_bangunan: checkUndefined(detail.no_persil_bangunan),
-        no_persil_darat: checkUndefined(detail.no_persil_darat),
-        no_persil_sawah: checkUndefined(detail.no_persil_sawah),
         nomor: checkUndefined(detail.nomor),
-        pajak_bangunan: checkUndefined(detail.pajak_bangunan),
-        pajak_darat: checkUndefined(detail.pajak_darat),
-        pajak_sawah: checkUndefined(detail.pajak_sawah),
+        tempat_tinggal: checkUndefined(detail.tempat_tinggal),
+        a: checkUndefined(detail.no_persil_sawah),
+        b: checkUndefined(detail.desa_sawah),
+        c: checkUndefined(detail.nasional_sawah),
+        d: checkUndefined(detail.luas_sawah),
+        e: checkUndefined(detail.pajak_sawah),
+        f: checkUndefined(detail.mutasi_bumi),
+        g: checkUndefined(detail.no_persil_darat),
+        h: checkUndefined(detail.desa_darat),
+        i: checkUndefined(detail.luas_darat),
+        j: checkUndefined(detail.nasional_darat),
+        k: checkUndefined(detail.pajak_darat),
+        l: checkUndefined(detail.no_persil_bangunan),
+        m: checkUndefined(detail.gol_bangunan),
+        n: checkUndefined(detail.luas_bangunan),
+        o: checkUndefined(detail.pajak_bangunan),
+        p: checkUndefined(detail.mutasi_bangunan),
       };
       return doc.setData(detailData);
     });

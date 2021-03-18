@@ -43,13 +43,17 @@ const TitleBar = (props) => {
         }
       >
         <div className="py-1 select-none cursor-pointer" role="none">
-          <span
-            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-            role="menuitem"
-            onClick={() => history.push("/profile")}
-          >
-            Profile
-          </span>
+          {localStorage.getItem("admin") === "false" ? (
+            <span
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              role="menuitem"
+              onClick={() => history.push("/profile")}
+            >
+              Profile
+            </span>
+          ) : (
+            <></>
+          )}
           <span
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
             role="menuitem"

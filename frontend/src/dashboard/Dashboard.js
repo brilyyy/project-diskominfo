@@ -7,8 +7,8 @@ import {
   FaEnvelope,
   FaPrint,
   FaUserAstronaut,
-  FaHome,
   FaRegNewspaper,
+  FaBook,
 } from "react-icons/fa";
 import { BiChevronRightCircle, BiChevronDownCircle } from "react-icons/bi";
 import axios from "axios";
@@ -33,7 +33,7 @@ import TambahDataKrawanganDetail from "./krawangan-detail/crud/TambahData";
 import Profile from "./user-config/UserConfig";
 
 const Dashboard = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [menu, setMenu] = useState("");
   const [dropdown, setDropdown] = useState(false);
 
@@ -97,7 +97,7 @@ const Dashboard = () => {
               <div className="flex flex-col">
                 <SidebarLink
                   title="Krawangan"
-                  icon={<FaHome />}
+                  icon={<FaBook />}
                   linkto="/krawangan"
                   open={open}
                   tooltip="Krawangan"
