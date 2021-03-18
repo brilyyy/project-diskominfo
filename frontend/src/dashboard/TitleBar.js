@@ -2,8 +2,10 @@ import React from "react";
 import axios from "axios";
 import { FaUserCircle } from "react-icons/fa";
 import API from "../config/API";
+import { useHistory } from "react-router-dom";
 
 const TitleBar = (props) => {
+  let history = useHistory();
   const [open, setOpen] = React.useState(false);
   const handleLogout = () => {
     axios.post(API.url + "logout", {
@@ -44,6 +46,7 @@ const TitleBar = (props) => {
           <span
             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
             role="menuitem"
+            onClick={() => history.push("/profile")}
           >
             Profile
           </span>

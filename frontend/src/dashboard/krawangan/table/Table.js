@@ -4,6 +4,7 @@ import Pagination from "./pagination/Pagination";
 import axios from "axios";
 import API from "../../../config/API";
 import { AiTwotoneEye } from "react-icons/ai";
+import Search from "./Search";
 
 const Table = () => {
   const history = useHistory();
@@ -14,6 +15,7 @@ const Table = () => {
   const [loading, setLoading] = useState(true);
   const [village, setVillage] = useState({});
   const [searchVillage, setSearchVillage] = useState("");
+  const [search, setSearch] = useState("");
 
   const ITEMS_PER_PAGE = 20;
 
@@ -49,6 +51,11 @@ const Table = () => {
 
   const krawangansData = useMemo(() => {
     let computedData = Array.from(data);
+    if (search) {
+      computedData = computedData.filter((data) =>
+        data.no_persil.toString().includes(search)
+      );
+    }
 
     if (searchVillage) {
       computedData = computedData.filter((i) => {
@@ -62,7 +69,7 @@ const Table = () => {
       (currentPage - 1) * ITEMS_PER_PAGE,
       (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
     );
-  }, [data, currentPage, searchVillage]);
+  }, [data, currentPage, searchVillage, search]);
 
   const changeNavbar = () => {
     window.scrollY >= 80 ? setNavbar(true) : setNavbar(false);
@@ -82,6 +89,12 @@ const Table = () => {
           (!navbar ? "" : "bg-gray-100 drop-shadow-md p-3 rounded-sm")
         }
       >
+        <Search
+          onSearch={(value) => {
+            setSearch(value);
+            setCurrentPage(1);
+          }}
+        />
         {localStorage.getItem("admin") === "true" ? (
           <select
             onChange={handleChange}

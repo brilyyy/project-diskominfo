@@ -13,11 +13,11 @@ const EditData = () => {
     password: "",
     password_confirmation: "",
     email: "",
-    permissions: [],
+    roles: [],
     village_id: 0,
   });
   const [village, setVillage] = useState({});
-  const [permission, setPermission] = useState({});
+  const [roles, setRoles] = useState({});
 
   useEffect(() => {
     axios
@@ -34,7 +34,7 @@ const EditData = () => {
       });
 
     axios
-      .get(API.url + "users/detail/" + id, {
+      .get(API.url + "users/" + id, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
         },
@@ -47,13 +47,13 @@ const EditData = () => {
       });
 
     axios
-      .get(API.url + "permissions", {
+      .get(API.url + "roles", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
         },
       })
       .then((response) => {
-        setPermission(response.data.data);
+        setRoles(response.data.data);
       })
       .catch((err) => {
         console.log(err.response);
@@ -68,7 +68,7 @@ const EditData = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(API.url + "update-user/" + id, data, {
+      .put(API.url + "users/" + id, data, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
         },
@@ -86,11 +86,11 @@ const EditData = () => {
 
   const handleCheckBox = (e) => {
     console.log(e.target.value);
-    if (data.permissions.includes(e.target.value)) {
-      let i = data.permissions.indexOf(e.target.value);
-      data.permissions.splice(i, 1);
+    if (data.roles.includes(e.target.value)) {
+      let i = data.roles.indexOf(e.target.value);
+      data.roles.splice(i, 1);
     } else {
-      data.permissions = [...data.permissions, e.target.value];
+      data.roles = [...data.roles, e.target.value];
     }
   };
 
@@ -206,21 +206,19 @@ const EditData = () => {
             </div>
             <div>
               <h1 className="mb-6 text-xl font-medium">Hak Akses</h1>
-              {Array.from(permission).map((permission, key) => (
+              {Array.from(roles).map((role, key) => (
                 <div className="mb-6" key={key}>
                   <div className="text-gray-700 md:flex md:items-center">
                     <input
                       type="checkbox"
-                      value={permission.name}
+                      value={role.name}
                       onChange={handleCheckBox}
                       className="w-6 h-6 px-3 border rounded-lg focus:shadow-outline mr-3"
-                      defaultChecked={data.permissions.includes(
-                        permission.name
-                      )}
+                      defaultChecked={data.roles.includes(role.name)}
                     />
                     <div className="mb-1 md:mb-0 md:w-1/3">
                       <label htmlFor="password_confirmation">
-                        {permission.name.toUpperCase()}
+                        {role.name.toUpperCase()}
                       </label>
                     </div>
                   </div>

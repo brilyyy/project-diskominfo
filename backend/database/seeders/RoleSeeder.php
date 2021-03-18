@@ -3,9 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\PermissionRegistrar;
 
 class RoleSeeder extends Seeder
 {
@@ -16,12 +14,10 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        app()[PermissionRegistrar::class]->forgetCachedPermissions();
+        $superAdmin = Role::create(['name' => 'super-admin', 'guard_name' => 'api']);
+        $adminDesa = Role::create(['name' => 'admin-desa', 'guard_name' => 'api']);
 
-        Permission::create(['name' => 'letterc', 'guard_name' => 'api']);
-        Permission::create(['name' => 'desa', 'guard_name' => 'api']);
-        Permission::create(['name' => 'krawangan', 'guard_name' => 'api']);
-        Permission::create(['name' => 'user', 'guard_name' => 'api']);
-        Permission::create(['name' => 'permission', 'guard_name' => 'api']);
+        $superAdmin->syncPermissions(['letterc', 'desa', 'user', 'krawangan', 'permission']);
+        $adminDesa->syncPermissions(['letterc', 'desa', 'krawangan']);
     }
 }

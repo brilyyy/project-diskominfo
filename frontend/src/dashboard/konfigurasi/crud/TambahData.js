@@ -12,11 +12,11 @@ const TambahData = () => {
     password: "",
     password_confirmation: "",
     email: "",
-    permissions: [],
+    roles: [],
     village_id: 0,
   });
   const [village, setVillage] = useState({});
-  const [permission, setPermission] = useState({});
+  const [roles, setRoles] = useState({});
   const [notmatch, setNotmatch] = useState(false);
 
   useEffect(() => {
@@ -33,13 +33,13 @@ const TambahData = () => {
         console.log(err.response);
       });
     axios
-      .get(API.url + "permissions", {
+      .get(API.url + "roles", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
         },
       })
       .then((response) => {
-        setPermission(response.data.data);
+        setRoles(response.data.data);
       })
       .catch((err) => {
         console.log(err.response);
@@ -74,11 +74,11 @@ const TambahData = () => {
 
   const handleCheckBox = (e) => {
     console.log(e.target.value);
-    if (data.permissions.includes(e.target.value)) {
-      let i = data.permissions.indexOf(e.target.value);
-      data.permissions.splice(i, 1);
+    if (data.roles.includes(e.target.value)) {
+      let i = data.roles.indexOf(e.target.value);
+      data.roles.splice(i, 1);
     } else {
-      data.permissions = [...data.permissions, e.target.value];
+      data.roles = [...data.roles, e.target.value];
     }
   };
 
@@ -126,7 +126,6 @@ const TambahData = () => {
                     <input
                       className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
                       type="text"
-                      id="name"
                       name="name"
                       autoComplete="off"
                       onChange={handleChange}
@@ -144,7 +143,6 @@ const TambahData = () => {
                     <input
                       className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
                       type="email"
-                      id="email"
                       name="email"
                       autoComplete="off"
                       onChange={handleChange}
@@ -162,7 +160,6 @@ const TambahData = () => {
                     <input
                       className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
                       type="text"
-                      id="username"
                       name="username"
                       autoComplete="off"
                       onChange={handleChange}
@@ -180,7 +177,6 @@ const TambahData = () => {
                     <input
                       className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
                       type="password"
-                      id="password"
                       name="password"
                       autoComplete="off"
                       onChange={handleChange}
@@ -199,7 +195,6 @@ const TambahData = () => {
                     <input
                       className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
                       type="password"
-                      id="password_confirmation"
                       name="password_confirmation"
                       autoComplete="off"
                       onChange={handleChange}
@@ -222,19 +217,19 @@ const TambahData = () => {
             </div>
             <div>
               <h1 className="mb-6 text-xl font-medium">Hak Akses</h1>
-              {Array.from(permission).map((permission, key) => (
+              {Array.from(roles).map((role, key) => (
                 <div className="mb-6">
                   <div className="text-gray-700 md:flex md:items-center">
                     <input
                       type="checkbox"
-                      value={permission.name}
+                      value={role.name}
                       key={key}
                       onChange={handleCheckBox}
                       className="w-6 h-6 px-3 border rounded-lg focus:shadow-outline mr-3"
                     />
                     <div className="mb-1 md:mb-0 md:w-1/3">
                       <label htmlFor="password_confirmation">
-                        {permission.name.toUpperCase()}
+                        {role.name.toUpperCase()}
                       </label>
                     </div>
                   </div>

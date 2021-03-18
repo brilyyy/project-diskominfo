@@ -4,17 +4,18 @@ namespace App\Services;
 
 use App\Http\Resources\LettercResource;
 use App\Models\User;
-use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PermissionServices {
+class PermissionServices
+{
     use ApiResponser;
 
     public function index()
     {
-        $permission = Permission::all();
+        $permission = Role::all();
         return $this->successResponse($permission, 'Permission data retreived successfully');
     }
 

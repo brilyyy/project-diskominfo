@@ -124,7 +124,9 @@ const Table = () => {
                   className="text-center h-11 select-none cursor-pointer hover:bg-gray-50 text-sm"
                   key={key}
                 >
-                  <td className="border border-gray-300 p-1">{key + "."}</td>
+                  <td className="border border-gray-300 p-1">
+                    {key + 1 + "."}
+                  </td>
                   <td className="border border-gray-300 p-1">{user.name}</td>
                   <td className="border border-gray-300 p-1">
                     {user.username}
@@ -139,7 +141,7 @@ const Table = () => {
                         type="button"
                         className="focus:outline-none text-white text-sm p-2 bg-yellow-500 rounded-l-md hover:bg-yellow-600 hover:shadow-lg"
                         onClick={() => {
-                          history.push(`/konfigurasi/${user.id}`);
+                          history.push(`/konfigurasi/ubah/${user.id}`);
                         }}
                       >
                         <BiPencil />

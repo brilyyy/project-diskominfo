@@ -30,10 +30,11 @@ import Krawangan from "./krawangan/Krawangan";
 import TambahDataKrawangan from "./krawangan/crud/TambahData";
 import KrawanganDetail from "./krawangan-detail/KrawanganDetail";
 import TambahDataKrawanganDetail from "./krawangan-detail/crud/TambahData";
+import Profile from "./user-config/UserConfig";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
-  const [menu, setMenu] = useState([]);
+  const [menu, setMenu] = useState("");
   const [dropdown, setDropdown] = useState(false);
 
   const handleDropdown = () => {
@@ -56,100 +57,12 @@ const Dashboard = () => {
         },
       })
       .then((response) => {
-        setMenu(response.data.data.permissions);
+        setMenu(response.data.data.roles[0].name);
       })
       .catch((err) => {
         console.log(err.response);
       });
   }, []);
-
-  const menuItems = useMemo(() => {
-    const menus = [];
-    for (let i = 0; i < menu.length; i++) {
-      const access = menu[i].name;
-      if (access === "letterc") {
-        menus[1] = (
-          <SidebarLink
-            title="Letter C"
-            icon={<FaEnvelope />}
-            linkto="/letterc"
-            open={open}
-            tooltip="Letter C"
-          />
-        );
-      }
-      if (access === "desa") {
-        menus[3] = (
-          <SidebarLink
-            title="Data Desa"
-            icon={<FaUserAstronaut />}
-            linkto="/data-desa"
-            open={open}
-            tooltip="Data Desa"
-          />
-        );
-      }
-      if (access === "permission") {
-        menus[4] = (
-          <SidebarLink
-            title="Konfigurasi"
-            icon={<BsGearFill />}
-            linkto="/konfigurasi"
-            open={open}
-            tooltip="Konfigurasi"
-          />
-        );
-      }
-      if (access === "krawangan") {
-        menus[0] = (
-          <SidebarLink
-            title="Krawangan"
-            icon={<FaHome />}
-            linkto="/krawangan"
-            open={open}
-            tooltip="Krawangan"
-          />
-        );
-      }
-    }
-    menus[2] = (
-      <div className="select-none">
-        <div
-          onClick={handleDropdown}
-          className={
-            "text-white hover:bg-blue-200 cursor-pointer p-3 flex " +
-            (open ? "" : "justify-center")
-          }
-        >
-          <span className={open ? "mr-3" : ""}>
-            <FaPrint />
-          </span>
-          <span className={open ? "" : "hidden"}>Cetak Surat</span>
-          <span className={open ? "ml-3" : "hidden"}>
-            {dropdown ? (
-              <BiChevronDownCircle className="mt-1" />
-            ) : (
-              <BiChevronRightCircle className="mt-1" />
-            )}
-          </span>
-        </div>
-        <div>
-          <div className={!dropdown ? "hidden" : ""}>
-            <SidebarLink
-              title="Surat Tanah"
-              icon={<FaRegNewspaper />}
-              linkto="/cetak-surat-tanah"
-              open={open}
-              dropdown={dropdown}
-              tooltip="Cetak Surat Tanah"
-            />
-          </div>
-        </div>
-      </div>
-    );
-
-    return menus;
-  }, [menu, open, dropdown, handleDropdown]);
 
   return (
     <Router>
@@ -181,7 +94,77 @@ const Dashboard = () => {
                   {!open ? <TiThMenu /> : <MdClose />}
                 </button>
               </div>
-              <div className="flex flex-col">{menuItems}</div>
+              <div className="flex flex-col">
+                <SidebarLink
+                  title="Krawangan"
+                  icon={<FaHome />}
+                  linkto="/krawangan"
+                  open={open}
+                  tooltip="Krawangan"
+                />
+                <SidebarLink
+                  title="Letter C"
+                  icon={<FaEnvelope />}
+                  linkto="/letterc"
+                  open={open}
+                  tooltip="Letter C"
+                />
+                <div className="select-none">
+                  <div
+                    onClick={handleDropdown}
+                    className={
+                      "text-white hover:bg-blue-200 cursor-pointer p-3 flex " +
+                      (open ? "" : "justify-center")
+                    }
+                  >
+                    <span className={open ? "mr-3" : ""}>
+                      <FaPrint />
+                    </span>
+                    <span className={open ? "" : "hidden"}>Cetak Surat</span>
+                    <span className={open ? "ml-3" : "hidden"}>
+                      {dropdown ? (
+                        <BiChevronDownCircle className="mt-1" />
+                      ) : (
+                        <BiChevronRightCircle className="mt-1" />
+                      )}
+                    </span>
+                  </div>
+                  <div>
+                    <div className={!dropdown ? "hidden" : ""}>
+                      <SidebarLink
+                        title="Surat Tanah"
+                        icon={<FaRegNewspaper />}
+                        linkto="/cetak-surat-tanah"
+                        open={open}
+                        dropdown={dropdown}
+                        tooltip="Cetak Surat Tanah"
+                      />
+                    </div>
+                  </div>
+                </div>
+                {menu === "super-admin" ? (
+                  <SidebarLink
+                    title="Data Desa"
+                    icon={<FaUserAstronaut />}
+                    linkto="/data-desa"
+                    open={open}
+                    tooltip="Data Desa"
+                  />
+                ) : (
+                  <></>
+                )}
+                {menu === "super-admin" ? (
+                  <SidebarLink
+                    title="Konfigurasi"
+                    icon={<BsGearFill />}
+                    linkto="/konfigurasi"
+                    open={open}
+                    tooltip="Konfigurasi"
+                  />
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
           </aside>
         </div>
@@ -219,7 +202,8 @@ const Dashboard = () => {
                 path="/cetak-surat-tanah"
                 component={CetakSuratTanah}
               />
-              {localStorage.getItem("admin") === "true" ? (
+              <Route exact path="/profile" component={Profile} />
+              {menu === "super-admin" ? (
                 <>
                   <Route exact path="/data-desa" component={DataDesa} />
                   <Route
@@ -235,8 +219,11 @@ const Dashboard = () => {
 
                   <Route exact path="/konfigurasi" component={Konfigurasi} />
                   <Route exact path="/konfigurasi/tambah" component={AddUser} />
-                  <Route exact path="/konfigurasi/:id" component={ConfigUser} />
-                  <Route exact path="/krawangan" component={Krawangan} />
+                  <Route
+                    exact
+                    path="/konfigurasi/ubah/:id"
+                    component={ConfigUser}
+                  />
                 </>
               ) : null}
             </Switch>

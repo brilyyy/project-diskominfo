@@ -97,7 +97,9 @@ const generateSuratTanah = async (id) => {
     });
     saveAs(
       out,
-      `${new Date().toJSON().slice(0, 10).replace(/-/g, "_")}_Surat_Tanah.docx`
+      `${new Date().toJSON().slice(0, 10).replace(/-/g, "_")}_${
+        data[0].nama
+      }_Surat_Tanah.docx`
     );
   });
 };
@@ -126,6 +128,7 @@ const generateLetterc = async (id) => {
     doc = new Docxtemplater().loadZip(zip);
 
     // mapping data dari server dengan merubah key sesuai template docx
+    console.log(data[0].nama);
     data.map((detail, key) => {
       const detailData = {
         desa_darat: checkUndefined(detail.desa_darat),
@@ -169,7 +172,9 @@ const generateLetterc = async (id) => {
     });
     saveAs(
       out,
-      `${new Date().toJSON().slice(0, 10).replace(/-/g, "_")}_Letter_C.docx`
+      `${new Date().toJSON().slice(0, 10).replace(/-/g, "_")}_${
+        data[0].nama
+      }_Letter_C.docx`
     );
   });
 };
