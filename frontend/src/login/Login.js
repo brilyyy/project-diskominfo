@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import axios from "axios";
-import qs from "qs";
 import API from "../config/API";
+import Logo from "../dashboard/component/Logo";
 
 const Login = () => {
   let history = useHistory();
@@ -39,6 +39,7 @@ const Login = () => {
 
   return (
     <div className="w-full h-screen flex justify-center items-center flex-col bg-pattern-light">
+      <Logo width="w-1/4" />
       <div className="p-8 rounded-xl bg-white bg-opacity-80 w-80 drop-shadow">
         <form
           className="w-full"

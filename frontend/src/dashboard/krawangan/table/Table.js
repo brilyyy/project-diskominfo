@@ -79,6 +79,10 @@ const Table = () => {
     setSearchVillage(e.target.value);
   };
 
+  const getPage = () => {
+    return currentPage > 1 ? currentPage * 10 : 0;
+  };
+
   window.addEventListener("scroll", changeNavbar);
 
   return (
@@ -156,7 +160,7 @@ const Table = () => {
                 key={key}
               >
                 <td className="border border-gray-300 p-1">
-                  {krawangan.id + "."}
+                  {key + 1 + getPage() + "."}
                 </td>
                 <td className="border border-gray-300 p-1">
                   {krawangan.no_persil}

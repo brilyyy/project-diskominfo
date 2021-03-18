@@ -76,6 +76,10 @@ const Table = () => {
     window.scrollY >= 80 ? setNavbar(true) : setNavbar(false);
   };
 
+  const getPage = () => {
+    return currentPage > 1 ? currentPage * 10 : 0;
+  };
+
   window.addEventListener("scroll", changeNavbar);
 
   const handleChange = (e) => {
@@ -218,7 +222,9 @@ const Table = () => {
                 className="text-center h-11 select-none cursor-pointer hover:bg-gray-50 text-sm"
                 key={key}
               >
-                <td className="border border-gray-300 p-1">{key + 1 + "."}</td>
+                <td className="border border-gray-300 p-1">
+                  {key + 1 + getPage() + "."}
+                </td>
                 <td className="border border-gray-300 p-1 max-w-0 overflow-ellipsis whitespace-nowrap overflow-hidden">
                   {letterc.nama}
                 </td>
