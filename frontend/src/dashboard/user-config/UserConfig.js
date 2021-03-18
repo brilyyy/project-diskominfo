@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import API from "../../config/API";
 import Close from "../component/CloseButton";
+import LoadingOverlay from "../component/LoadingOverlay";
 
 const UserConfig = () => {
   const [data, setData] = useState({});
@@ -50,18 +51,19 @@ const UserConfig = () => {
   };
   return (
     <div className="p-4 min-h-screen">
-      <div className="bg-white px-5 py-4 rounded-lg shadow-md">
-        <div className="flex justify-between">
-          <h1 className="mb-6 text-3xl font-bold">Profile</h1>
-          <Close />
-        </div>
-        <hr />
-        <form onSubmit={handleSubmit} className="mt-6">
-          {/* Input htmlForm */}
-          {isLoading ? (
-            <div>Loading...</div>
-          ) : (
-            <>
+      {isLoading ? (
+        <LoadingOverlay />
+      ) : (
+        <>
+          <div className="bg-white px-5 py-4 rounded-lg shadow-md">
+            <div className="flex justify-between">
+              <h1 className="mb-6 text-3xl font-bold">Profile</h1>
+              <Close />
+            </div>
+            <hr />
+            <form onSubmit={handleSubmit} className="mt-6">
+              {/* Input htmlForm */}
+
               <div className="mb-6">
                 <div className="text-gray-700 md:flex md:items-center">
                   <div className="mb-1 md:mb-0 md:w-1/3">
@@ -251,18 +253,18 @@ const UserConfig = () => {
                   </div>
                 </div>
               </div>
-            </>
-          )}
 
-          {/* End of input form */}
+              {/* End of input form */}
 
-          <div className="mt-10 flex flex-row-reverse">
-            <button className="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg">
-              Simpan
-            </button>
+              <div className="mt-10 flex flex-row-reverse">
+                <button className="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg">
+                  Simpan
+                </button>
+              </div>
+            </form>
           </div>
-        </form>
-      </div>
+        </>
+      )}
     </div>
   );
 };
