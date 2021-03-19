@@ -35,7 +35,7 @@ class LettercServices
             $user = User::find(Auth::id());
             $letterc->village_id = $user->village_id;
         }
-        $letterc->nama = $request->get('nama');
+        $letterc->name = $request->get('name');
         $letterc->nomor = $request->get('nomor');
         $letterc->tempat_tinggal = $request->get('tempat_tinggal');
         $letterc->no_persil_sawah = $request->get('no_persil_sawah');
@@ -54,6 +54,7 @@ class LettercServices
         $letterc->luas_bangunan = $request->get('luas_bangunan');
         $letterc->pajak_bangunan = $request->get('pajak_bangunan');
         $letterc->mutasi_bangunan = $request->get('mutasi_bangunan');
+        $letterc->parent_id = $request->get('parent_id');
 
         if ($letterc->save()) {
             return $this->successResponse($letterc, 'Letterc Stored Successfully', 201);
@@ -71,7 +72,7 @@ class LettercServices
         $letterc = Letterc::find($id);
 
         $letterc->village_id = $request->get('village_id');
-        $letterc->nama = $request->get('nama');
+        $letterc->name = $request->get('name');
         $letterc->nomor = $request->get('nomor');
         $letterc->tempat_tinggal = $request->get('tempat_tinggal');
         $letterc->no_persil_sawah = $request->get('no_persil_sawah');
@@ -90,6 +91,7 @@ class LettercServices
         $letterc->luas_bangunan = $request->get('luas_bangunan');
         $letterc->pajak_bangunan = $request->get('pajak_bangunan');
         $letterc->mutasi_bangunan = $request->get('mutasi_bangunan');
+        $letterc->parent_id = $request->get('parent_id');
 
         if ($letterc->save()) {
             return $this->successResponse($letterc, 'Letterc Stored Successfully', 200);
@@ -107,6 +109,12 @@ class LettercServices
     public function detailLetter($id)
     {
         $data = Letterc::with('village')->where('lettercs.id', $id)->get();
+        return $this->successResponse($data, 'Letterc Details Successfully', 200);
+    }
+
+    public function getTheTree($id)
+    {
+        $data = Letterc::where('id', $id)->with('children')->get();
         return $this->successResponse($data, 'Letterc Details Successfully', 200);
     }
 }

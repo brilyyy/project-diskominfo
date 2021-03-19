@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Close from "../../component/CloseButton";
 import API from "../../../config/API";
+import MutasiSelect from "./mutasi-select/MutasiSelect";
 
 const TambahData = () => {
   let history = useHistory();
@@ -16,7 +17,7 @@ const TambahData = () => {
     luas_sawah: "",
     mutasi_bangunan: "",
     mutasi_bumi: "",
-    nama: "",
+    name: "",
     nasional_darat: "",
     nasional_sawah: "",
     no_persil_bangunan: "",
@@ -27,8 +28,10 @@ const TambahData = () => {
     pajak_darat: "",
     pajak_sawah: "",
     village_id: 0,
+    parent_id: "",
   });
   const [village, setVillage] = useState({});
+  const [villageId, setVillageId] = useState(0);
 
   useEffect(() => {
     if (localStorage.getItem("admin") === "true") {
@@ -49,6 +52,9 @@ const TambahData = () => {
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
+    if (e.target.name === "village_id") {
+      setVillageId(e.target.value);
+    }
     console.log(data);
   };
 
@@ -63,10 +69,7 @@ const TambahData = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    data.nama = changeCapital(data.nama);
-    data.tempat_tinggal = changeCapital(data.tempat_tinggal);
-
+    console.log(data);
     axios
       .post(API.url + "lettercs", data, {
         headers: {
@@ -131,8 +134,7 @@ const TambahData = () => {
                     <input
                       className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
                       type="text"
-                      id="nama"
-                      name="nama"
+                      name="name"
                       autoComplete="off"
                       onChange={handleChange}
                       required
@@ -270,24 +272,6 @@ const TambahData = () => {
                       type="text"
                       id="pajak_sawah"
                       name="pajak_sawah"
-                      autoComplete="off"
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="mb-6">
-                <div className="text-gray-700 md:flex md:items-center">
-                  <div className="mb-1 md:mb-0 md:w-1/3 pl-4">
-                    <label htmlFor="mutasi_bumi">Mutasi </label>
-                  </div>
-                  <div className="md:w-2/3 md:flex-grow">
-                    <input
-                      className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                      type="text"
-                      id="mutasi_bumi"
-                      name="mutasi_bumi"
                       autoComplete="off"
                       onChange={handleChange}
                     />
@@ -464,8 +448,33 @@ const TambahData = () => {
                   </div>
                 </div>
               </div>
-
               <div className="mb-6">
+                {/* <div className="text-gray-700 md:flex md:items-center">
+                  <div className="mb-1 md:mb-0 md:w-1/3 pl-4">
+                    <label htmlFor="mutasi_bumi">Mutasi </label>
+                  </div>
+                  <div className="md:w-2/3 md:flex-grow">
+                    <input
+                      className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
+                      type="text"
+                      id="mutasi_bumi"
+                      name="mutasi_bumi"
+                      autoComplete="off"
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div> */}
+                <MutasiSelect
+                  villageId={villageId}
+                  selectThis={(value) => {
+                    const valueArray = value.split("|");
+                    data.mutasi_bangunan = valueArray[1];
+                    data.mutasi_bumi = valueArray[1];
+                    data.parent_id = valueArray[0];
+                  }}
+                />
+              </div>
+              {/* <div className="mb-6">
                 <div className="text-gray-700 md:flex md:items-center">
                   <div className="mb-1 md:mb-0 md:w-1/3">
                     <label htmlFor="mutasi_bangunan">Mutasi</label>
@@ -481,7 +490,7 @@ const TambahData = () => {
                     />
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* End of input form */}
             </div>

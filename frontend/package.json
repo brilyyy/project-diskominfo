@@ -18,11 +18,13 @@
     "postcss": "^7.0.35",
     "qs": "^6.5.2",
     "react": "^17.0.1",
+    "react-d3-tree": "^2.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
     "react-spinners": "^0.10.6",
+    "react-tree-graph": "^6.0.0",
     "tailwind-filter-utilities": "^2.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
     "web-vitals": "^1.1.0"

@@ -31,6 +31,7 @@ import TambahDataKrawangan from "./krawangan/crud/TambahData";
 import KrawanganDetail from "./krawangan-detail/KrawanganDetail";
 import TambahDataKrawanganDetail from "./krawangan-detail/crud/TambahData";
 import Profile from "./user-config/UserConfig";
+import TreeView from "./letterc/TreeView";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(true);
@@ -178,6 +179,7 @@ const Dashboard = () => {
           <div>
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route exact path="/tree-view/:id" component={TreeView} />
               <Route
                 exact
                 path="/krawangan/tambah"

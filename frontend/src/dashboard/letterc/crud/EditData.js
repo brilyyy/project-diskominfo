@@ -17,7 +17,7 @@ const EditData = () => {
     luas_sawah: "",
     mutasi_bangunan: "",
     mutasi_bumi: "",
-    nama: "",
+    name: "",
     nasional_darat: "",
     nasional_sawah: "",
     no_persil_bangunan: "",
@@ -137,11 +137,10 @@ const EditData = () => {
                     <input
                       className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
                       type="text"
-                      id="nama"
-                      name="nama"
+                      name="name"
                       autoComplete="off"
                       onChange={handleChange}
-                      value={data.nama}
+                      value={data.name}
                       required
                     />
                   </div>

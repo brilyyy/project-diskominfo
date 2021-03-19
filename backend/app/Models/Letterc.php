@@ -29,10 +29,21 @@ class Letterc extends Model
         'luas_bangunan',
         'pajak_bangunan',
         'mutasi_bangunan',
-        'foto',
+        'village_id',
+        'parent_id',
     ];
     public function village()
     {
         return $this->belongsTo(Village::class);
+    }
+
+    public function letterc()
+    {
+        return $this->hasMany(Letterc::class, 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->letterc()->with('children');
     }
 }

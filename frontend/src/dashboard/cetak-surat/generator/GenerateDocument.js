@@ -89,7 +89,7 @@ const generateSuratTanah = async (id) => {
         no_persil_sawah: checkUndefined(detail.no_persil_sawah),
         kelas_sawah: checkUndefined(detail.kelas_sawah),
         luas_sawah: checkUndefined(detail.luas_sawah),
-        nama: checkUndefined(detail.nama),
+        nama: checkUndefined(detail.name),
         tanggal: date,
       };
       return doc.setData(detailData);
@@ -114,7 +114,7 @@ const generateSuratTanah = async (id) => {
     saveAs(
       out,
       `${new Date().toJSON().slice(0, 10).replace(/-/g, "_")}_${
-        data[0].nama
+        data[0].name
       }_Surat_Tanah.docx`
     );
   });
@@ -147,7 +147,7 @@ const generateLetterc = async (id) => {
     console.log(data[0].nama);
     data.map((detail, key) => {
       const detailData = {
-        nama: checkUndefined(detail.nama),
+        nama: checkUndefined(detail.name),
         nomor: checkUndefined(detail.nomor),
         tempat_tinggal: checkUndefined(detail.tempat_tinggal),
         a: checkUndefined(detail.no_persil_sawah),
@@ -189,7 +189,7 @@ const generateLetterc = async (id) => {
     saveAs(
       out,
       `${new Date().toJSON().slice(0, 10).replace(/-/g, "_")}_${
-        data[0].nama
+        data[0].name
       }_Letter_C.docx`
     );
   });

@@ -24,6 +24,10 @@ class LettercController extends Controller
     {
         return $this->letterc->index();
     }
+    public function getTheTree($id)
+    {
+        return $this->letterc->getTheTree($id);
+    }
 
     /**
      * Store a newly created resource in storage.

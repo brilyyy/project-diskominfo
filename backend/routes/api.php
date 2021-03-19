@@ -46,6 +46,7 @@ Route::group(['middleware' => ['auth:api', 'role:super-admin|admin-desa', 'permi
     Route::put('lettercs/{id}', [LettercController::class, 'update']);
     Route::delete('lettercs/{id}', [LettercController::class, 'destroy']);
     Route::get('letter-detail/{id}', [LettercController::class, 'detailLetter']);
+    Route::get('letterc-tree/{id}', [LettercController::class, 'getTheTree']);
 });
 
 Route::group(['middleware' => ['auth:api', 'role:super-admin|admin-desa', 'permission:krawangan']], function () {

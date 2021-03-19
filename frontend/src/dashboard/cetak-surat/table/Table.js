@@ -51,7 +51,7 @@ const Table = () => {
     if (search) {
       computedData = computedData.filter(
         (data) =>
-          data.nama.toLowerCase().indexOf(search.toLowerCase()) > -1 ||
+          data.name.toLowerCase().indexOf(search.toLowerCase()) > -1 ||
           data.nomor.toString().includes(search)
       );
     }
@@ -226,7 +226,7 @@ const Table = () => {
                   {key + 1 + getPage() + "."}
                 </td>
                 <td className="border border-gray-300 p-1 max-w-0 overflow-ellipsis whitespace-nowrap overflow-hidden">
-                  {letterc.nama}
+                  {letterc.name}
                 </td>
                 <td className="border border-gray-300 p-1">{letterc.nomor}</td>
                 <td className="border border-gray-300 p-1">

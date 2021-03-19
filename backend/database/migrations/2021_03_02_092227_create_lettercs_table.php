@@ -16,7 +16,7 @@ class CreateLettercsTable extends Migration
         Schema::create('lettercs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('village_id')->nullable();
-            $table->string('nama')->nullable();
+            $table->string('name')->nullable();
             $table->bigInteger('nomor')->nullable();
             $table->string('tempat_tinggal')->nullable();
             $table->string('no_persil_sawah')->nullable();
@@ -35,10 +35,12 @@ class CreateLettercsTable extends Migration
             $table->string('luas_bangunan')->nullable();
             $table->string('pajak_bangunan')->nullable();
             $table->string('mutasi_bangunan')->nullable();
+            $table->unsignedBigInteger('parent_id')->nullable();
             $table->timestamps();
         });
-        Schema::table('lettercs', function(Blueprint $table){
+        Schema::table('lettercs', function (Blueprint $table) {
             $table->foreign('village_id')->references('id')->on('villages');
+            $table->foreign('parent_id')->references('id')->on('lettercs')->onDelete('set null')->onUpdate('set null');
         });
     }
 

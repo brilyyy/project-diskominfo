@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import Pagination from "./pagination/Pagination";
 import Search from "./Search";
 import axios from "axios";
-import { BiPencil, BiPrinter, BiTrash } from "react-icons/bi";
+import { BiHistory, BiPencil, BiPrinter, BiTrash } from "react-icons/bi";
 import { generateLetterc } from "../../cetak-surat/generator/GenerateDocument";
 import API from "../../../config/API";
 
@@ -59,7 +59,7 @@ const Table = () => {
     if (search) {
       computedData = computedData.filter(
         (data) =>
-          data.nama.toLowerCase().indexOf(search.toLowerCase()) > -1 ||
+          data.name.toLowerCase().indexOf(search.toLowerCase()) > -1 ||
           data.nomor.toString().includes(search)
       );
     }
@@ -258,7 +258,7 @@ const Table = () => {
                   {key + 1 + getPage() + "."}
                 </td>
                 <td className="border border-gray-300 p-1 max-w-0 overflow-ellipsis whitespace-nowrap overflow-hidden">
-                  {letterc.nama}
+                  {letterc.name}
                 </td>
                 <td className="border border-gray-300 p-1">{letterc.nomor}</td>
                 <td className="border border-gray-300 p-1">
@@ -308,11 +308,20 @@ const Table = () => {
                     </button>
                     <button
                       type="button"
+                      className="focus:outline-none text-white text-sm p-2 bg-blue-500 hover:bg-blue-600 hover:shadow-lg"
+                      onClick={() => {
+                        history.push(`/tree-view/${letterc.id}`);
+                      }}
+                    >
+                      <BiHistory />
+                    </button>
+                    <button
+                      type="button"
                       className="focus:outline-none text-white text-sm p-2 bg-red-500 rounded-r-md hover:bg-red-600 hover:shadow-lg"
                       onClick={() => {
                         setDeleteModal(true);
                         setActiveItem(letterc.id);
-                        setNamaItem(letterc.nama);
+                        setNamaItem(letterc.name);
                       }}
                     >
                       <BiTrash />
