@@ -12,11 +12,11 @@ const TambahData = () => {
     password: "",
     password_confirmation: "",
     email: "",
-    roles: [],
+    permissions: [],
     village_id: 0,
   });
   const [village, setVillage] = useState({});
-  const [roles, setRoles] = useState({});
+  const [permissions, setPermissions] = useState({});
   const [notmatch, setNotmatch] = useState(false);
 
   useEffect(() => {
@@ -33,13 +33,13 @@ const TambahData = () => {
         console.log(err.response);
       });
     axios
-      .get(API.url + "roles", {
+      .get(API.url + "permissions", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
         },
       })
       .then((response) => {
-        setRoles(response.data.data);
+        setPermissions(response.data.data);
       })
       .catch((err) => {
         console.log(err.response);
@@ -74,11 +74,11 @@ const TambahData = () => {
 
   const handleCheckBox = (e) => {
     console.log(e.target.value);
-    if (data.roles.includes(e.target.value)) {
-      let i = data.roles.indexOf(e.target.value);
-      data.roles.splice(i, 1);
+    if (data.permissions.includes(e.target.value)) {
+      let i = data.permissions.indexOf(e.target.value);
+      data.permissions.splice(i, 1);
     } else {
-      data.roles = [...data.roles, e.target.value];
+      data.permissions = [...data.permissions, e.target.value];
     }
   };
 
@@ -217,19 +217,19 @@ const TambahData = () => {
             </div>
             <div>
               <h1 className="mb-6 text-xl font-medium">Hak Akses</h1>
-              {Array.from(roles).map((role, key) => (
+              {Array.from(permissions).map((permission, key) => (
                 <div className="mb-6">
                   <div className="text-gray-700 md:flex md:items-center">
                     <input
                       type="checkbox"
-                      value={role.name}
+                      value={permission.name}
                       key={key}
                       onChange={handleCheckBox}
                       className="w-6 h-6 px-3 border rounded-lg focus:shadow-outline mr-3"
                     />
                     <div className="mb-1 md:mb-0 md:w-1/3">
                       <label htmlFor="password_confirmation">
-                        {role.name.toUpperCase()}
+                        {permission.name.toUpperCase()}
                       </label>
                     </div>
                   </div>

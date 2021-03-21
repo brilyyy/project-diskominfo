@@ -43,7 +43,7 @@ class LettercServices
         $letterc->nasional_sawah = $request->get('nasional_sawah');
         $letterc->luas_sawah = $request->get('luas_sawah');
         $letterc->pajak_sawah = $request->get('pajak_sawah');
-        $letterc->mutasi_bumi = $request->get('mutasi_bumi');
+        $letterc->mutasi_bumi = $request->get('mutasi');
         $letterc->no_persil_darat = $request->get('no_persil_darat');
         $letterc->desa_darat = $request->get('desa_darat');
         $letterc->nasional_darat = $request->get('nasional_darat');
@@ -53,7 +53,7 @@ class LettercServices
         $letterc->gol_bangunan = $request->get('gol_bangunan');
         $letterc->luas_bangunan = $request->get('luas_bangunan');
         $letterc->pajak_bangunan = $request->get('pajak_bangunan');
-        $letterc->mutasi_bangunan = $request->get('mutasi_bangunan');
+        $letterc->mutasi_bangunan = $request->get('mutasi');
         $letterc->parent_id = $request->get('parent_id');
 
         if ($letterc->save()) {
@@ -80,7 +80,7 @@ class LettercServices
         $letterc->nasional_sawah = $request->get('nasional_sawah');
         $letterc->luas_sawah = $request->get('luas_sawah');
         $letterc->pajak_sawah = $request->get('pajak_sawah');
-        $letterc->mutasi_bumi = $request->get('mutasi_bumi');
+        $letterc->mutasi_bumi = $request->get('mutasi');
         $letterc->no_persil_darat = $request->get('no_persil_darat');
         $letterc->desa_darat = $request->get('desa_darat');
         $letterc->nasional_darat = $request->get('nasional_darat');
@@ -90,7 +90,7 @@ class LettercServices
         $letterc->gol_bangunan = $request->get('gol_bangunan');
         $letterc->luas_bangunan = $request->get('luas_bangunan');
         $letterc->pajak_bangunan = $request->get('pajak_bangunan');
-        $letterc->mutasi_bangunan = $request->get('mutasi_bangunan');
+        $letterc->mutasi_bangunan = $request->get('mutasi');
         $letterc->parent_id = $request->get('parent_id');
 
         if ($letterc->save()) {

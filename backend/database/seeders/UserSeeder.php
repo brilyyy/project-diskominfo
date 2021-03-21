@@ -22,14 +22,14 @@ class UserSeeder extends Seeder
             'village_id' => 1
         ]);
         $user = \App\Models\User::factory()->create([
-            'name' => 'Super Admin',
+            'name' => 'Admin Desa',
             'username' => 'user',
             'email' => 'user@userise.com',
             'password' => Hash::make('user'),
             'village_id' => 2
         ]);
 
-        $admin->assignRole('super-admin');
-        $user->assignRole('admin-desa');
+        $admin->syncPermissions(['letterc', 'desa', 'krawangan', 'user', 'permission']);
+        $user->syncPermissions(['letterc', 'krawangan']);
     }
 }

@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Role;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
 
 class PermissionServices
 {
@@ -15,7 +16,7 @@ class PermissionServices
 
     public function index()
     {
-        $permission = Role::all();
+        $permission = Permission::all();
         return $this->successResponse($permission, 'Permission data retreived successfully');
     }
 

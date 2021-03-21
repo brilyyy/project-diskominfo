@@ -33,13 +33,13 @@ Route::group(['middleware' => ['auth:api']], function () {
 });
 
 
-Route::group(['middleware' => ['auth:api', 'role:super-admin']], function () {
+Route::group(['middleware' => ['auth:api', 'permission:desa']], function () {
     Route::get('villages/{id}', [VillageController::class, 'show']);
     Route::post('villages', [VillageController::class, 'store']);
 });
 
 
-Route::group(['middleware' => ['auth:api', 'role:super-admin|admin-desa', 'permission:letterc']], function () {
+Route::group(['middleware' => ['auth:api', 'permission:letterc']], function () {
     Route::get('lettercs', [LettercController::class, 'index']);
     Route::post('lettercs', [LettercController::class, 'store']);
     Route::get('lettercs/{id}', [LettercController::class, 'show']);
@@ -49,7 +49,7 @@ Route::group(['middleware' => ['auth:api', 'role:super-admin|admin-desa', 'permi
     Route::get('letterc-tree/{id}', [LettercController::class, 'getTheTree']);
 });
 
-Route::group(['middleware' => ['auth:api', 'role:super-admin|admin-desa', 'permission:krawangan']], function () {
+Route::group(['middleware' => ['auth:api', 'permission:krawangan']], function () {
     Route::get('krawangans', [KrawanganController::class, 'index']);
     Route::post('krawangans', [KrawanganController::class, 'store']);
     Route::get('krawangans/{id}', [KrawanganController::class, 'show']);
@@ -59,13 +59,13 @@ Route::group(['middleware' => ['auth:api', 'role:super-admin|admin-desa', 'permi
     Route::post('krawangan/details/', [KrawanganDetailController::class, 'store']);
 });
 
-Route::group(['middleware' => ['auth:api', 'role:super-admin', 'permission:permission']], function () {
-    Route::get('roles', [PermissionController::class, 'index']);
-    Route::put('roles/{id}', [PermissionController::class, 'update']);
-    Route::delete('roles/{id}', [PermissionController::class, 'destroy']);
+Route::group(['middleware' => ['auth:api', 'permission:permission']], function () {
+    Route::get('permissions', [PermissionController::class, 'index']);
+    Route::put('permissions/{id}', [PermissionController::class, 'update']);
+    Route::delete('permissions/{id}', [PermissionController::class, 'destroy']);
 });
 
-Route::group(['middleware' => ['auth:api', 'role:super-admin', 'permission:user']], function () {
+Route::group(['middleware' => ['auth:api', 'permission:user']], function () {
     Route::get('users', [UserController::class, 'index']);
     Route::get('users/{id}', [UserController::class, 'show']);
     Route::put('users/{id}', [AuthController::class, 'update']);

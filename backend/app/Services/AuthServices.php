@@ -27,7 +27,7 @@ class AuthServices
         $validatedData['password'] = Hash::make($request->password);
         $validatedData['village_id'] = $request->get('village_id');
         $user = User::create($validatedData);
-        $user->syncRoles($request->all()['roles']);
+        $user->syncPermissions($request->all()['permissions']);
 
         return $this->successResponse($user, 'Registered Successfully', 201);
     }
@@ -41,7 +41,7 @@ class AuthServices
         $user->village_id = $request->get('village_id');
         $user->save();
 
-        $user->syncRoles($request->all()['roles']);
+        $user->syncPermissions($request->all()['permissions']);
         return $this->successResponse($user, 'Registered Successfully', 201);
     }
 

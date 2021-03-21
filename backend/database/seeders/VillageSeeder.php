@@ -17,7 +17,7 @@ class VillageSeeder extends Seeder
     {
         $dataDesa = [
             ['Admin', 'Admin', 'Admin', 'Admin', 'Admin', 1],
-            ['Oro-oro Ombo', 'Desa', 'Jl. Raya Oro-Oro No.298, Oro-Oro Ombo', 'Batu', '422.310.8', 2],
+            ['Oro-oro Ombo', 'Desa', 'Jl. Raya Oro-oro No.298, Oro-oro Ombo', 'Batu', '422.310.8', 2],
             ['Pesanggrahan', 'Desa', 'Balai Mayangsari, Jalan Suropati No. 123, Pesanggrahan', 'Batu', '422.310.7', 3],
             ['Sidomulyo', 'Desa', 'Jl. Raya Sidomulyo, Sidomulyo', 'Batu', '422.310.6', 4],
             ['Sumberejo', 'Desa', 'Jl. Indragiri No. 30, Sumberejo', 'Batu', '422.310.5', 5],

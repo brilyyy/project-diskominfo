@@ -35,7 +35,8 @@ import TreeView from "./letterc/TreeView";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(true);
-  const [menu, setMenu] = useState("");
+  const [menu, setMenu] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [dropdown, setDropdown] = useState(false);
 
   const handleDropdown = () => {
@@ -58,12 +59,100 @@ const Dashboard = () => {
         },
       })
       .then((response) => {
-        setMenu(response.data.data.roles[0].name);
+        setMenu(response.data.data.permissions);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err.response);
       });
   }, []);
+
+  const sideMenu = useMemo(() => {
+    let menus = [];
+    menu.map((permissions) => {
+      if (permissions.name === "krawangan") {
+        menus[0] = (
+          <SidebarLink
+            title="Krawangan"
+            icon={<FaBook />}
+            linkto="/krawangan"
+            open={open}
+            tooltip="Krawangan"
+          />
+        );
+      }
+      if (permissions.name === "letterc") {
+        menus[1] = (
+          <SidebarLink
+            title="Letter C"
+            icon={<FaEnvelope />}
+            linkto="/letterc"
+            open={open}
+            tooltip="Letter C"
+          />
+        );
+      }
+      menus[2] = (
+        <div className="select-none">
+          <div
+            onClick={handleDropdown}
+            className={
+              "text-white hover:bg-blue-200 cursor-pointer p-3 flex " +
+              (open ? "" : "justify-center")
+            }
+          >
+            <span className={open ? "mr-3" : ""}>
+              <FaPrint />
+            </span>
+            <span className={open ? "" : "hidden"}>Cetak Surat</span>
+            <span className={open ? "ml-3" : "hidden"}>
+              {dropdown ? (
+                <BiChevronDownCircle className="mt-1" />
+              ) : (
+                <BiChevronRightCircle className="mt-1" />
+              )}
+            </span>
+          </div>
+          <div>
+            <div className={!dropdown ? "hidden" : ""}>
+              <SidebarLink
+                title="Surat Tanah"
+                icon={<FaRegNewspaper />}
+                linkto="/cetak-surat-tanah"
+                open={open}
+                dropdown={dropdown}
+                tooltip="Cetak Surat Tanah"
+              />
+            </div>
+          </div>
+        </div>
+      );
+      if (permissions.name === "desa") {
+        menus[3] = (
+          <SidebarLink
+            title="Data Desa"
+            icon={<FaUserAstronaut />}
+            linkto="/data-desa"
+            open={open}
+            tooltip="Data Desa"
+          />
+        );
+      }
+
+      if (permissions.name === "permission") {
+        menus[4] = (
+          <SidebarLink
+            title="Konfigurasi"
+            icon={<BsGearFill />}
+            linkto="/konfigurasi"
+            open={open}
+            tooltip="Konfigurasi"
+          />
+        );
+      }
+    });
+    return menus;
+  }, [menu, dropdown, handleDropdown, open]);
 
   return (
     <Router>
@@ -95,77 +184,7 @@ const Dashboard = () => {
                   {!open ? <TiThMenu /> : <MdClose />}
                 </button>
               </div>
-              <div className="flex flex-col">
-                <SidebarLink
-                  title="Krawangan"
-                  icon={<FaBook />}
-                  linkto="/krawangan"
-                  open={open}
-                  tooltip="Krawangan"
-                />
-                <SidebarLink
-                  title="Letter C"
-                  icon={<FaEnvelope />}
-                  linkto="/letterc"
-                  open={open}
-                  tooltip="Letter C"
-                />
-                <div className="select-none">
-                  <div
-                    onClick={handleDropdown}
-                    className={
-                      "text-white hover:bg-blue-200 cursor-pointer p-3 flex " +
-                      (open ? "" : "justify-center")
-                    }
-                  >
-                    <span className={open ? "mr-3" : ""}>
-                      <FaPrint />
-                    </span>
-                    <span className={open ? "" : "hidden"}>Cetak Surat</span>
-                    <span className={open ? "ml-3" : "hidden"}>
-                      {dropdown ? (
-                        <BiChevronDownCircle className="mt-1" />
-                      ) : (
-                        <BiChevronRightCircle className="mt-1" />
-                      )}
-                    </span>
-                  </div>
-                  <div>
-                    <div className={!dropdown ? "hidden" : ""}>
-                      <SidebarLink
-                        title="Surat Tanah"
-                        icon={<FaRegNewspaper />}
-                        linkto="/cetak-surat-tanah"
-                        open={open}
-                        dropdown={dropdown}
-                        tooltip="Cetak Surat Tanah"
-                      />
-                    </div>
-                  </div>
-                </div>
-                {menu === "super-admin" ? (
-                  <SidebarLink
-                    title="Data Desa"
-                    icon={<FaUserAstronaut />}
-                    linkto="/data-desa"
-                    open={open}
-                    tooltip="Data Desa"
-                  />
-                ) : (
-                  <></>
-                )}
-                {menu === "super-admin" ? (
-                  <SidebarLink
-                    title="Konfigurasi"
-                    icon={<BsGearFill />}
-                    linkto="/konfigurasi"
-                    open={open}
-                    tooltip="Konfigurasi"
-                  />
-                ) : (
-                  <></>
-                )}
-              </div>
+              <div className="flex flex-col">{loading ? <></> : sideMenu}</div>
             </div>
           </aside>
         </div>
@@ -205,7 +224,7 @@ const Dashboard = () => {
                 component={CetakSuratTanah}
               />
               <Route exact path="/profile" component={Profile} />
-              {menu === "super-admin" ? (
+              {localStorage.getItem("admin") === "true" ? (
                 <>
                   <Route exact path="/data-desa" component={DataDesa} />
                   <Route
