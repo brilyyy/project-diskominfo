@@ -20,14 +20,18 @@ class UserServices
 
     public function show($id)
     {
+        $ps = [];
         $user = User::find($id);
-        $roles = $user->getRoleNames();
+        $permissions = $user->getAllPermissions();
+        foreach ($user->permissions as $value) {
+            array_push($ps, $value->name);
+        }
         $data = [
             'id' => $user->id,
             'village_id' => $user->village_id,
             'name' => $user->name,
             'email' => $user->email,
-            'roles' => $roles,
+            'permissions' => $ps,
             'username' => $user->username,
         ];
         return $this->successResponse($data, 'User details retrieved successfully');

@@ -3,6 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import Close from "../../component/CloseButton";
 import axios from "axios";
 import API from "../../../config/API";
+import Loading from "../../component/LoadingOverlay";
 
 const EditData = () => {
   let { id } = useParams();
@@ -13,11 +14,12 @@ const EditData = () => {
     password: "",
     password_confirmation: "",
     email: "",
-    roles: [],
+    permissions: [],
     village_id: 0,
   });
   const [village, setVillage] = useState({});
-  const [roles, setRoles] = useState({});
+  const [permissions, setPermissions] = useState({});
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     axios
@@ -47,18 +49,19 @@ const EditData = () => {
       });
 
     axios
-      .get(API.url + "roles", {
+      .get(API.url + "permissions", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
         },
       })
       .then((response) => {
-        setRoles(response.data.data);
+        setPermissions(response.data.data);
+        setLoading(false)
       })
       .catch((err) => {
         console.log(err.response);
       });
-  }, [id]);
+  }, []);
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -86,17 +89,21 @@ const EditData = () => {
 
   const handleCheckBox = (e) => {
     console.log(e.target.value);
-    if (data.roles.includes(e.target.value)) {
-      let i = data.roles.indexOf(e.target.value);
-      data.roles.splice(i, 1);
+    if (data.permissions.includes(e.target.value)) {
+      let i = data.permissions.indexOf(e.target.value);
+      data.permissions.splice(i, 1);
     } else {
-      data.roles = [...data.roles, e.target.value];
+      data.permissions = [...data.permissions, e.target.value];
     }
   };
 
   return (
     <div className="p-4 min-h-screen">
-      <div className="bg-white px-5 py-4 rounded-lg shadow-md">
+      {
+        loading ?
+        <Loading />
+        :
+        <div className="bg-white px-5 py-4 rounded-lg shadow-md">
         <div className="flex justify-between">
           <h1 className="mb-6 text-3xl font-bold">Ubah Data User</h1>
           <Close />
@@ -186,7 +193,7 @@ const EditData = () => {
                   </div>
                 </div>
               </div>
-              <div className="mb-6">
+              {/* <div className="mb-6">
                 <div className="text-gray-700 md:flex md:items-center">
                   <div className="mb-1 md:mb-0 md:w-1/3">
                     <label>Ubah Password</label>
@@ -200,25 +207,27 @@ const EditData = () => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* End of input form */}
             </div>
             <div>
               <h1 className="mb-6 text-xl font-medium">Hak Akses</h1>
-              {Array.from(roles).map((role, key) => (
+              {Array.from(permissions).map((permission, key) => (
                 <div className="mb-6" key={key}>
                   <div className="text-gray-700 md:flex md:items-center">
                     <input
                       type="checkbox"
-                      value={role.name}
+                      value={permission.name}
                       onChange={handleCheckBox}
                       className="w-6 h-6 px-3 border rounded-lg focus:shadow-outline mr-3"
-                      defaultChecked={data.roles.includes(role.name)}
+                      defaultChecked={data.permissions.includes(
+                        permission.name
+                      )}
                     />
                     <div className="mb-1 md:mb-0 md:w-1/3">
                       <label htmlFor="password_confirmation">
-                        {role.name.toUpperCase()}
+                        {permission.name.toUpperCase()}
                       </label>
                     </div>
                   </div>
@@ -236,6 +245,7 @@ const EditData = () => {
           </div>
         </form>
       </div>
+      }
     </div>
   );
 };
