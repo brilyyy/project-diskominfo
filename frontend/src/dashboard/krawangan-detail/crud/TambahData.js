@@ -86,7 +86,7 @@ const TambahData = () => {
               <div className="md:w-2/3 md:flex-grow">
                 <input
                   className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                  type="text"
+                  type="number"
                   id="blok_persil"
                   name="blok_persil"
                   autoComplete="off"
@@ -104,7 +104,7 @@ const TambahData = () => {
               <div className="md:w-2/3 md:flex-grow">
                 <input
                   className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                  type="text"
+                  type="number"
                   id="nomor_letterc"
                   name="nomor_letterc"
                   autoComplete="off"
@@ -117,12 +117,12 @@ const TambahData = () => {
           <div className="mb-6">
             <div className="text-gray-700 md:flex md:items-center">
               <div className="mb-1 md:mb-0 md:w-1/3">
-                <label htmlFor="luas">Luas</label>
+                <label htmlFor="luas">Luas (m2)</label>
               </div>
               <div className="md:w-2/3 md:flex-grow">
                 <input
                   className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                  type="text"
+                  type="number"
                   id="luas"
                   name="luas"
                   autoComplete="off"

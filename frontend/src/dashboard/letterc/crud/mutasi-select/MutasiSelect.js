@@ -62,7 +62,7 @@ const MutasiSelect = (props) => {
             onChange={(e) => onSelectedInput(e.target.value)}
             className="w-2/3 h-10 px-3 text-base placeholder-gray-600 border rounded-r-lg focus:shadow-outline"
           >
-            <option value="">Default</option>
+            <option value="">Belum Ada</option>
             {Array.from(dataArray).map((letterc, key) => (
               <option key={key} value={`${letterc.id}|${letterc.name}`}>
                 {`${letterc.name} - ${letterc.nomor}`}
