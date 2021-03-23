@@ -19,7 +19,7 @@ $ npm run start
 - production build
 $ npm run build
 
-- utk ubah url API
+- utk ubah uri API
 src/config/API.js
 
 
