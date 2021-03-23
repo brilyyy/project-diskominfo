@@ -17,7 +17,7 @@ const UbahData = () => {
             setActive(0);
           }}
           className={
-            "focus:outline-none text-white text-sm py-2.5 px-5 rounded-md hover:shadow-lg w-full mx-2 " +
+            "focus:outline-none text-white text-xs py-2.5 px-5 rounded-md hover:shadow-lg w-1/5 mx-2 " +
             (active === 0
               ? "bg-blue-500 hover:bg-blue-600"
               : "bg-gray-500 hover:bg-gray-600")
@@ -31,7 +31,7 @@ const UbahData = () => {
             setActive(1);
           }}
           className={
-            "focus:outline-none text-white text-sm py-2.5 px-5 rounded-md hover:shadow-lg w-full mx-2 " +
+            "focus:outline-none text-white text-xs py-2.5 px-5 rounded-md hover:shadow-lg w-1/5 mx-2 " +
             (active === 1
               ? "bg-blue-500 hover:bg-blue-600"
               : "bg-gray-500 hover:bg-gray-600")

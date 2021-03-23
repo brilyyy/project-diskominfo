@@ -220,8 +220,8 @@ const Table = () => {
             </th>
           </tr>
           <tr>
-            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Nomor Persil
+            <th className="border border-gray-300 px-2 py-1 font-medium text-sm w-32">
+              Nomor Persil dan Bag. Persil
             </th>
             <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
               Desa
@@ -229,8 +229,8 @@ const Table = () => {
             <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
               Nasional
             </th>
-            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Nomor Persil
+            <th className="border border-gray-300 px-2 py-1 font-medium text-sm w-32">
+              Nomor Persil dan Bag. Persil
             </th>
             <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
               Desa
