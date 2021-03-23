@@ -15,8 +15,7 @@ const TambahData = () => {
     luas_bangunan: "",
     luas_darat: "",
     luas_sawah: "",
-    mutasi_bangunan: "",
-    mutasi_bumi: "",
+    mutasi: "",
     name: "",
     nasional_darat: "",
     nasional_sawah: "",
@@ -251,7 +250,7 @@ const TambahData = () => {
                   <div className="md:w-2/3 md:flex-grow">
                     <input
                       className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                      type="text"
+                      type="number"
                       id="luas_sawah"
                       name="luas_sawah"
                       autoComplete="off"
@@ -269,7 +268,7 @@ const TambahData = () => {
                   <div className="md:w-2/3 md:flex-grow">
                     <input
                       className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                      type="text"
+                      type="number"
                       id="pajak_sawah"
                       name="pajak_sawah"
                       autoComplete="off"
@@ -345,7 +344,7 @@ const TambahData = () => {
                   <div className="md:w-2/3 md:flex-grow">
                     <input
                       className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                      type="text"
+                      type="number"
                       id="luas_darat"
                       name="luas_darat"
                       autoComplete="off"
@@ -363,7 +362,7 @@ const TambahData = () => {
                   <div className="md:w-2/3 md:flex-grow">
                     <input
                       className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                      type="text"
+                      type="number"
                       id="pajak_darat"
                       name="pajak_darat"
                       autoComplete="off"
@@ -421,7 +420,7 @@ const TambahData = () => {
                   <div className="md:w-2/3 md:flex-grow">
                     <input
                       className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                      type="text"
+                      type="number"
                       id="luas_bangunan"
                       name="luas_bangunan"
                       autoComplete="off"
@@ -439,7 +438,7 @@ const TambahData = () => {
                   <div className="md:w-2/3 md:flex-grow">
                     <input
                       className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                      type="text"
+                      type="number"
                       id="pajak_bangunan"
                       name="pajak_bangunan"
                       autoComplete="off"
@@ -449,27 +448,29 @@ const TambahData = () => {
                 </div>
               </div>
               <div className="mb-6">
-                {/* <div className="text-gray-700 md:flex md:items-center">
-                  <div className="mb-1 md:mb-0 md:w-1/3 pl-4">
-                    <label htmlFor="mutasi_bumi">Mutasi </label>
+                <div className="text-gray-700 md:flex md:items-center">
+                  <div className="mb-1 md:mb-0 md:w-1/3">
+                    <label htmlFor="mutasi">Mutasi (dari krawangan)</label>
                   </div>
                   <div className="md:w-2/3 md:flex-grow">
                     <input
                       className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
                       type="text"
-                      id="mutasi_bumi"
-                      name="mutasi_bumi"
+                      id="mutasi"
+                      name="mutasi"
                       autoComplete="off"
                       onChange={handleChange}
                     />
                   </div>
-                </div> */}
-                <MutasiSelect
+                </div>
+              </div>
+
+              <div className="mb-6">
+              <MutasiSelect
                   villageId={villageId}
                   selectThis={(value) => {
                     const valueArray = value.split("|");
-                    data.mutasi_bangunan = valueArray[1];
-                    data.mutasi_bumi = valueArray[1];
+                    data.mutasi = valueArray[1];
                     data.parent_id = valueArray[0];
                   }}
                 />

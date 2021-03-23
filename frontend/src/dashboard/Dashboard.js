@@ -20,7 +20,7 @@ import EditDataDesa from "./data-desa/crud/EditDesa";
 import TambahDataDesa from "./data-desa/crud/TambahDesa";
 import Letterc from "./letterc/Letterc";
 import TambahDataLc from "./letterc/crud/TambahData";
-import EditDataLc from "./letterc/crud/EditData";
+import EditDataLc from "./letterc/crud/UbahData";
 import CetakSuratTanah from "./cetak-surat/CetakSuratTanah";
 import Konfigurasi from "./konfigurasi/Konfigurasi";
 import ConfigUser from "./konfigurasi/crud/EditData";

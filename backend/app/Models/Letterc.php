@@ -42,8 +42,19 @@ class Letterc extends Model
         return $this->hasMany(Letterc::class, 'parent_id');
     }
 
+    public function letterc_p()
+    {
+        return $this->belongsTo(Letterc::class, 'parent_id', 'id');
+    }
+
     public function children()
     {
         return $this->letterc()->with('children');
     }
+
+    public function parent()
+    {
+        return $this->letterc_p()->with('parent');
+    }
+
 }

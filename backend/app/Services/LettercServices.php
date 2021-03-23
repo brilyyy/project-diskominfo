@@ -63,7 +63,8 @@ class LettercServices
 
     public function show($id)
     {
-        $data = Letterc::find($id);
+        $data = Letterc::with(['children', 'parent'])->find($id);
+        // dd($data);
         return $this->successResponse($data, 'Letterc Details Retrieved Successfully', 200);
     }
 

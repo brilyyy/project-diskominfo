@@ -48,7 +48,7 @@ const MutasiSelect = (props) => {
     <>
       <div className="text-gray-700 md:flex md:items-center">
         <div className="mb-1 md:mb-0 md:w-1/3">
-          <label htmlFor="mutasi_bumi">Mutasi </label>
+          <label htmlFor="mutasi_bumi">Mutasi (dari letter c)</label>
         </div>
         <div className="md:w-2/3 md:flex-grow flex flex-row ">
           <input

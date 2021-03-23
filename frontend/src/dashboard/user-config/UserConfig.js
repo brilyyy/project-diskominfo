@@ -3,8 +3,10 @@ import axios from "axios";
 import API from "../../config/API";
 import Close from "../component/CloseButton";
 import LoadingOverlay from "../component/LoadingOverlay";
+import { useHistory } from "react-router-dom";
 
 const UserConfig = () => {
+  let history = useHistory();
   const [data, setData] = useState({});
   const [dataDesa, setDataDesa] = useState({
     village_id: 0,
@@ -44,6 +46,7 @@ const UserConfig = () => {
       })
       .then((response) => {
         console.log(response);
+        history.push("/");
       })
       .catch((err) => {
         console.log(err.response);
