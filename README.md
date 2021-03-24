@@ -3,7 +3,9 @@
 <p align="center"><img src='img/adiarta.jpg' width=80% /></p>
 
 ## 1. Deskripsi
-Adiarta Dashboard adalah sebuah aplikasi yang digunakan untuk pendataan
+
+Pembuatan aplikasi “ADIARTA” merupakan salah satu terobosan dari Dinas Komunikasi dan Informatika Kota Batu dalam memberikan fasilitas kepada Dinas Perpustakaan dan Kearsipan Kota Batu untuk menjamin terciptanya pengelolaan dokumentasi dan informasi yang terpadu dan terintegrasi diberbagai instansi pemerintah dan institusi lainnya. Salah satu tujuan aplikasi juga untuk memudahkan masing-masing operator Desa/Kelurahan dalam mengelola buku Letter C atau yang sering disebut buku percil di pemerintahan Kota Batu. 
+Setelah beberapa tahun berjalan, alur dalam pengelolaan buku Letter C dilakukan dengan cara manual tanpa adanya aplikasi untuk membantu kinerja yang efisien dalam pengelolaan data. Karena hal tersebut maka Dinas Komunikasi dan Informatika Kota Batu memulai proyek ini untuk memberikan fasilitas kepada Dinas Perpustakaan dan Kearsipan Kota Batu berupa aplikasi “ADIARTA’’.
 
 ## 2. Backend
 
