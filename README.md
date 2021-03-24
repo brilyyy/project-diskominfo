@@ -133,5 +133,5 @@ Untuk Frontend, menggunakan Framework Javascript yaitu [React JS](https://reactj
   $ npm run build / yarn build
   ```
   
-
+> Dibuat oleh Anak Magang UNS untuk Diskominfo Kota Batu
 
