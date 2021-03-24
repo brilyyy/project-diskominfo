@@ -18,6 +18,7 @@ const KrawanganDetail = () => {
       })
       .then((response) => {
         setData(response.data.data[0]);
+        console.log(response.data.data[0]);
       })
       .catch((err) => {
         console.log(err.response);

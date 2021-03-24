@@ -78,6 +78,7 @@ const Dashboard = () => {
             linkto="/krawangan"
             open={open}
             tooltip="Krawangan"
+            key={0}
           />
         );
       }
@@ -89,11 +90,12 @@ const Dashboard = () => {
             linkto="/letterc"
             open={open}
             tooltip="Letter C"
+            key={1}
           />
         );
       }
       menus[2] = (
-        <div className="select-none">
+        <div className="select-none" key={2}>
           <div
             onClick={handleDropdown}
             className={
@@ -135,6 +137,7 @@ const Dashboard = () => {
             linkto="/data-desa"
             open={open}
             tooltip="Data Desa"
+            key={3}
           />
         );
       }
@@ -147,6 +150,7 @@ const Dashboard = () => {
             linkto="/konfigurasi"
             open={open}
             tooltip="Konfigurasi"
+            key={4}
           />
         );
       }
