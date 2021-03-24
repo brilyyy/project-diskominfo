@@ -1,14 +1,3 @@
-<style>
-.hiyaa{
-  display: flex;
-  justify-items: center;
-  width: 100%;
-}
-.hiyaa img{
-  margin: 10px
-}
-</style>
-
 # ADIARTA Dashboard
 
 <p align="center"><img src='img/adiarta.jpg' width=80% /></p>
@@ -70,7 +59,7 @@ Untuk backend aplikasi Adiarta, menggunakan bahasa pemrograman PHP dan Framework
 ## 3. Frontend
 
 <p align="center" class="hiyaa">
-<img src='img/js.png' width=20% />
+<img src='img/js.png' width=22% />
 <img src='img/react.png' width=25% />
 </p>
 
