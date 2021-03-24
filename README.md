@@ -1,6 +1,6 @@
 # ADIARTA Dashboard
 
-<p align="center"><img src='img/adiarta.jpg' width=80% /></p>
+<p align="center"><img src='img/adiarta.png' width=80% /></p>
 
 ## 1. Deskripsi
 
