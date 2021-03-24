@@ -123,4 +123,8 @@ Untuk Frontend, menggunakan Framework Javascript yaitu [React JS](https://reactj
   ```
   
 > Dibuat oleh Anak Magang UNS untuk Diskominfo Kota Batu
+> - Brilyan - Programmer
+> - Chiesa - System Analyst
+> - Erix - Database
+> - Halim - UI/UX Designer
 
