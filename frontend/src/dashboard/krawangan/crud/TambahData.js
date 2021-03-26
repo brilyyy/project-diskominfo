@@ -3,11 +3,13 @@ import API from "../../../config/API";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import Close from "../../component/CloseButton";
+import SubmitButton from "../../component/SubmitButton";
 
 const TambahData = () => {
   const history = useHistory();
   const [village, setVillage] = useState({});
   const [notImage, setNotImage] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const form = new FormData();
   const [data, setData] = useState({
     village_id: 0,
@@ -47,7 +49,7 @@ const TambahData = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    setUploading(true);
     form.append("no_persil", data.no_persil);
     form.append("village_id", data.village_id);
 
@@ -60,12 +62,15 @@ const TambahData = () => {
         })
         .then((response) => {
           console.log(response);
+          setTimeout(() => {
+            setUploading(false);
+            history.push("/krawangan");
+          }, 3000);
         })
         .catch((err) => {
           console.log(err.response);
         });
       console.log(form);
-      history.push("/krawangan");
     }
   };
   return (
@@ -148,12 +153,7 @@ const TambahData = () => {
             </div>
           </div>
           <div className="mt-10 flex flex-row-reverse">
-            <button
-              type="submit"
-              className="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg"
-            >
-              Simpan
-            </button>
+            <SubmitButton uploading={uploading} />
           </div>
         </form>
       </div>

@@ -38,7 +38,7 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full h-screen flex justify-center items-center flex-col bg-pattern-light">
+    <div className="w-full h-screen flex justify-around items-center flex-col bg-pattern-light">
       <Logo width="w-1/4" />
       <div className="p-8 rounded-xl bg-white bg-opacity-80 w-80 drop-shadow">
         <form
@@ -74,6 +74,12 @@ const Login = () => {
           </button>
         </form>
       </div>
+
+      <span className="text-sm text-gray-400">
+        Copyright ©️ {new Date().getFullYear()} Dinas Komunikasi dan Informasi
+        Kota Batu
+      </span>
+
       {!failed ? (
         <></>
       ) : (

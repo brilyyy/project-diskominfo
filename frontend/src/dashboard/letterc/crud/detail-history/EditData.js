@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import API from "../../../../config/API";
+import SubmitButton from "../../../component/SubmitButton";
 
 const EditData = () => {
   let history = useHistory();
   let { id } = useParams();
+  const [uploading, setUploading] = useState(false);
   const [data, setData] = useState({
     desa_darat: "",
     desa_sawah: "",
@@ -67,7 +69,7 @@ const EditData = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    setUploading(true);
     axios
       .put(API.url + "lettercs/" + id, data, {
         headers: {
@@ -76,11 +78,14 @@ const EditData = () => {
       })
       .then((response) => {
         console.log(response);
+        setTimeout(() => {
+          setUploading(false);
+          history.push("/letterc");
+        }, 3000);
       })
       .catch((err) => {
         console.log(err.response);
       });
-    history.push("/letterc");
   };
 
   return (
@@ -485,9 +490,7 @@ const EditData = () => {
           </div>
         </div>
         <div className="mt-10 flex flex-row-reverse">
-          <button className="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg">
-            Simpan
-          </button>
+          <SubmitButton uploading={uploading} />
         </div>
       </form>
     </div>

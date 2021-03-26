@@ -3,9 +3,11 @@ import { useHistory } from "react-router-dom";
 import Close from "../../component/CloseButton";
 import axios from "axios";
 import API from "../../../config/API";
+import SubmitButton from "../../component/SubmitButton";
 
 const TambahData = () => {
   let history = useHistory();
+  const [uploading, setUploading] = useState(false);
   const [data, setData] = useState({
     name: "",
     username: "",
@@ -53,6 +55,7 @@ const TambahData = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setUploading(true);
     if (data.password === data.password_confirmation) {
       axios
         .post(API.url + "register", data, {
@@ -62,11 +65,14 @@ const TambahData = () => {
         })
         .then((response) => {
           console.log(response);
+          setTimeout(() => {
+            setUploading(false);
+            history.push("/konfigurasi");
+          }, 3000);
         })
         .catch((err) => {
           console.log(err.response);
         });
-      history.push("/konfigurasi");
     } else {
       setNotmatch(true);
     }
@@ -238,9 +244,7 @@ const TambahData = () => {
             </div>
           </div>
           <div className="mt-10 flex flex-row-reverse">
-            <button className="h-12 px-6 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800 focus:outline-none">
-              Simpan
-            </button>
+            <SubmitButton uploading={uploading} />
           </div>
         </form>
       </div>

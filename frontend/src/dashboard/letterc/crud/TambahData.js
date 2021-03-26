@@ -4,9 +4,11 @@ import axios from "axios";
 import Close from "../../component/CloseButton";
 import API from "../../../config/API";
 import MutasiSelect from "./mutasi-select/MutasiSelect";
+import SubmitButton from "../../component/SubmitButton";
 
 const TambahData = () => {
   let history = useHistory();
+  const [uploading, setUploading] = useState(false);
   const [data, setData] = useState({
     desa_darat: "",
     desa_sawah: "",
@@ -69,6 +71,7 @@ const TambahData = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(data);
+    setUploading(true);
     axios
       .post(API.url + "lettercs", data, {
         headers: {
@@ -77,11 +80,14 @@ const TambahData = () => {
       })
       .then((response) => {
         console.log(response);
+        setTimeout(() => {
+          setUploading(false);
+          history.push("/letterc");
+        }, 3000);
       })
       .catch((err) => {
         console.log(err.response);
       });
-    history.push("/letterc");
   };
 
   return (
@@ -497,9 +503,7 @@ const TambahData = () => {
             </div>
           </div>
           <div className="mt-10 flex flex-row-reverse">
-            <button className="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg">
-              Simpan
-            </button>
+            <SubmitButton uploading={uploading} />
           </div>
         </form>
       </div>

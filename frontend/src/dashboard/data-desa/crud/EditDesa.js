@@ -3,10 +3,12 @@ import { useHistory, useParams } from "react-router-dom";
 import Close from "../../component/CloseButton";
 import axios from "axios";
 import API from "../../../config/API";
+import SubmitButton from "../../component/SubmitButton";
 
 const EditDesa = () => {
   let history = useHistory();
   let { id } = useParams();
+  const [uploading, setUploading] = useState(false);
   const [data, setData] = useState({
     nama_desa: "",
     status: "",
@@ -39,7 +41,7 @@ const EditDesa = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    setUploading(true);
     axios
       .put(API.url + "villages/" + id, data, {
         headers: {
@@ -48,11 +50,14 @@ const EditDesa = () => {
       })
       .then((response) => {
         console.log(response);
+        setTimeout(() => {
+          setUploading(false);
+          history.push("/data-desa");
+        }, 3000);
       })
       .catch((err) => {
         console.log(err.response);
       });
-    history.push("/data-desa");
   };
 
   return (
@@ -201,9 +206,7 @@ const EditDesa = () => {
           {/* End of input form */}
 
           <div className="mt-10 flex flex-row-reverse">
-            <button className="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg">
-              Simpan
-            </button>
+            <SubmitButton uploading={uploading} />
           </div>
         </form>
       </div>

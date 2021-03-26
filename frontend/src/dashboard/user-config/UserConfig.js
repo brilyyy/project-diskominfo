@@ -4,9 +4,11 @@ import API from "../../config/API";
 import Close from "../component/CloseButton";
 import LoadingOverlay from "../component/LoadingOverlay";
 import { useHistory } from "react-router-dom";
+import SubmitButton from "../component/SubmitButton";
 
 const UserConfig = () => {
   let history = useHistory();
+  const [uploading, setUploading] = useState(false);
   const [data, setData] = useState({});
   const [dataDesa, setDataDesa] = useState({
     village_id: 0,
@@ -14,6 +16,7 @@ const UserConfig = () => {
     nip_desa: "",
   });
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     axios
       .get(API.url + "user-detail", {
@@ -37,7 +40,7 @@ const UserConfig = () => {
     console.log(data.village_id);
     console.log(data);
     console.log(dataDesa);
-
+    setUploading(true);
     axios
       .put(API.url + "villages/" + data.village_id, dataDesa, {
         headers: {
@@ -46,7 +49,10 @@ const UserConfig = () => {
       })
       .then((response) => {
         console.log(response);
-        history.push("/");
+        setTimeout(() => {
+          setUploading(false);
+          history.push("/");
+        }, 3000);
       })
       .catch((err) => {
         console.log(err.response);
@@ -260,9 +266,7 @@ const UserConfig = () => {
               {/* End of input form */}
 
               <div className="mt-10 flex flex-row-reverse">
-                <button className="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg">
-                  Simpan
-                </button>
+                <SubmitButton uploading={uploading} />
               </div>
             </form>
           </div>

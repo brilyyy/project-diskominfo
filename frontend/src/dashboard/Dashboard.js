@@ -190,6 +190,19 @@ const Dashboard = () => {
               </div>
               <div className="flex flex-col">{loading ? <></> : sideMenu}</div>
             </div>
+            <div className="p-4 text-sm text-medium antialiased text-center text-gray-700">
+              {open ? (
+                <>
+                  <span>Developed by</span>
+                  <br />
+                  <span>SKxUNS Dev</span>
+                </>
+              ) : (
+                <>
+                  <span>♥️</span>
+                </>
+              )}
+            </div>
           </aside>
         </div>
 

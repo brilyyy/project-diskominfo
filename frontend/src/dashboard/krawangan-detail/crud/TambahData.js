@@ -3,10 +3,12 @@ import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import Close from "../../component/CloseButton";
 import API from "../../../config/API";
+import SubmitButton from "../../component/SubmitButton";
 
 const TambahData = () => {
   let { id } = useParams();
   let history = useHistory();
+  const [uploading, setUploading] = useState(false);
   const [data, setData] = useState({
     krawangan_id: "",
     nomor_letterc: "",
@@ -32,6 +34,7 @@ const TambahData = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setUploading(true);
     data.krawangan_id = id;
     data.nama = changeCapital(data.nama);
     data.mutasi = changeCapital(data.mutasi);
@@ -43,11 +46,14 @@ const TambahData = () => {
       })
       .then((response) => {
         console.log(response);
+        setTimeout(() => {
+          setUploading(false);
+          history.push("/krawangan/details/" + id);
+        }, 3000);
       })
       .catch((err) => {
         console.log(err.response);
       });
-    history.push("/krawangan/details/" + id);
   };
 
   return (
@@ -153,9 +159,7 @@ const TambahData = () => {
           {/* End of input form */}
 
           <div className="mt-10 flex flex-row-reverse">
-            <button className="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg">
-              Simpan
-            </button>
+            <SubmitButton uploading={uploading} />
           </div>
         </form>
       </div>
