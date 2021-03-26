@@ -4,6 +4,7 @@ import Pagination from "./pagination/Pagination";
 import axios from "axios";
 import API from "../../../config/API";
 import { BiPencil, BiTrash } from "react-icons/bi";
+import Loading from "../../component/LoadingOverlay";
 
 const Table = () => {
   const history = useHistory();
@@ -74,113 +75,119 @@ const Table = () => {
 
   return (
     <div className="bg-white px-3 py-4 rounded-lg shadow-md">
-      <div
-        className={
-          "transition-all duration-500 flex items-center w-full justify-between mb-4 select-none sticky top-0 " +
-          (!navbar ? "" : "bg-gray-100 drop-shadow-md p-3 rounded-sm")
-        }
-      >
-        <Pagination
-          total={totalItems}
-          itemsPerPage={ITEMS_PER_PAGE}
-          currentPage={currentPage}
-          onPageChange={(page) => setCurrentPage(page)}
-        />
-        <button
-          className="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg"
-          onClick={() => {
-            history.push("/konfigurasi/tambah");
-          }}
-        >
-          Tambah
-        </button>
-      </div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <div
+            className={
+              "transition-all duration-500 flex items-center w-full justify-between mb-4 select-none sticky top-0 " +
+              (!navbar ? "" : "bg-gray-100 drop-shadow-md p-3 rounded-sm")
+            }
+          >
+            <Pagination
+              total={totalItems}
+              itemsPerPage={ITEMS_PER_PAGE}
+              currentPage={currentPage}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
+            <button
+              className="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg"
+              onClick={() => {
+                history.push("/konfigurasi/tambah");
+              }}
+            >
+              Tambah
+            </button>
+          </div>
 
-      <table className="w-full">
-        <thead className="bg-gray-100 text-base select-none ">
-          <tr>
-            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              No.
-            </th>
-            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Nama
-            </th>
-            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Username
-            </th>
-            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Email
-            </th>
-            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Nama Desa
-            </th>
-            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Action
-            </th>
-          </tr>
-        </thead>
+          <table className="w-full">
+            <thead className="bg-gray-100 text-base select-none ">
+              <tr>
+                <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
+                  No.
+                </th>
+                <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
+                  Nama
+                </th>
+                <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
+                  Username
+                </th>
+                <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
+                  Email
+                </th>
+                <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
+                  Nama Desa
+                </th>
+                <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
+                  Action
+                </th>
+              </tr>
+            </thead>
 
-        <tbody>
-          {usersData.length !== 0 ? (
-            usersData.map((user, key) =>
-              user.id !== 0 ? (
-                <tr
-                  className="text-center h-11 select-none cursor-pointer hover:bg-gray-50 text-sm"
-                  key={key}
-                >
-                  <td className="border border-gray-300 p-1">
-                    {key + 1 + getPage() + "."}
-                  </td>
-                  <td className="border border-gray-300 p-1">{user.name}</td>
-                  <td className="border border-gray-300 p-1">
-                    {user.username}
-                  </td>
-                  <td className="border border-gray-300 p-1">{user.email}</td>
-                  <td className="border border-gray-300 p-1">
-                    {user.village.nama_desa}
-                  </td>
-                  <td className="border border-gray-300 p-1 flex justify-center">
-                    <div className="flex m-1" role="group">
-                      <button
-                        type="button"
-                        className="focus:outline-none text-white text-sm p-2 bg-yellow-500 rounded-l-md hover:bg-yellow-600 hover:shadow-lg"
-                        onClick={() => {
-                          history.push(`/konfigurasi/ubah/${user.id}`);
-                        }}
-                      >
-                        <BiPencil />
-                      </button>
-                      <button
-                        type="button"
-                        className="focus:outline-none text-white text-sm p-2 bg-red-500 rounded-r-md hover:bg-red-600 hover:shadow-lg"
-                        onClick={() => {
-                          setDeleteModal(true);
-                          setActiveItem(user.id);
-                          setNamaItem(user.name);
-                        }}
-                      >
-                        <BiTrash />
-                      </button>
-                    </div>
+            <tbody>
+              {usersData.length !== 0 ? (
+                usersData.map((user, key) =>
+                  user.id !== 0 ? (
+                    <tr
+                      className="text-center h-11 select-none cursor-pointer hover:bg-gray-50 text-sm"
+                      key={key}
+                    >
+                      <td className="border border-gray-300 p-1">
+                        {key + 1 + getPage() + "."}
+                      </td>
+                      <td className="border border-gray-300 p-1">
+                        {user.name}
+                      </td>
+                      <td className="border border-gray-300 p-1">
+                        {user.username}
+                      </td>
+                      <td className="border border-gray-300 p-1">
+                        {user.email}
+                      </td>
+                      <td className="border border-gray-300 p-1">
+                        {user.village.nama_desa}
+                      </td>
+                      <td className="border border-gray-300 p-1 flex justify-center">
+                        <div className="flex m-1" role="group">
+                          <button
+                            type="button"
+                            className="focus:outline-none text-white text-sm p-2 bg-yellow-500 rounded-l-md hover:bg-yellow-600 hover:shadow-lg"
+                            onClick={() => {
+                              history.push(`/konfigurasi/ubah/${user.id}`);
+                            }}
+                          >
+                            <BiPencil />
+                          </button>
+                          <button
+                            type="button"
+                            className="focus:outline-none text-white text-sm p-2 bg-red-500 rounded-r-md hover:bg-red-600 hover:shadow-lg"
+                            onClick={() => {
+                              setDeleteModal(true);
+                              setActiveItem(user.id);
+                              setNamaItem(user.name);
+                            }}
+                          >
+                            <BiTrash />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ) : (
+                    <></>
+                  )
+                )
+              ) : (
+                <tr className="text-center">
+                  <td colSpan="12" className="border border-gray-300 p-5">
+                    <span className="text-xl">Data Not Found</span>
                   </td>
                 </tr>
-              ) : (
-                <></>
-              )
-            )
-          ) : (
-            <tr className="text-center">
-              <td colSpan="12" className="border border-gray-300 p-5">
-                {loading ? (
-                  <span className="text-xl">Loading...</span>
-                ) : (
-                  <span className="text-xl">Data Not Found</span>
-                )}
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+              )}
+            </tbody>
+          </table>
+        </>
+      )}
 
       {!deleteModal ? (
         <></>

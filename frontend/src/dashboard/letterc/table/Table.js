@@ -6,6 +6,7 @@ import axios from "axios";
 import { BiHistory, BiPencil, BiPrinter, BiTrash } from "react-icons/bi";
 import { generateLetterc } from "../../cetak-surat/generator/GenerateDocument";
 import API from "../../../config/API";
+import Loading from "../../component/LoadingOverlay";
 
 const Table = () => {
   const history = useHistory();
@@ -112,237 +113,241 @@ const Table = () => {
 
   return (
     <div className="bg-white px-3 py-4 rounded-lg shadow-md">
-      <div
-        className={
-          "transition-all duration-500 flex items-center w-full justify-between mb-4 select-none sticky top-0 " +
-          (!navbar ? "" : "bg-gray-100 drop-shadow-md p-3 rounded-sm")
-        }
-      >
-        <Search
-          onSearch={(value) => {
-            setSearch(value);
-            setCurrentPage(1);
-          }}
-        />
-        {localStorage.getItem("admin") === "true" ? (
-          <select
-            name=""
-            id=""
-            onChange={handleChange}
-            className="bg-white h-10 p-2 rounded-lg text-sm focus:outline-none border-gray-200 border-2"
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <div
+            className={
+              "transition-all duration-500 flex items-center w-full justify-between mb-4 select-none sticky top-0 " +
+              (!navbar ? "" : "bg-gray-100 drop-shadow-md p-3 rounded-sm")
+            }
           >
-            <option value="">Semua Desa</option>
-            {Array.from(village).map((village, key) => (
-              <option value={village.id} key={key}>
-                {village.nama_desa}
-              </option>
-            ))}
-          </select>
-        ) : (
-          <></>
-        )}
-
-        <Pagination
-          total={totalItems}
-          itemsPerPage={ITEMS_PER_PAGE}
-          currentPage={currentPage}
-          onPageChange={(page) => setCurrentPage(page)}
-        />
-        <button
-          className="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg"
-          onClick={() => {
-            history.push("/letterc/tambah");
-          }}
-        >
-          Tambah
-        </button>
-      </div>
-
-      <table className="w-full">
-        <thead className="bg-gray-100 text-base select-none ">
-          <tr>
-            <th
-              rowSpan="3"
-              className="border border-gray-300 px-2 py-1 font-medium text-sm"
-            >
-              No.
-            </th>
-            <th
-              rowSpan="3"
-              className="border border-gray-300 px-2 py-1 font-medium text-sm w-36"
-            >
-              Nama Wajib Pajak
-            </th>
-            <th
-              rowSpan="3"
-              className="border border-gray-300 px-2 py-1 font-medium text-sm"
-            >
-              Nomor
-            </th>
-            <th
-              rowSpan="3"
-              className="border border-gray-300 px-2 py-1 font-medium text-sm"
-            >
-              Tempat Tinggal
-            </th>
-            <th
-              colSpan="6"
-              className="border border-gray-300 px-2 py-1 font-medium text-sm"
-            >
-              Bumi
-            </th>
-            <th
-              colSpan="2"
-              rowSpan="2"
-              className="border border-gray-300 px-2 py-1 font-medium text-sm"
-            >
-              Bangunan
-            </th>
-            <th
-              rowSpan="3"
-              className="border border-gray-300 px-2 py-1 font-medium text-sm"
-            >
-              Action
-            </th>
-          </tr>
-          <tr>
-            <th
-              colSpan="3"
-              className="border border-gray-300 px-2 py-1 font-medium text-sm"
-            >
-              Sawah
-            </th>
-            <th
-              colSpan="3"
-              className="border border-gray-300 px-2 py-1 font-medium text-sm"
-            >
-              Darat
-            </th>
-          </tr>
-          <tr>
-            <th className="border border-gray-300 px-2 py-1 font-medium text-sm w-32">
-              Nomor Persil dan Bag. Persil
-            </th>
-            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Desa
-            </th>
-            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Nasional
-            </th>
-            <th className="border border-gray-300 px-2 py-1 font-medium text-sm w-32">
-              Nomor Persil dan Bag. Persil
-            </th>
-            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Desa
-            </th>
-            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Nasional
-            </th>
-            <th className="border border-gray-300 px-2 py-1 font-medium w-32 text-sm">
-              Di Persil dan Bagian Persil Nomor
-            </th>
-            <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
-              Gol/Kelas
-            </th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {lettercData.length !== 0 ? (
-            lettercData.map((letterc, key) => (
-              <tr
-                className="text-center h-11 select-none cursor-pointer hover:bg-gray-50 text-sm"
-                key={key}
+            <Search
+              onSearch={(value) => {
+                setSearch(value);
+                setCurrentPage(1);
+              }}
+            />
+            {localStorage.getItem("admin") === "true" ? (
+              <select
+                name=""
+                id=""
+                onChange={handleChange}
+                className="bg-white h-10 p-2 rounded-lg text-sm focus:outline-none border-gray-200 border-2"
               >
-                <td className="border border-gray-300 p-1">
-                  {key + 1 + getPage() + "."}
-                </td>
-                <td className="border border-gray-300 p-1 max-w-0 overflow-ellipsis whitespace-nowrap overflow-hidden">
-                  {letterc.name}
-                </td>
-                <td className="border border-gray-300 p-1">{letterc.nomor}</td>
-                <td className="border border-gray-300 p-1">
-                  {letterc.tempat_tinggal}
-                </td>
-                <td className="border border-gray-300 p-1">
-                  {letterc.no_persil_sawah}
-                </td>
-                <td className="border border-gray-300 p-1">
-                  {letterc.desa_sawah}
-                </td>
-                <td className="border border-gray-300 p-1">
-                  {letterc.nasional_sawah}
-                </td>
-                <td className="border border-gray-300 p-1">
-                  {letterc.no_persil_darat}
-                </td>
-                <td className="border border-gray-300 p-1">
-                  {letterc.desa_darat}
-                </td>
-                <td className="border border-gray-300 p-1">
-                  {letterc.nasional_darat}
-                </td>
-                <td className="border border-gray-300 p-1">
-                  {letterc.no_persil_bangunan}
-                </td>
-                <td className="border border-gray-300 p-1">
-                  {letterc.gol_bangunan}
-                </td>
-                <td className="border border-gray-300 p-1 flex justify-center">
-                  <div className="flex m-1" role="group">
-                    <button
-                      type="button"
-                      className="focus:outline-none text-white text-sm p-2 bg-yellow-500 rounded-l-md hover:bg-yellow-600 hover:shadow-lg"
-                      onClick={() => {
-                        history.push(`/letterc/ubah/${letterc.id}`);
-                      }}
-                    >
-                      <BiPencil />
-                    </button>
-                    <button
-                      type="button"
-                      className="focus:outline-none text-white text-sm p-2 bg-green-500 hover:bg-green-600 hover:shadow-lg"
-                      onClick={() => generateLetterc(letterc.id)}
-                    >
-                      <BiPrinter />
-                    </button>
-                    <button
-                      type="button"
-                      className="focus:outline-none text-white text-sm p-2 bg-blue-500 hover:bg-blue-600 hover:shadow-lg"
-                      onClick={() => {
-                        history.push(`/tree-view/${letterc.id}`);
-                      }}
-                    >
-                      <BiHistory />
-                    </button>
-                    <button
-                      type="button"
-                      className="focus:outline-none text-white text-sm p-2 bg-red-500 rounded-r-md hover:bg-red-600 hover:shadow-lg"
-                      onClick={() => {
-                        setDeleteModal(true);
-                        setActiveItem(letterc.id);
-                        setNamaItem(letterc.name);
-                      }}
-                    >
-                      <BiTrash />
-                    </button>
-                  </div>
-                </td>
+                <option value="">Semua Desa</option>
+                {Array.from(village).map((village, key) => (
+                  <option value={village.id} key={key}>
+                    {village.nama_desa}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <></>
+            )}
+
+            <Pagination
+              total={totalItems}
+              itemsPerPage={ITEMS_PER_PAGE}
+              currentPage={currentPage}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
+            <button
+              className="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg"
+              onClick={() => {
+                history.push("/letterc/tambah");
+              }}
+            >
+              Tambah
+            </button>
+          </div>
+
+          <table className="w-full">
+            <thead className="bg-gray-100 text-base select-none ">
+              <tr>
+                <th
+                  rowSpan="3"
+                  className="border border-gray-300 px-2 py-1 font-medium text-sm"
+                >
+                  No.
+                </th>
+                <th
+                  rowSpan="3"
+                  className="border border-gray-300 px-2 py-1 font-medium text-sm w-36"
+                >
+                  Nama Wajib Pajak
+                </th>
+                <th
+                  rowSpan="3"
+                  className="border border-gray-300 px-2 py-1 font-medium text-sm"
+                >
+                  Nomor
+                </th>
+                <th
+                  rowSpan="3"
+                  className="border border-gray-300 px-2 py-1 font-medium text-sm"
+                >
+                  Tempat Tinggal
+                </th>
+                <th
+                  colSpan="6"
+                  className="border border-gray-300 px-2 py-1 font-medium text-sm"
+                >
+                  Bumi
+                </th>
+                <th
+                  colSpan="2"
+                  rowSpan="2"
+                  className="border border-gray-300 px-2 py-1 font-medium text-sm"
+                >
+                  Bangunan
+                </th>
+                <th
+                  rowSpan="3"
+                  className="border border-gray-300 px-2 py-1 font-medium text-sm"
+                >
+                  Action
+                </th>
               </tr>
-            ))
-          ) : (
-            <tr className="text-center">
-              <td colSpan="13" className="border border-gray-300 p-5">
-                {loading ? (
-                  <span className="text-xl">Loading...</span>
-                ) : (
-                  <span className="text-xl">Data Not Found</span>
-                )}
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+              <tr>
+                <th
+                  colSpan="3"
+                  className="border border-gray-300 px-2 py-1 font-medium text-sm"
+                >
+                  Sawah
+                </th>
+                <th
+                  colSpan="3"
+                  className="border border-gray-300 px-2 py-1 font-medium text-sm"
+                >
+                  Darat
+                </th>
+              </tr>
+              <tr>
+                <th className="border border-gray-300 px-2 py-1 font-medium text-sm w-32">
+                  Nomor Persil dan Bag. Persil
+                </th>
+                <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
+                  Desa
+                </th>
+                <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
+                  Nasional
+                </th>
+                <th className="border border-gray-300 px-2 py-1 font-medium text-sm w-32">
+                  Nomor Persil dan Bag. Persil
+                </th>
+                <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
+                  Desa
+                </th>
+                <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
+                  Nasional
+                </th>
+                <th className="border border-gray-300 px-2 py-1 font-medium w-32 text-sm">
+                  Di Persil dan Bagian Persil Nomor
+                </th>
+                <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
+                  Gol/Kelas
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {lettercData.length !== 0 ? (
+                lettercData.map((letterc, key) => (
+                  <tr
+                    className="text-center h-11 select-none cursor-pointer hover:bg-gray-50 text-sm"
+                    key={key}
+                  >
+                    <td className="border border-gray-300 p-1">
+                      {key + 1 + getPage() + "."}
+                    </td>
+                    <td className="border border-gray-300 p-1 max-w-0 overflow-ellipsis whitespace-nowrap overflow-hidden">
+                      {letterc.name}
+                    </td>
+                    <td className="border border-gray-300 p-1">
+                      {letterc.nomor}
+                    </td>
+                    <td className="border border-gray-300 p-1">
+                      {letterc.tempat_tinggal}
+                    </td>
+                    <td className="border border-gray-300 p-1">
+                      {letterc.no_persil_sawah}
+                    </td>
+                    <td className="border border-gray-300 p-1">
+                      {letterc.desa_sawah}
+                    </td>
+                    <td className="border border-gray-300 p-1">
+                      {letterc.nasional_sawah}
+                    </td>
+                    <td className="border border-gray-300 p-1">
+                      {letterc.no_persil_darat}
+                    </td>
+                    <td className="border border-gray-300 p-1">
+                      {letterc.desa_darat}
+                    </td>
+                    <td className="border border-gray-300 p-1">
+                      {letterc.nasional_darat}
+                    </td>
+                    <td className="border border-gray-300 p-1">
+                      {letterc.no_persil_bangunan}
+                    </td>
+                    <td className="border border-gray-300 p-1">
+                      {letterc.gol_bangunan}
+                    </td>
+                    <td className="border border-gray-300 p-1 flex justify-center">
+                      <div className="flex m-1" role="group">
+                        <button
+                          type="button"
+                          className="focus:outline-none text-white text-sm p-2 bg-yellow-500 rounded-l-md hover:bg-yellow-600 hover:shadow-lg"
+                          onClick={() => {
+                            history.push(`/letterc/ubah/${letterc.id}`);
+                          }}
+                        >
+                          <BiPencil />
+                        </button>
+                        <button
+                          type="button"
+                          className="focus:outline-none text-white text-sm p-2 bg-green-500 hover:bg-green-600 hover:shadow-lg"
+                          onClick={() => generateLetterc(letterc.id)}
+                        >
+                          <BiPrinter />
+                        </button>
+                        <button
+                          type="button"
+                          className="focus:outline-none text-white text-sm p-2 bg-blue-500 hover:bg-blue-600 hover:shadow-lg"
+                          onClick={() => {
+                            history.push(`/tree-view/${letterc.id}`);
+                          }}
+                        >
+                          <BiHistory />
+                        </button>
+                        <button
+                          type="button"
+                          className="focus:outline-none text-white text-sm p-2 bg-red-500 rounded-r-md hover:bg-red-600 hover:shadow-lg"
+                          onClick={() => {
+                            setDeleteModal(true);
+                            setActiveItem(letterc.id);
+                            setNamaItem(letterc.name);
+                          }}
+                        >
+                          <BiTrash />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr className="text-center">
+                  <td colSpan="13" className="border border-gray-300 p-5">
+                    <span className="text-xl">Data Not Found</span>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </>
+      )}
 
       {!deleteModal ? (
         <></>

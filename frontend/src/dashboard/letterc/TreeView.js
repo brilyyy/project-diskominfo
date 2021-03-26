@@ -3,6 +3,7 @@ import axios from "axios";
 import API from "../../config/API";
 import Tree from "react-d3-tree";
 import Loading from "../component/LoadingOverlay";
+import Close from "../component/CloseButton";
 import { useParams } from "react-router-dom";
 
 const TreeView = () => {
@@ -27,6 +28,10 @@ const TreeView = () => {
   return (
     <div className="p-4 min-h-screen">
       <div className="bg-white px-5 py-4 rounded-lg shadow-md">
+        <div className="flex justify-between">
+          <h1 className="mb-6 text-3xl font-bold">Historical Tree</h1>
+          <Close />
+        </div>
         {loading ? (
           <Loading />
         ) : (

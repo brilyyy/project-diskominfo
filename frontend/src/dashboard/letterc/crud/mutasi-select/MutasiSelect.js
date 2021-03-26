@@ -59,12 +59,13 @@ const MutasiSelect = (props) => {
             list="mutasiList"
           />
           <datalist id="mutasiList">
-          {Array.from(dataArray).map((letterc, key) => (
-              <option key={key} value={`${letterc.id}|${letterc.name}`}>
+            {Array.from(dataArray).map((letterc, key) => (
+              <option key={key} value={`${letterc.name}|${letterc.id}`}>
+                Nomor Letterc : {letterc.nomor}, Nama : {letterc.name}
               </option>
             ))}
           </datalist>
-          
+
           {/* <select
             onChange={(e) => onSelectedInput(e.target.value)}
             className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-r-lg focus:shadow-outline"

@@ -466,12 +466,12 @@ const TambahData = () => {
               </div>
 
               <div className="mb-6">
-              <MutasiSelect
+                <MutasiSelect
                   villageId={villageId}
                   selectThis={(value) => {
                     const valueArray = value.split("|");
-                    data.mutasi = valueArray[1];
-                    data.parent_id = valueArray[0];
+                    data.mutasi = valueArray[0];
+                    data.parent_id = valueArray[1];
                   }}
                 />
               </div>

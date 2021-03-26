@@ -27,15 +27,10 @@ class KrawanganDetailServices
         $detail->nomor_letterc = $request->get('nomor_letterc');
         $detail->nama = $request->get('nama');
         $detail->luas = $request->get('luas');
-        $detail->mutasi = $request->get('mutasi');
         $detail->blok_persil = $request->get('blok_persil');
 
         if ($detail->save()) {
             return $this->successResponse($detail, 'Krawangan Detail Stored Successfully', 201);
         }
-    }
-
-    public function update(Request $request, $id)
-    {
     }
 }
