@@ -195,7 +195,7 @@ const Dashboard = () => {
                 <>
                   <span>Developed by</span>
                   <br />
-                  <span>SKxUNS Dev</span>
+                  <span>Sebelas Maret</span>
                 </>
               ) : (
                 <>
