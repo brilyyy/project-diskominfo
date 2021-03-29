@@ -295,44 +295,46 @@ const Table = () => {
                     <td className="border border-gray-300 p-1">
                       {letterc.gol_bangunan}
                     </td>
-                    <td className="border border-gray-300 p-1 flex justify-center">
-                      <div className="flex m-1" role="group">
-                        <button
-                          type="button"
-                          className="focus:outline-none text-white text-sm p-2 bg-yellow-500 rounded-l-md hover:bg-yellow-600 hover:shadow-lg"
-                          onClick={() => {
-                            history.push(`/letterc/ubah/${letterc.id}`);
-                          }}
-                        >
-                          <BiPencil />
-                        </button>
-                        <button
-                          type="button"
-                          className="focus:outline-none text-white text-sm p-2 bg-green-500 hover:bg-green-600 hover:shadow-lg"
-                          onClick={() => generateLetterc(letterc.id)}
-                        >
-                          <BiPrinter />
-                        </button>
-                        <button
-                          type="button"
-                          className="focus:outline-none text-white text-sm p-2 bg-blue-500 hover:bg-blue-600 hover:shadow-lg"
-                          onClick={() => {
-                            history.push(`/tree-view/${letterc.id}`);
-                          }}
-                        >
-                          <BiHistory />
-                        </button>
-                        <button
-                          type="button"
-                          className="focus:outline-none text-white text-sm p-2 bg-red-500 rounded-r-md hover:bg-red-600 hover:shadow-lg"
-                          onClick={() => {
-                            setDeleteModal(true);
-                            setActiveItem(letterc.id);
-                            setNamaItem(letterc.name);
-                          }}
-                        >
-                          <BiTrash />
-                        </button>
+                    <td className="border border-gray-300 p-1">
+                      <div className="w-full flex justify-center">
+                        <div className="flex m-1" role="group">
+                          <button
+                            type="button"
+                            className="focus:outline-none text-white text-sm p-2 bg-yellow-500 rounded-l-md hover:bg-yellow-600 hover:shadow-lg"
+                            onClick={() => {
+                              history.push(`/letterc/ubah/${letterc.id}`);
+                            }}
+                          >
+                            <BiPencil />
+                          </button>
+                          <button
+                            type="button"
+                            className="focus:outline-none text-white text-sm p-2 bg-green-500 hover:bg-green-600 hover:shadow-lg"
+                            onClick={() => generateLetterc(letterc.id)}
+                          >
+                            <BiPrinter />
+                          </button>
+                          <button
+                            type="button"
+                            className="focus:outline-none text-white text-sm p-2 bg-blue-500 hover:bg-blue-600 hover:shadow-lg"
+                            onClick={() => {
+                              history.push(`/tree-view/${letterc.id}`);
+                            }}
+                          >
+                            <BiHistory />
+                          </button>
+                          <button
+                            type="button"
+                            className="focus:outline-none text-white text-sm p-2 bg-red-500 rounded-r-md hover:bg-red-600 hover:shadow-lg"
+                            onClick={() => {
+                              setDeleteModal(true);
+                              setActiveItem(letterc.id);
+                              setNamaItem(letterc.name);
+                            }}
+                          >
+                            <BiTrash />
+                          </button>
+                        </div>
                       </div>
                     </td>
                   </tr>
