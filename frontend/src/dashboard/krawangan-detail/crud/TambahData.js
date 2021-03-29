@@ -14,7 +14,6 @@ const TambahData = () => {
     nomor_letterc: "",
     nama: "",
     luas: "",
-    mutasi: "",
     blok_persil: "",
   });
 
@@ -23,21 +22,10 @@ const TambahData = () => {
     console.log(data);
   };
 
-  const changeCapital = (x) => {
-    const newText = [];
-    const text = x.split(" ");
-    text.forEach((element) => {
-      newText.push(element.charAt(0).toUpperCase() + element.slice(1));
-    });
-    return newText.join(" ");
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setUploading(true);
     data.krawangan_id = id;
-    data.nama = changeCapital(data.nama);
-    data.mutasi = changeCapital(data.mutasi);
     axios
       .post(API.url + "krawangan/details/", data, {
         headers: {
@@ -131,24 +119,6 @@ const TambahData = () => {
                   type="number"
                   id="luas"
                   name="luas"
-                  autoComplete="off"
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="mb-6">
-            <div className="text-gray-700 md:flex md:items-center">
-              <div className="mb-1 md:mb-0 md:w-1/3">
-                <label htmlFor="mutasi">Mutasi</label>
-              </div>
-              <div className="md:w-2/3 md:flex-grow">
-                <input
-                  className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                  type="text"
-                  id="mutasi"
-                  name="mutasi"
                   autoComplete="off"
                   onChange={handleChange}
                 />

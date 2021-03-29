@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Logo from "../component/Logo";
+import Logo from "../../img/adiarta.png";
 import axios from "axios";
 import API from "../../config/API";
 
@@ -23,7 +23,7 @@ const Home = () => {
   }, []);
   return (
     <div className="p-4 min-h-screen flex flex-col justify-center items-center">
-      <Logo className="shadow-lg" width="w-2/5" />
+      <img src={Logo} alt="Logo adiarta" width="40%" className="mb-6" />
       {loading ? (
         <></>
       ) : (

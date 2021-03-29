@@ -31,7 +31,7 @@ const UserConfig = () => {
       .catch((err) => {
         console.log(err.response);
       });
-  });
+  }, []);
   const handleChange = (e) => {
     setDataDesa({ ...dataDesa, [e.target.name]: e.target.value });
   };

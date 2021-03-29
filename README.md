@@ -122,6 +122,8 @@ Untuk Frontend, menggunakan Framework Javascript yaitu [React JS](https://reactj
 
   # Build untuk deployment
   $ npm run build / yarn build
+
+  # Ganti Url API di src/config/API.js
   ```
   
 > Dibuat oleh Anak Magang UNS untuk Diskominfo Kota Batu
