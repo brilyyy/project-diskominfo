@@ -478,25 +478,6 @@ const EditData = () => {
                 </div>
               </div>
 
-              {/* <div className="mb-6">
-                <div className="text-gray-700 md:flex md:items-center">
-                  <div className="mb-1 md:mb-0 md:w-1/3">
-                    <label htmlFor="mutasi">Mutasi</label>
-                  </div>
-                  <div className="md:w-2/3 md:flex-grow">
-                    <input
-                      className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                      type="text"
-                      id="mutasi"
-                      name="mutasi"
-                      autoComplete="off"
-                      onChange={handleChange}
-                      value={data.mutasi_bumi}
-                    />
-                  </div>
-                </div>
-              </div> */}
-
               <div className="mb-6">
                 <MutasiSelect
                   villageId={villageId}

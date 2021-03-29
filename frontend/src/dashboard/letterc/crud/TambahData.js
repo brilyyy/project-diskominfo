@@ -453,23 +453,6 @@ const TambahData = () => {
                   </div>
                 </div>
               </div>
-              {/* <div className="mb-6">
-                <div className="text-gray-700 md:flex md:items-center">
-                  <div className="mb-1 md:mb-0 md:w-1/3">
-                    <label htmlFor="mutasi">Mutasi (dari krawangan)</label>
-                  </div>
-                  <div className="md:w-2/3 md:flex-grow">
-                    <input
-                      className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                      type="text"
-                      id="mutasi"
-                      name="mutasi"
-                      autoComplete="off"
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-              </div> */}
 
               <div className="mb-6">
                 <MutasiSelect
@@ -482,23 +465,6 @@ const TambahData = () => {
                   edit={false}
                 />
               </div>
-              {/* <div className="mb-6">
-                <div className="text-gray-700 md:flex md:items-center">
-                  <div className="mb-1 md:mb-0 md:w-1/3">
-                    <label htmlFor="mutasi_bangunan">Mutasi</label>
-                  </div>
-                  <div className="md:w-2/3 md:flex-grow">
-                    <input
-                      className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                      type="text"
-                      id="mutasi_bangunan"
-                      name="mutasi_bangunan"
-                      autoComplete="off"
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-              </div> */}
 
               {/* End of input form */}
             </div>
