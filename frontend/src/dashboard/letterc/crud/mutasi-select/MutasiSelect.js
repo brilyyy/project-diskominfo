@@ -56,6 +56,7 @@ const MutasiSelect = (props) => {
               name="mutasi"
               placeholder="Masukkan Nama/Ambil dari Letter C sebelumnya"
               defaultValue={props.defValue}
+              autoComplete="off"
             />
             <datalist id="mutasiList">
               {Array.from(dataArray).map((letterc, key) =>

@@ -239,7 +239,7 @@ const Dashboard = () => {
                 component={CetakSuratTanah}
               />
               <Route exact path="/profile" component={Profile} />
-              {localStorage.getItem("admin") === "true" ? (
+              {localStorage.getItem("admin") === "true" && (
                 <>
                   <Route exact path="/data-desa" component={DataDesa} />
                   <Route
@@ -261,7 +261,7 @@ const Dashboard = () => {
                     component={ConfigUser}
                   />
                 </>
-              ) : null}
+              )}
             </Switch>
           </div>
         </main>
