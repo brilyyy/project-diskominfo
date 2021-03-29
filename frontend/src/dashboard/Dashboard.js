@@ -20,7 +20,7 @@ import EditDataDesa from "./data-desa/crud/EditDesa";
 import TambahDataDesa from "./data-desa/crud/TambahDesa";
 import Letterc from "./letterc/Letterc";
 import TambahDataLc from "./letterc/crud/TambahData";
-import EditDataLc from "./letterc/crud/UbahData";
+import EditDataLc from "./letterc/crud/EditData";
 import CetakSuratTanah from "./cetak-surat/CetakSuratTanah";
 import Konfigurasi from "./konfigurasi/Konfigurasi";
 import ConfigUser from "./konfigurasi/crud/EditData";
@@ -31,7 +31,7 @@ import TambahDataKrawangan from "./krawangan/crud/TambahData";
 import KrawanganDetail from "./krawangan-detail/KrawanganDetail";
 import TambahDataKrawanganDetail from "./krawangan-detail/crud/TambahData";
 import Profile from "./user-config/UserConfig";
-import TreeView from "./letterc/TreeView";
+import History from "./letterc/history/History";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(true);
@@ -213,7 +213,7 @@ const Dashboard = () => {
           <div>
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route exact path="/tree-view/:id" component={TreeView} />
+              <Route exact path="/tree-view/:id" component={History} />
               <Route
                 exact
                 path="/krawangan/tambah"

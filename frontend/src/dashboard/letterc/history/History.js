@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
 import Close from "../../component/CloseButton";
-import EditData from "./detail-history/EditData";
 import HistoryList from "./detail-history/HistoryList";
+import TreeView from "./detail-history/TreeView";
 
 const UbahData = () => {
-  let { id } = useParams();
   const [switcher, setSwitcher] = useState(true);
   const [active, setActive] = useState(0);
   return (
@@ -23,7 +21,7 @@ const UbahData = () => {
               : "bg-gray-500 hover:bg-gray-600")
           }
         >
-          Data Details
+          Historical Tree
         </button>
         <button
           onClick={() => {
@@ -37,18 +35,18 @@ const UbahData = () => {
               : "bg-gray-500 hover:bg-gray-600")
           }
         >
-          History
+          Historical List
         </button>
       </div>
       <div className="bg-white px-5 py-4 rounded-lg shadow-md">
         <div className="flex justify-between">
           <h1 className="mb-6 text-3xl font-bold">
-            {active === 0 ? "Ubah Data Letter C" : "History Data Letter C"}
+            {active === 0 ? "Historical Tree" : "Historical List"}
           </h1>
           <Close />
         </div>
         <hr />
-        {switcher ? <EditData /> : <HistoryList />}
+        {switcher ? <TreeView /> : <HistoryList />}
       </div>
     </div>
   );
