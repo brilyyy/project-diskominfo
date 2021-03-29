@@ -27,7 +27,7 @@ const TambahData = () => {
     setUploading(true);
     data.krawangan_id = id;
     axios
-      .post(API.url + "krawangan/details/", data, {
+      .post(API.url + "krawangan/details", data, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
         },
