@@ -453,7 +453,7 @@ const TambahData = () => {
                   </div>
                 </div>
               </div>
-              <div className="mb-6">
+              {/* <div className="mb-6">
                 <div className="text-gray-700 md:flex md:items-center">
                   <div className="mb-1 md:mb-0 md:w-1/3">
                     <label htmlFor="mutasi">Mutasi (dari krawangan)</label>
@@ -469,7 +469,7 @@ const TambahData = () => {
                     />
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div className="mb-6">
                 <MutasiSelect
@@ -479,6 +479,7 @@ const TambahData = () => {
                     data.mutasi = valueArray[0];
                     data.parent_id = valueArray[1];
                   }}
+                  edit={false}
                 />
               </div>
               {/* <div className="mb-6">

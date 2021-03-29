@@ -238,7 +238,7 @@ const UserConfig = () => {
                       name="kepala_desa"
                       autoComplete="off"
                       onChange={handleChange}
-                      defaultValue={data.village.kepala_desa}
+                      value={data.village.kepala_desa}
                     />
                   </div>
                 </div>
@@ -257,7 +257,7 @@ const UserConfig = () => {
                       name="nip_desa"
                       autoComplete="off"
                       onChange={handleChange}
-                      defaultValue={data.village.nip_desa}
+                      value={data.village.nip_desa}
                     />
                   </div>
                 </div>
