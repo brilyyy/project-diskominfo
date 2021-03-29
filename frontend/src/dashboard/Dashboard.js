@@ -198,9 +198,7 @@ const Dashboard = () => {
                   <span>Sebelas Maret</span>
                 </>
               ) : (
-                <>
-                  <span>♥️</span>
-                </>
+                <></>
               )}
             </div>
           </aside>

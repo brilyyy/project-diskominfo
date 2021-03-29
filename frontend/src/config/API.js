@@ -2,7 +2,7 @@
  * @param {Object} API untuk menyimpan URL API yang digunakan
  */
 const API = {
-  url: "http://192.168.1.8:8000/api/",
+  url: "http://adiarta.batukota.go.id/api/",
 };
 
 export default API;
