@@ -76,7 +76,12 @@ const generateSuratTanah = async (id) => {
     doc = new Docxtemplater().loadZip(zip);
 
     // mapping data dari server dengan merubah key sesuai template docx
+
     data.map((detail, key) => {
+      let nip;
+      if (checkUndefined(detail.village.nip_desa) !== "  ") {
+        nip = `NIP. ${detail.village.nip_desa}`;
+      }
       const detailData = {
         nama_desa: checkUndefined(detail.village.nama_desa),
         desa_head: checkUndefined(detail.village.nama_desa.toUpperCase()),
@@ -91,6 +96,7 @@ const generateSuratTanah = async (id) => {
         luas_sawah: checkUndefined(detail.luas_sawah),
         nama: checkUndefined(detail.name),
         tanggal: date,
+        nip: checkUndefined(nip),
       };
       return doc.setData(detailData);
     });

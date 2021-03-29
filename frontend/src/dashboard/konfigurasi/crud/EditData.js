@@ -198,21 +198,6 @@ const EditData = () => {
                     </div>
                   </div>
                 </div>
-                {/* <div className="mb-6">
-                <div className="text-gray-700 md:flex md:items-center">
-                  <div className="mb-1 md:mb-0 md:w-1/3">
-                    <label>Ubah Password</label>
-                  </div>
-                  <div className="md:w-2/3 md:flex-grow">
-                    <button
-                      className="h-10 px-6 text-md text-white transition-colors duration-150 bg-red-700 rounded-lg hover:bg-red-800 focus:outline-none"
-                      type="button"
-                    >
-                      Ubah
-                    </button>
-                  </div>
-                </div>
-              </div> */}
 
                 {/* End of input form */}
               </div>
