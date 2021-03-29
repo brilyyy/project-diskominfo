@@ -32,6 +32,7 @@ import KrawanganDetail from "./krawangan-detail/KrawanganDetail";
 import TambahDataKrawanganDetail from "./krawangan-detail/crud/TambahData";
 import Profile from "./user-config/UserConfig";
 import History from "./letterc/history/History";
+import LoadingOverlay from "./component/LoadingOverlay";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(true);
@@ -69,6 +70,7 @@ const Dashboard = () => {
 
   const sideMenu = useMemo(() => {
     let menus = [];
+    let route = [];
     menu.map((permissions) => {
       if (permissions.name === "krawangan") {
         menus[0] = (
@@ -79,6 +81,28 @@ const Dashboard = () => {
             open={open}
             tooltip="Krawangan"
             key={0}
+          />
+        );
+        route.push(
+          <Route
+            exact
+            path="/krawangan/tambah"
+            component={TambahDataKrawangan}
+          />
+        );
+        route.push(<Route exact path="/krawangan" component={Krawangan} />);
+        route.push(
+          <Route
+            exact
+            path="/krawangan/details/:id"
+            component={KrawanganDetail}
+          />
+        );
+        route.push(
+          <Route
+            exact
+            path="/krawangan/details/tambah/:id"
+            component={TambahDataKrawanganDetail}
           />
         );
       }
@@ -93,6 +117,14 @@ const Dashboard = () => {
             key={1}
           />
         );
+        route.push(<Route exact path="/letterc" component={Letterc} />);
+        route.push(
+          <Route exact path="/letterc/tambah" component={TambahDataLc} />
+        );
+        route.push(
+          <Route exact path="/letterc/ubah/:id" component={EditDataLc} />
+        );
+        route.push(<Route exact path="/tree-view/:id" component={History} />);
       }
       menus[2] = (
         <div className="select-none" key={2}>
@@ -140,9 +172,16 @@ const Dashboard = () => {
             key={3}
           />
         );
+        route.push(<Route exact path="/data-desa" component={DataDesa} />);
+        route.push(
+          <Route exact path="/data-desa/tambah" component={TambahDataDesa} />
+        );
+        route.push(
+          <Route exact path="/data-desa/ubah/:id" component={EditDataDesa} />
+        );
       }
 
-      if (permissions.name === "permission") {
+      if (permissions.name === "konfigurasi") {
         menus[4] = (
           <SidebarLink
             title="Konfigurasi"
@@ -153,119 +192,90 @@ const Dashboard = () => {
             key={4}
           />
         );
+        route.push(<Route exact path="/konfigurasi" component={Konfigurasi} />);
+        route.push(
+          <Route exact path="/konfigurasi/tambah" component={AddUser} />
+        );
+        route.push(
+          <Route exact path="/konfigurasi/ubah/:id" component={ConfigUser} />
+        );
       }
     });
-    return menus;
+    return [menus, route];
   }, [menu, dropdown, handleDropdown, open]);
 
   return (
     <Router>
-      <div
-        className="flex bg-pattern-light
+      {loading ? (
+        <LoadingOverlay />
+      ) : (
+        <div
+          className="flex bg-pattern-light
        font-poppins"
-      >
-        <div className="fixed">
-          <aside
-            className={
-              "transition-all duration-300 border-r border-gray-light bg-gray-800 h-screen shadow-md flex flex-col justify-between " +
-              (open ? "w-48" : "w-14")
-            }
-          >
-            <div>
-              <div className="flex p-4 justify-around">
+        >
+          <div className="fixed">
+            <aside
+              className={
+                "transition-all duration-300 border-r border-gray-light bg-gray-800 h-screen shadow-md flex flex-col justify-between " +
+                (open ? "w-48" : "w-14")
+              }
+            >
+              <div>
+                <div className="flex p-4 justify-around">
+                  {open ? (
+                    <p className="font-semibold text-xl antialiased text-white">
+                      Adiarta
+                    </p>
+                  ) : (
+                    <></>
+                  )}
+                  <button
+                    onClick={open ? handleClose : handleOpen}
+                    type="button"
+                    className="focus:outline-none text-white rounded-md text-2xl"
+                  >
+                    {!open ? <TiThMenu /> : <MdClose />}
+                  </button>
+                </div>
+                <div className="flex flex-col">{sideMenu[0]}</div>
+              </div>
+              <div className="p-4 text-sm text-medium antialiased text-center text-gray-700">
                 {open ? (
-                  <p className="font-semibold text-xl antialiased text-white">
-                    Adiarta
-                  </p>
+                  <span className="select-none">
+                    <span>Developed by</span>
+                    <br />
+                    <span>Sebelas Maret</span>
+                  </span>
                 ) : (
                   <></>
                 )}
-                <button
-                  onClick={open ? handleClose : handleOpen}
-                  type="button"
-                  className="focus:outline-none text-white rounded-md text-2xl"
-                >
-                  {!open ? <TiThMenu /> : <MdClose />}
-                </button>
               </div>
-              <div className="flex flex-col">{loading ? <></> : sideMenu}</div>
-            </div>
-            <div className="p-4 text-sm text-medium antialiased text-center text-gray-700">
-              {open ? (
-                <>
-                  <span>Developed by</span>
-                  <br />
-                  <span>Sebelas Maret</span>
-                </>
-              ) : (
-                <></>
-              )}
-            </div>
-          </aside>
-        </div>
-
-        <main
-          className={
-            "w-full transition-all duration-300 " + (!open ? "ml-14" : "ml-48")
-          }
-        >
-          <TitleBar title="Adiarta Dashboard" />
-          <div>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/tree-view/:id" component={History} />
-              <Route
-                exact
-                path="/krawangan/tambah"
-                component={TambahDataKrawangan}
-              />
-              <Route exact path="/krawangan" component={Krawangan} />
-              <Route
-                exact
-                path="/krawangan/details/:id"
-                component={KrawanganDetail}
-              />
-              <Route
-                exact
-                path="/krawangan/details/tambah/:id"
-                component={TambahDataKrawanganDetail}
-              />
-              <Route exact path="/letterc" component={Letterc} />
-              <Route exact path="/letterc/tambah" component={TambahDataLc} />
-              <Route exact path="/letterc/ubah/:id" component={EditDataLc} />
-              <Route
-                exact
-                path="/cetak-surat-tanah"
-                component={CetakSuratTanah}
-              />
-              <Route exact path="/profile" component={Profile} />
-              {localStorage.getItem("admin") === "true" && (
-                <>
-                  <Route exact path="/data-desa" component={DataDesa} />
-                  <Route
-                    exact
-                    path="/data-desa/tambah"
-                    component={TambahDataDesa}
-                  />
-                  <Route
-                    exact
-                    path="/data-desa/ubah/:id"
-                    component={EditDataDesa}
-                  />
-
-                  <Route exact path="/konfigurasi" component={Konfigurasi} />
-                  <Route exact path="/konfigurasi/tambah" component={AddUser} />
-                  <Route
-                    exact
-                    path="/konfigurasi/ubah/:id"
-                    component={ConfigUser}
-                  />
-                </>
-              )}
-            </Switch>
+            </aside>
           </div>
-        </main>
-      </div>
+
+          <main
+            className={
+              "w-full transition-all duration-300 " +
+              (!open ? "ml-14" : "ml-48")
+            }
+          >
+            <TitleBar title="Adiarta Dashboard" />
+            <div>
+              <Switch>
+                <Route exact path="/" component={Home} />
+
+                <Route
+                  exact
+                  path="/cetak-surat-tanah"
+                  component={CetakSuratTanah}
+                />
+                <Route exact path="/profile" component={Profile} />
+                {sideMenu[1]}
+              </Switch>
+            </div>
+          </main>
+        </div>
+      )}
     </Router>
   );
 };

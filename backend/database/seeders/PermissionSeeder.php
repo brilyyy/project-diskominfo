@@ -21,7 +21,6 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'letterc', 'guard_name' => 'api']);
         Permission::create(['name' => 'desa', 'guard_name' => 'api']);
         Permission::create(['name' => 'krawangan', 'guard_name' => 'api']);
-        Permission::create(['name' => 'user', 'guard_name' => 'api']);
-        Permission::create(['name' => 'permission', 'guard_name' => 'api']);
+        Permission::create(['name' => 'konfigurasi', 'guard_name' => 'api']);
     }
 }

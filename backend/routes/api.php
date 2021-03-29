@@ -59,13 +59,13 @@ Route::group(['middleware' => ['auth:api', 'permission:krawangan']], function ()
     Route::post('krawangan/details/', [KrawanganDetailController::class, 'store']);
 });
 
-Route::group(['middleware' => ['auth:api', 'permission:permission']], function () {
+Route::group(['middleware' => ['auth:api', 'permission:konfigurasi']], function () {
     Route::get('permissions', [PermissionController::class, 'index']);
     Route::put('permissions/{id}', [PermissionController::class, 'update']);
     Route::delete('permissions/{id}', [PermissionController::class, 'destroy']);
 });
 
-Route::group(['middleware' => ['auth:api', 'permission:user']], function () {
+Route::group(['middleware' => ['auth:api', 'permission:konfigurasi']], function () {
     Route::get('users', [UserController::class, 'index']);
     Route::get('users/{id}', [UserController::class, 'show']);
     Route::put('users/{id}', [AuthController::class, 'update']);

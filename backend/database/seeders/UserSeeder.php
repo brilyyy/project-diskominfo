@@ -21,15 +21,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('admin'),
             'village_id' => 1
         ]);
-        $user = \App\Models\User::factory()->create([
-            'name' => 'Admin Desa',
-            'username' => 'user',
-            'email' => 'user@userise.com',
-            'password' => Hash::make('user'),
-            'village_id' => 2
-        ]);
 
-        $admin->syncPermissions(['letterc', 'desa', 'krawangan', 'user', 'permission']);
-        $user->syncPermissions(['letterc', 'krawangan']);
+        $admin->syncPermissions(['letterc', 'desa', 'krawangan', 'konfigurasi']);
     }
 }
