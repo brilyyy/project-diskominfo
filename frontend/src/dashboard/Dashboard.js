@@ -88,14 +88,18 @@ const Dashboard = () => {
             exact
             path="/krawangan/tambah"
             component={TambahDataKrawangan}
+            key={0}
           />
         );
-        route.push(<Route exact path="/krawangan" component={Krawangan} />);
+        route.push(
+          <Route exact path="/krawangan" component={Krawangan} key={1} />
+        );
         route.push(
           <Route
             exact
             path="/krawangan/details/:id"
             component={KrawanganDetail}
+            key={2}
           />
         );
         route.push(
@@ -103,6 +107,7 @@ const Dashboard = () => {
             exact
             path="/krawangan/details/tambah/:id"
             component={TambahDataKrawanganDetail}
+            key={3}
           />
         );
       }
@@ -119,12 +124,24 @@ const Dashboard = () => {
         );
         route.push(<Route exact path="/letterc" component={Letterc} />);
         route.push(
-          <Route exact path="/letterc/tambah" component={TambahDataLc} />
+          <Route
+            exact
+            path="/letterc/tambah"
+            component={TambahDataLc}
+            key={4}
+          />
         );
         route.push(
-          <Route exact path="/letterc/ubah/:id" component={EditDataLc} />
+          <Route
+            exact
+            path="/letterc/ubah/:id"
+            component={EditDataLc}
+            key={5}
+          />
         );
-        route.push(<Route exact path="/tree-view/:id" component={History} />);
+        route.push(
+          <Route exact path="/tree-view/:id" component={History} key={6} />
+        );
       }
       menus[2] = (
         <div className="select-none" key={2}>
@@ -172,12 +189,24 @@ const Dashboard = () => {
             key={3}
           />
         );
-        route.push(<Route exact path="/data-desa" component={DataDesa} />);
         route.push(
-          <Route exact path="/data-desa/tambah" component={TambahDataDesa} />
+          <Route exact path="/data-desa" component={DataDesa} key={7} />
         );
         route.push(
-          <Route exact path="/data-desa/ubah/:id" component={EditDataDesa} />
+          <Route
+            exact
+            path="/data-desa/tambah"
+            component={TambahDataDesa}
+            key={8}
+          />
+        );
+        route.push(
+          <Route
+            exact
+            path="/data-desa/ubah/:id"
+            component={EditDataDesa}
+            key={9}
+          />
         );
       }
 
@@ -192,12 +221,24 @@ const Dashboard = () => {
             key={4}
           />
         );
-        route.push(<Route exact path="/konfigurasi" component={Konfigurasi} />);
         route.push(
-          <Route exact path="/konfigurasi/tambah" component={AddUser} />
+          <Route exact path="/konfigurasi" component={Konfigurasi} key={12} />
         );
         route.push(
-          <Route exact path="/konfigurasi/ubah/:id" component={ConfigUser} />
+          <Route
+            exact
+            path="/konfigurasi/tambah"
+            component={AddUser}
+            key={10}
+          />
+        );
+        route.push(
+          <Route
+            exact
+            path="/konfigurasi/ubah/:id"
+            component={ConfigUser}
+            key={11}
+          />
         );
       }
     });
