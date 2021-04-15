@@ -55,8 +55,10 @@ Route::group(['middleware' => ['auth:api', 'permission:krawangan']], function ()
     Route::get('krawangans/{id}', [KrawanganController::class, 'show']);
     Route::put('krawangans/{id}', [KrawanganController::class, 'update']);
     Route::put('krawangans/{id}', [KrawanganController::class, 'update']);
-    Route::get('krawangan/details/{id}', [KrawanganDetailController::class, 'show']);
-    Route::post('krawangan/details/', [KrawanganDetailController::class, 'store']);
+    Route::middleware(['cors'])->group(function () {
+        Route::get('krawangan/details/{id}', [KrawanganDetailController::class, 'show']);
+        Route::post('krawangan/details/', [KrawanganDetailController::class, 'store']);
+    });
 });
 
 Route::group(['middleware' => ['auth:api', 'permission:konfigurasi']], function () {

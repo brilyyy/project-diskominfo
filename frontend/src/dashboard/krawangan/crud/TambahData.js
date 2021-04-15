@@ -36,11 +36,17 @@ const TambahData = () => {
   };
 
   const handleFileInput = (e) => {
+    console.log(e.target.files[0].type.split("/")[1]);
     if (e.target.files[0]) {
       if (e.target.files[0].type.split("/")[0] === "image") {
         form.append("image", e.target.files[0]);
         setNotImage(false);
-      } else {
+      }
+      else if(e.target.files[0].type.split("/")[1] === "pdf"){
+        form.append("image", e.target.files[0]);
+        setNotImage(false);
+      } 
+      else {
         setNotImage(true);
       }
     } else {
