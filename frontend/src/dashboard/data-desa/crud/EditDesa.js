@@ -23,7 +23,8 @@ const EditDesa = () => {
     axios
       .get(API.url + "villages/" + id, {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {
@@ -45,7 +46,8 @@ const EditDesa = () => {
     axios
       .put(API.url + "villages/" + id, data, {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {

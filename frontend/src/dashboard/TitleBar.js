@@ -10,11 +10,11 @@ const TitleBar = (props) => {
   const handleLogout = () => {
     axios.post(API.url + "logout", {
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        Authorization: "Bearer " + window.sessionStorage.getItem("accessToken"),
       },
     });
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("admin");
+    window.sessionStorage.removeItem("accessToken");
+    window.sessionStorage.removeItem("admin");
     window.location.reload();
   };
   const handleUser = () => {
@@ -43,7 +43,7 @@ const TitleBar = (props) => {
         }
       >
         <div className="py-1 select-none cursor-pointer" role="none">
-          {localStorage.getItem("admin") === "false" ? (
+          {window.sessionStorage.getItem("admin") === "false" ? (
             <span
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"

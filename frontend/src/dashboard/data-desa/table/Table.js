@@ -20,7 +20,8 @@ const Table = () => {
     axios
       .get(API.url + "villages", {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {

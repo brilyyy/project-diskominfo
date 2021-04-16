@@ -40,10 +40,6 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [dropdown, setDropdown] = useState(false);
 
-  const handleDropdown = () => {
-    dropdown ? setDropdown(false) : setDropdown(true);
-  };
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -56,7 +52,8 @@ const Dashboard = () => {
     axios
       .get(API.url + "details", {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {
@@ -71,6 +68,7 @@ const Dashboard = () => {
   const sideMenu = useMemo(() => {
     let menus = [];
     let route = [];
+    // eslint-disable-next-line array-callback-return
     menu.map((permissions) => {
       if (permissions.name === "krawangan") {
         menus[0] = (
@@ -146,7 +144,7 @@ const Dashboard = () => {
       menus[2] = (
         <div className="select-none" key={2}>
           <div
-            onClick={handleDropdown}
+            onClick={() => setDropdown(!dropdown)}
             className={
               "text-white hover:bg-blue-200 cursor-pointer p-3 flex " +
               (open ? "" : "justify-center")
@@ -242,8 +240,11 @@ const Dashboard = () => {
         );
       }
     });
-    return [menus, route];
-  }, [menu, dropdown, handleDropdown, open]);
+    return [
+      <React.Fragment key={0}>{menus}</React.Fragment>,
+      <React.Fragment key={0}>{route}</React.Fragment>,
+    ];
+  }, [menu, dropdown, open]);
 
   return (
     <Router>

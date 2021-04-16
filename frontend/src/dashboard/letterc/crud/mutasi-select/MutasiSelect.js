@@ -11,7 +11,8 @@ const MutasiSelect = (props) => {
     axios
       .get(API.url + "lettercs", {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {

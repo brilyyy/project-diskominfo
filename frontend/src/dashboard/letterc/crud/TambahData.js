@@ -35,11 +35,12 @@ const TambahData = () => {
   const [villageId, setVillageId] = useState(0);
 
   useEffect(() => {
-    if (localStorage.getItem("admin") === "true") {
+    if (window.sessionStorage.getItem("admin") === "true") {
       axios
         .get(API.url + "villages", {
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+            Authorization:
+              "Bearer " + window.sessionStorage.getItem("accessToken"),
           },
         })
         .then((response) => {
@@ -75,7 +76,8 @@ const TambahData = () => {
     axios
       .post(API.url + "lettercs", data, {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {
@@ -99,7 +101,7 @@ const TambahData = () => {
         </div>
         <hr />
         <form onSubmit={handleSubmit} className="mt-6">
-          {localStorage.getItem("admin") === "true" ? (
+          {window.sessionStorage.getItem("admin") === "true" ? (
             <div className="mb-6">
               <div className="text-gray-700 md:flex md:items-center">
                 <div className="mb-1 md:mb-0 md:w-1/3">

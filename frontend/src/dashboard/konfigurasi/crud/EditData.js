@@ -27,7 +27,8 @@ const EditData = () => {
     axios
       .get(API.url + "villages", {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {
@@ -40,7 +41,8 @@ const EditData = () => {
     axios
       .get(API.url + "users/" + id, {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {
@@ -53,7 +55,8 @@ const EditData = () => {
     axios
       .get(API.url + "permissions", {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {
@@ -76,7 +79,8 @@ const EditData = () => {
     axios
       .put(API.url + "users/" + id, data, {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {

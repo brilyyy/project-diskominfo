@@ -25,7 +25,8 @@ const TambahData = () => {
     axios
       .get(API.url + "villages", {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {
@@ -37,7 +38,8 @@ const TambahData = () => {
     axios
       .get(API.url + "permissions", {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {
@@ -60,7 +62,8 @@ const TambahData = () => {
       axios
         .post(API.url + "register", data, {
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+            Authorization:
+              "Bearer " + window.sessionStorage.getItem("accessToken"),
           },
         })
         .then((response) => {

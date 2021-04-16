@@ -58,4 +58,11 @@ class KrawanganServices
     public function update(Request $request, $id)
     {
     }
+
+    public function destroy($id)
+    {
+        $krawangan = Krawangan::find($id);
+        $krawangan->delete();
+        return $this->successResponse($krawangan, 'Krawangan Deleted Successfully', 200);
+    }
 }

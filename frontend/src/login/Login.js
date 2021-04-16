@@ -25,9 +25,12 @@ const Login = () => {
       .then((response) => {
         setLoading(false);
         response.data.data.user.name === "Super Admin"
-          ? localStorage.setItem("admin", true)
-          : localStorage.setItem("admin", false);
-        localStorage.setItem("accessToken", response.data.data.access_token);
+          ? window.sessionStorage.setItem("admin", true)
+          : window.sessionStorage.setItem("admin", false);
+        window.sessionStorage.setItem(
+          "accessToken",
+          response.data.data.access_token
+        );
         history.push("/");
       })
       .catch((error) => {

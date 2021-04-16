@@ -29,7 +29,8 @@ const TambahDesa = () => {
     axios
       .post(API.url + "villages/", data, {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {

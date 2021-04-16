@@ -6,7 +6,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) => {
-        if (localStorage.getItem("accessToken")) {
+        if (window.sessionStorage.getItem("accessToken")) {
           return <Component {...props} />;
         } else {
           return (

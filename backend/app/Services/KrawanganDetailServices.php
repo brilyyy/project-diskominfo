@@ -28,4 +28,12 @@ class KrawanganDetailServices
             return $this->successResponse($detail, 'Krawangan Detail Stored Successfully', 201);
         }
     }
+
+    public function destroy($id)
+    {
+        $detail = KrawanganDetail::find($id);
+        $detail->delete();
+
+        $this->successResponse($detail . 'Krawangan Detail Deleted Successfully', 200);
+    }
 }

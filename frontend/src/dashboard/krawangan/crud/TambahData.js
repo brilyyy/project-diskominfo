@@ -16,11 +16,12 @@ const TambahData = () => {
     no_persil: 0,
   });
   useEffect(() => {
-    if (localStorage.getItem("admin") === "true") {
+    if (window.sessionStorage.getItem("admin") === "true") {
       axios
         .get(API.url + "villages", {
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+            Authorization:
+              "Bearer " + window.sessionStorage.getItem("accessToken"),
           },
         })
         .then((response) => {
@@ -41,12 +42,10 @@ const TambahData = () => {
       if (e.target.files[0].type.split("/")[0] === "image") {
         form.append("image", e.target.files[0]);
         setNotImage(false);
-      }
-      else if(e.target.files[0].type.split("/")[1] === "pdf"){
+      } else if (e.target.files[0].type.split("/")[1] === "pdf") {
         form.append("image", e.target.files[0]);
         setNotImage(false);
-      } 
-      else {
+      } else {
         setNotImage(true);
       }
     } else {
@@ -63,7 +62,8 @@ const TambahData = () => {
       axios
         .post(API.url + "krawangans", form, {
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+            Authorization:
+              "Bearer " + window.sessionStorage.getItem("accessToken"),
           },
         })
         .then((response) => {
@@ -88,7 +88,7 @@ const TambahData = () => {
         </div>
         <hr />
         <form onSubmit={handleSubmit} className="mt-6">
-          {localStorage.getItem("admin") === "true" ? (
+          {window.sessionStorage.getItem("admin") === "true" ? (
             <div className="mb-6">
               <div className="text-gray-700 md:flex md:items-center">
                 <div className="mb-1 md:mb-0 md:w-1/3">

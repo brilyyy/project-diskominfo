@@ -23,7 +23,8 @@ const Table = () => {
     axios
       .get(API.url + "lettercs", {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {
@@ -36,7 +37,8 @@ const Table = () => {
     axios
       .get(API.url + "villages", {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {
@@ -105,7 +107,7 @@ const Table = () => {
                 setCurrentPage(1);
               }}
             />
-            {localStorage.getItem("admin") === "true" ? (
+            {window.sessionStorage.getItem("admin") === "true" ? (
               <select
                 name=""
                 id=""

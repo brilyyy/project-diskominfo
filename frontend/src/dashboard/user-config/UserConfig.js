@@ -21,7 +21,8 @@ const UserConfig = () => {
     axios
       .get(API.url + "user-detail", {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {
@@ -44,7 +45,8 @@ const UserConfig = () => {
     axios
       .put(API.url + "villages/" + data.village_id, dataDesa, {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {

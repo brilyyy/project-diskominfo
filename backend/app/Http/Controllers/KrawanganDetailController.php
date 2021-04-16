@@ -84,8 +84,8 @@ class KrawanganDetailController extends Controller
      * @param  \App\Models\KrawanganDetail  $krawanganDetail
      * @return \Illuminate\Http\Response
      */
-    public function destroy(KrawanganDetail $krawanganDetail)
+    public function destroy($id)
     {
-        //
+        return $this->krawanganDetail->destroy($id);
     }
 }

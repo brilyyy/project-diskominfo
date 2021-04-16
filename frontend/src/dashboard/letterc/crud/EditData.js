@@ -38,11 +38,12 @@ const EditData = () => {
   const [villages, setVillages] = useState({});
 
   useEffect(() => {
-    if (localStorage.getItem("admin") === "true") {
+    if (window.sessionStorage.getItem("admin") === "true") {
       axios
         .get(API.url + "villages", {
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+            Authorization:
+              "Bearer " + window.sessionStorage.getItem("accessToken"),
           },
         })
         .then((response) => {
@@ -56,7 +57,8 @@ const EditData = () => {
     axios
       .get(API.url + "lettercs/" + id, {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {
@@ -82,7 +84,8 @@ const EditData = () => {
     axios
       .put(API.url + "lettercs/" + id, data, {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {
@@ -110,7 +113,7 @@ const EditData = () => {
             </div>
             <hr />
             <form onSubmit={handleSubmit} className="mt-6">
-              {localStorage.getItem("admin") === "true" ? (
+              {window.sessionStorage.getItem("admin") === "true" ? (
                 <div className="mb-6">
                   <div className="text-gray-700 md:flex md:items-center">
                     <div className="mb-1 md:mb-0 md:w-1/3">

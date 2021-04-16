@@ -28,7 +28,8 @@ const Table = () => {
     axios
       .get(API.url + "lettercs", {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {
@@ -39,11 +40,12 @@ const Table = () => {
         console.log(err.response);
       });
 
-    if (localStorage.getItem("admin") === "true") {
+    if (window.sessionStorage.getItem("admin") === "true") {
       axios
         .get(API.url + "villages", {
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+            Authorization:
+              "Bearer " + window.sessionStorage.getItem("accessToken"),
           },
         })
         .then((response) => {
@@ -85,7 +87,8 @@ const Table = () => {
     axios
       .delete(API.url + "lettercs/" + activeItem, {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {
@@ -129,7 +132,7 @@ const Table = () => {
                 setCurrentPage(1);
               }}
             />
-            {localStorage.getItem("admin") === "true" ? (
+            {window.sessionStorage.getItem("admin") === "true" ? (
               <select
                 name=""
                 id=""

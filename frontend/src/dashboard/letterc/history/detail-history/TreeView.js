@@ -13,7 +13,8 @@ const TreeView = () => {
     axios
       .get(API.url + "letterc-tree/" + id, {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((res) => {

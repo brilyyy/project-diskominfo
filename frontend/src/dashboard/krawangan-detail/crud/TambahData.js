@@ -29,7 +29,8 @@ const TambahData = () => {
     axios
       .post(API.url + "krawangan/details", data, {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {

@@ -23,7 +23,8 @@ const Table = () => {
     axios
       .get(API.url + "users", {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {
@@ -40,7 +41,8 @@ const Table = () => {
     axios
       .delete(API.url + "users/" + activeItem, {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          Authorization:
+            "Bearer " + window.sessionStorage.getItem("accessToken"),
         },
       })
       .then((response) => {
