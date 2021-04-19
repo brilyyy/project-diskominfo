@@ -61,8 +61,9 @@ const KrawanganDetail = () => {
         <hr />
         <div className="mt-6">
           <div className="w-full flex flex-row justify-center mb-6">
-            {!loading &&
-              (data.foto.split("/")[5].split(".")[1] === "pdf" ? (
+            {
+              !loading && (
+                // (data.foto.split("/")[5].split(".")[1] === "pdf" ? (
                 <div>
                   <Document
                     file={data.foto}
@@ -93,9 +94,11 @@ const KrawanganDetail = () => {
                     </button>
                   </div>
                 </div>
-              ) : (
-                <img src={data.foto} alt="foto" className="w-2/3" />
-              ))}
+              )
+              // ) : (
+              //   <img src={data.foto} alt="foto" className="w-2/3" />
+              // ))
+            }
           </div>
           <Table id={id} />
         </div>
