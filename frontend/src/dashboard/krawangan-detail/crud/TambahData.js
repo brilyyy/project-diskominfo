@@ -81,7 +81,7 @@ const TambahData = () => {
               <div className="md:w-2/3 md:flex-grow">
                 <input
                   className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                  type="number"
+                  type="text"
                   id="blok_persil"
                   name="blok_persil"
                   autoComplete="off"
