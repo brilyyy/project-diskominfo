@@ -86,6 +86,13 @@ const KrawanganDetail = () => {
                     </button>
                     <button
                       type="button"
+                      onClick={() => window.open(data.foto)}
+                      className="m-2 p-1 text-white bg-blue-600 rounded-md focus:outline-none"
+                    >
+                      Download
+                    </button>
+                    <button
+                      type="button"
                       disabled={pageNumber >= numPages}
                       onClick={nextPage}
                       className="m-2 p-1 text-white bg-blue-600 rounded-md focus:outline-none"
