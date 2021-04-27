@@ -70,7 +70,9 @@ const MutasiSelect = (props) => {
                   )
                 ) : (
                   <option key={key} value={`${letterc.name}|${letterc.id}`}>
-                    Nomor Letterc : {letterc.nomor}, Nama : {letterc.name}
+                    Nomor Letterc: {letterc.nomor}, Nama: {letterc.name}, Luas
+                    Sawah: {letterc.luas_sawah}, Luas Darat:{" "}
+                    {letterc.luas_darat}
                   </option>
                 )
               )}

@@ -171,85 +171,91 @@ const Table = () => {
               <tr>
                 <th
                   rowSpan="3"
-                  className="border border-gray-300 px-2 py-1 font-medium text-sm"
+                  className="border border-gray-300 px-2 py-1 font-medium text-xs"
                 >
                   No.
                 </th>
                 <th
                   rowSpan="3"
-                  className="border border-gray-300 px-2 py-1 font-medium text-sm w-36"
+                  className="border border-gray-300 px-2 py-1 font-medium text-xs w-36"
                 >
                   Nama Wajib Pajak
                 </th>
                 <th
                   rowSpan="3"
-                  className="border border-gray-300 px-2 py-1 font-medium text-sm"
+                  className="border border-gray-300 px-2 py-1 font-medium text-xs"
                 >
                   Nomor
                 </th>
                 <th
                   rowSpan="3"
-                  className="border border-gray-300 px-2 py-1 font-medium text-sm"
+                  className="border border-gray-300 px-2 py-1 font-medium text-xs"
                 >
                   Tempat Tinggal
                 </th>
                 <th
-                  colSpan="6"
-                  className="border border-gray-300 px-2 py-1 font-medium text-sm"
+                  colSpan="8"
+                  className="border border-gray-300 px-2 py-1 font-medium text-xs"
                 >
                   Bumi
                 </th>
                 <th
                   colSpan="2"
                   rowSpan="2"
-                  className="border border-gray-300 px-2 py-1 font-medium text-sm"
+                  className="border border-gray-300 px-2 py-1 font-medium text-xs"
                 >
                   Bangunan
                 </th>
                 <th
                   rowSpan="3"
-                  className="border border-gray-300 px-2 py-1 font-medium text-sm"
+                  className="border border-gray-300 px-2 py-1 font-medium text-xs"
                 >
                   Action
                 </th>
               </tr>
               <tr>
                 <th
-                  colSpan="3"
-                  className="border border-gray-300 px-2 py-1 font-medium text-sm"
+                  colSpan="4"
+                  className="border border-gray-300 px-2 py-1 font-medium text-xs"
                 >
                   Sawah
                 </th>
                 <th
-                  colSpan="3"
-                  className="border border-gray-300 px-2 py-1 font-medium text-sm"
+                  colSpan="4"
+                  className="border border-gray-300 px-2 py-1 font-medium text-xs"
                 >
                   Darat
                 </th>
               </tr>
               <tr>
-                <th className="border border-gray-300 px-2 py-1 font-medium text-sm w-32">
+                <th className="border border-gray-300 px-2 py-1 font-medium text-xs w-32">
                   Nomor Persil dan Bag. Persil
                 </th>
-                <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
+                <th className="border border-gray-300 px-2 py-1 font-medium text-xs">
                   Desa
                 </th>
-                <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
+                <th className="border border-gray-300 px-2 py-1 font-medium text-xs">
                   Nasional
                 </th>
-                <th className="border border-gray-300 px-2 py-1 font-medium text-sm w-32">
+                <th className="border border-gray-300 px-2 py-1 font-medium text-xs">
+                  Luas
+                </th>
+                <th className="border border-gray-300 px-2 py-1 font-medium text-xs w-32">
                   Nomor Persil dan Bag. Persil
                 </th>
-                <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
+                <th className="border border-gray-300 px-2 py-1 font-medium text-xs">
                   Desa
                 </th>
-                <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
+                <th className="border border-gray-300 px-2 py-1 font-medium text-xs">
                   Nasional
                 </th>
-                <th className="border border-gray-300 px-2 py-1 font-medium w-32 text-sm">
+                <th className="border border-gray-300 px-2 py-1 font-medium text-xs">
+                  Luas
+                </th>
+                <th className="border border-gray-300 px-2 py-1 font-medium w-32 text-xs">
                   Di Persil dan Bagian Persil Nomor
                 </th>
-                <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
+                <th className="border border-gray-300 px-2 py-1 font-medium text-xs">
                   Gol/Kelas
                 </th>
               </tr>
@@ -284,6 +290,9 @@ const Table = () => {
                       {letterc.nasional_sawah}
                     </td>
                     <td className="border border-gray-300 p-1">
+                      {letterc.luas_sawah}
+                    </td>
+                    <td className="border border-gray-300 p-1">
                       {letterc.no_persil_darat}
                     </td>
                     <td className="border border-gray-300 p-1">
@@ -291,6 +300,9 @@ const Table = () => {
                     </td>
                     <td className="border border-gray-300 p-1">
                       {letterc.nasional_darat}
+                    </td>
+                    <td className="border border-gray-300 p-1">
+                      {letterc.luas_darat}
                     </td>
                     <td className="border border-gray-300 p-1">
                       {letterc.no_persil_bangunan}
@@ -344,7 +356,7 @@ const Table = () => {
                 ))
               ) : (
                 <tr className="text-center">
-                  <td colSpan="13" className="border border-gray-300 p-5">
+                  <td colSpan="15" className="border border-gray-300 p-5">
                     <span className="text-xl">Data Not Found</span>
                   </td>
                 </tr>

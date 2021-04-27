@@ -161,7 +161,7 @@ const Table = () => {
                   Tempat Tinggal
                 </th>
                 <th
-                  colSpan="6"
+                  colSpan="8"
                   className="border border-gray-300 px-2 py-1 font-medium text-sm"
                 >
                   Bumi
@@ -182,13 +182,13 @@ const Table = () => {
               </tr>
               <tr>
                 <th
-                  colSpan="3"
+                  colSpan="4"
                   className="border border-gray-300 px-2 py-1 font-medium text-sm"
                 >
                   Sawah
                 </th>
                 <th
-                  colSpan="3"
+                  colSpan="4"
                   className="border border-gray-300 px-2 py-1 font-medium text-sm"
                 >
                   Darat
@@ -205,6 +205,9 @@ const Table = () => {
                   Nasional
                 </th>
                 <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
+                  Luas
+                </th>
+                <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
                   Nomor Persil
                 </th>
                 <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
@@ -212,6 +215,9 @@ const Table = () => {
                 </th>
                 <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
                   Nasional
+                </th>
+                <th className="border border-gray-300 px-2 py-1 font-medium text-sm">
+                  Luas
                 </th>
                 <th className="border border-gray-300 px-2 py-1 font-medium text-sm w-32">
                   Di Persil dan Bagian Persil Nomor
@@ -251,6 +257,9 @@ const Table = () => {
                       {letterc.nasional_sawah}
                     </td>
                     <td className="border border-gray-300 p-1">
+                      {letterc.luas_sawah}
+                    </td>
+                    <td className="border border-gray-300 p-1">
                       {letterc.no_persil_darat}
                     </td>
                     <td className="border border-gray-300 p-1">
@@ -258,6 +267,9 @@ const Table = () => {
                     </td>
                     <td className="border border-gray-300 p-1">
                       {letterc.nasional_darat}
+                    </td>
+                    <td className="border border-gray-300 p-1">
+                      {letterc.luas_darat}
                     </td>
                     <td className="border border-gray-300 p-1">
                       {letterc.no_persil_bangunan}
@@ -278,7 +290,7 @@ const Table = () => {
                 ))
               ) : (
                 <tr className="text-center">
-                  <td colSpan="13" className="border border-gray-300 p-5">
+                  <td colSpan="15" className="border border-gray-300 p-5">
                     <span className="text-xl">Data Not Found</span>
                   </td>
                 </tr>
